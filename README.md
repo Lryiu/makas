@@ -8,9 +8,7 @@ Kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleler
 
 *Lryiu Labs — Experimental Suite'in bir parçasıdır.*
 
-[![Makas tanıtım videosu — izlemek için tıkla](media/makas-tanitim-kapak.jpg)](media/makas-tanitim.mp4)
-
-<sub>▶ Tanıtım videosu (1 dk 10 sn) — izlemek için görsele tıkla</sub>
+https://github.com/user-attachments/assets/08e0fa94-dd20-401b-92a8-28f3e4cdc055
 
 ---
 

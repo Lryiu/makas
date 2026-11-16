@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Makas — Alıntı ve Deneme Masası | Lryiu Labs</title>
+<meta name="description" content="Araştırma denemeleri için dijital yazı masası: alıntılarını ve notlarını getir, kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz. Dipnotlu Word çıktısı. Ücretsiz, kayıt gerektirmez.">
+<meta name="author" content="Gamze Güçkıran Chartrand Cossette">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://gamzeguckiran.com/makas.html">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f7f0e1'/%3E%3Cg fill='none' stroke='%23a4441d' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='10' cy='10' r='4'/%3E%3Ccircle cx='10' cy='22' r='4'/%3E%3Cpath d='M26 6 13 19M19.5 19.5 26 26M13 13l3.5 3.5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#eee8dc">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Lryiu Labs">
+<meta property="og:url" content="https://gamzeguckiran.com/makas.html">
+<meta property="og:title" content="Makas — Alıntı ve Deneme Masası">
+<meta property="og:description" content="Alıntılarını kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz. Araştırma denemeleri için ücretsiz yazı masası.">
+<meta property="og:image" content="https://gamzeguckiran.com/makas-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Makas — alıntı ve deneme masası">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Makas — Alıntı ve Deneme Masası">
+<meta name="twitter:description" content="Alıntılarını kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz.">
+<meta name="twitter:image" content="https://gamzeguckiran.com/makas-og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "@id": "https://gamzeguckiran.com/makas.html#app",
+ "name": "Makas",
+ "alternateName": "Makas — Alıntı ve Deneme Masası",
+ "url": "https://gamzeguckiran.com/makas.html",
+ "description": "Araştırma denemeleri için dijital yazı masası: alıntı ve notları kaynağıyla birlikte kesip kenara dizme, aralarına yazma, alıntı ve atıfları ayırma, dipnotlu Word çıktısı.",
+ "inLanguage": "tr",
+ "applicationCategory": "ProductivityApplication",
+ "operatingSystem": "Web browser",
+ "softwareVersion": "1.0",
+ "isAccessibleForFree": true,
+ "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+ "featureList": ["Alıntıyı kaynağıyla birlikte kesme", "Kenarda Giriş, Gelişme, Sonuç yığınları", "Alıntı ve atıf ayrımı", "Cümle içine alıntı", "Dipnotlu Word (.docx) çıktısı", "PDF, Word ve metin dosyası yükleme", "Okuma modu", "Taslak hâllerini saklama"],
+ "image": "https://gamzeguckiran.com/makas-og.jpg",
+ "isPartOf": { "@type": "CollectionPage", "@id": "https://gamzeguckiran.com/apps.html", "name": "Lryiu Labs — Apps" },
+ "author": { "@type": "Person", "@id": "https://lryiu.com/#person", "name": "Gamze Güçkıran Chartrand Cossette", "alternateName": "Lryiu", "url": "https://lryiu.com/" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{
+  --desk:#eee8dc; --paper:#fffdf8; --strip:#f7f0e1; --strip-edge:#e7dcc4;
+  --ink:#1c2b48; --print:#3a342b; --muted:#8a8070; --line:#ddd2be;
+  --accent:#a4441d; --accent-soft:#f5e2d6;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --serif:'Literata',Georgia,'Times New Roman',serif;
+  --hh:54px; --card:#fff;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--desk);color:var(--print);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;color:inherit}
+button:disabled{cursor:default}
+svg{flex:none}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:9px 18px;background:rgba(238,232,220,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.brand{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--ink);display:flex;align-items:center;gap:7px;margin-right:6px}
+.brand svg{color:var(--accent)}
+.btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:6px 11px;border-radius:7px;font-size:13px;display:inline-flex;align-items:center;gap:6px;line-height:1.2}
+.btn:hover:not(:disabled){border-color:#c3b496}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.primary:hover:not(:disabled){background:#2a3c60}
+.btn.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{background:transparent;border-color:transparent}
+.btn.ghost:hover:not(:disabled){background:rgba(255,255,255,.6);border-color:var(--line)}
+.btn.icon{padding:6px 8px}
+.btn:disabled{opacity:.38}
+.proj{max-width:340px}
+.proj span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.status{font-size:12px;color:var(--muted);margin-left:auto;white-space:nowrap;padding:0 6px}
+.status.err{color:var(--accent)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 370px;min-height:calc(100vh - var(--hh))}
+.layout.solo{grid-template-columns:1fr}
+.layout.solo aside.side{display:none}
+main{padding:34px 24px 140px;min-width:0}
+.paper{max-width:780px;margin:0 auto;background:var(--paper);border-radius:3px;box-shadow:0 1px 2px rgba(70,45,10,.06),0 10px 34px rgba(70,45,10,.08);padding:52px 64px 70px 124px;position:relative;min-height:75vh}
+.doc-title{display:block;width:100%;border:0;background:transparent;outline:none;font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.25;color:var(--ink);padding:0;margin:0 0 6px}
+.doc-title::placeholder{color:#c9bfae}
+.doc-meta{font-size:12px;color:var(--muted);margin-bottom:16px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;color:var(--muted);margin-bottom:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:10px;border-radius:2px;display:inline-block}
+.sw.src{background:var(--strip);box-shadow:inset 0 0 0 1px var(--strip-edge)}
+.sw.mine{background:var(--ink)}
+.sw.quote{background:#fcf3ec;box-shadow:inset 3px 0 0 var(--accent)}
+.hint{position:relative;font-size:12.5px;line-height:1.6;color:#6d6456;background:#f6f2ea;border-radius:6px;padding:10px 34px 10px 12px;margin-bottom:22px}
+.hint b{color:var(--ink);font-weight:600}
+.hint .x{position:absolute;right:6px;top:6px;border:0;background:transparent;color:var(--muted);font-size:16px;line-height:1;padding:4px 6px;border-radius:4px}
+.hint .x:hover{background:#ece5d8}
+
+/* blocks */
+.block{position:relative;border-radius:3px;padding:10px 14px}
+.block textarea{display:block;width:100%;border:0;background:transparent;resize:none;overflow:hidden;font-family:var(--serif);font-size:16.5px;line-height:1.72;color:inherit;padding:0;margin:0;outline:none}
+.block textarea::selection{background:#f1cdb8}
+.b-src{background:var(--strip);box-shadow:inset 0 0 0 1px var(--strip-edge);color:var(--print)}
+.b-src textarea{font-size:15.5px}
+.b-mine{color:var(--ink)}
+.b-mine:focus-within{box-shadow:inset 0 0 0 1px #d6dbe6}
+.b-mine textarea::placeholder{color:#a3acbf;font-style:italic}
+.b-quote{margin-left:36px;margin-right:6px;border-left:3px solid var(--accent);background:#fcf4ed;border-radius:0 3px 3px 0}
+.b-quote textarea{font-style:italic;font-size:15.5px;color:#43392f}
+.q-meta{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12.5px;color:var(--accent)}
+.q-meta input{flex:1;min-width:0;border:0;border-bottom:1px dashed transparent;background:transparent;font:inherit;font-weight:500;color:inherit;outline:none;padding:1px 0}
+.q-meta input:hover{border-bottom-color:#e2bfa9}
+.q-meta input:focus{border-bottom-color:var(--accent)}
+.q-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:3px}
+.b-label{position:absolute;left:-104px;top:14px;width:76px;text-align:right;font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:#bbb09d;pointer-events:none}
+.b-quote .b-label{left:-140px}
+.b-mine .b-label{color:#a7b0c2}
+.handle{position:absolute;left:-26px;top:10px;width:20px;height:26px;display:grid;place-items:center;color:#b5a991;cursor:grab;opacity:0;border-radius:4px;transition:opacity .12s}
+.handle:hover{background:#f1ebdf;color:var(--ink)}
+.block:hover .handle,.block:focus-within .handle{opacity:1}
+.b-actions{position:absolute;right:8px;top:-12px;display:flex;gap:4px;opacity:0;pointer-events:none;transition:opacity .12s;z-index:3}
+.block:hover .b-actions,.block:focus-within .b-actions{opacity:1;pointer-events:auto}
+.mini{font-size:11.5px;padding:3px 9px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--print);white-space:nowrap}
+.mini:hover{color:var(--accent);border-color:var(--accent)}
+
+/* gaps */
+.gap{position:relative;height:16px;display:flex;align-items:center;justify-content:center;transition:height .12s}
+.gap-line{position:absolute;left:0;right:0;top:50%;border-top:1px dashed transparent}
+.gap-acts{position:relative;display:flex;gap:6px;opacity:0;transition:opacity .12s;z-index:2}
+.gap:hover .gap-acts,.gap:focus-within .gap-acts{opacity:1}
+.gap:hover .gap-line{border-top-color:var(--line)}
+.gap-acts button{font-size:11.5px;padding:2px 10px;border-radius:20px;border:1px solid var(--line);background:var(--paper);color:var(--muted)}
+.gap-acts button:hover{color:var(--ink);border-color:var(--ink)}
+.gap.end{height:64px;align-items:flex-start;padding-top:14px}
+.gap.end .gap-line{top:22px}
+.gap.end .gap-acts{opacity:.75}
+.gap .empty-msg{display:none}
+.gap.empty{height:auto;flex-direction:column;gap:12px;padding:40px 0}
+.gap.empty .empty-msg{display:block;font-size:13px;color:var(--muted);text-align:center}
+.gap.empty .gap-acts{opacity:1}
+.gap .place-btn{display:none;position:relative;z-index:2;font-size:12px;padding:3px 14px;border-radius:20px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:500}
+.gap .place-btn:hover{background:var(--accent);color:#fff}
+body.placing .gap{height:34px}
+body.placing .gap .gap-acts{display:none}
+body.placing .gap .gap-line{border-top:1px dashed #dcb79f}
+body.placing .gap .place-btn{display:inline-block}
+body.dragging .gap{height:26px}
+body.dragging .gap-acts{display:none}
+body.dragging .gap .gap-line{border-top:1px dashed #d6c7ab}
+.gap.over .gap-line{border-top:3px solid var(--accent)!important}
+
+/* side */
+aside.side{border-left:1px solid var(--line);background:#f5f0e6;position:sticky;top:var(--hh);height:calc(100vh - var(--hh));display:flex;flex-direction:column;transition:background .12s}
+aside.side.over{background:#efe4d3}
+.side-head{padding:16px 18px 12px;border-bottom:1px solid var(--line)}
+.side-title{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);display:flex;align-items:baseline;gap:8px}
+.side-title small{font-family:var(--sans);font-size:12px;color:var(--muted);font-weight:400}
+.side-tools{display:flex;gap:6px;margin-top:10px}
+.side-tools input,.side-tools select{flex:1;min-width:0;border:1px solid var(--line);border-radius:7px;padding:6px 9px;font:inherit;font-size:12.5px;background:var(--card);color:var(--ink);outline:none}
+.side-tools input:focus,.side-tools select:focus{border-color:#b9a88a}
+.cards{flex:1;overflow:auto;padding:14px 16px 60px;display:flex;flex-direction:column;gap:10px}
+.card{background:var(--card);border:1px solid #e5dac6;border-radius:4px;padding:11px 13px 10px;cursor:grab;position:relative;transition:border-color .12s}
+.card:hover{border-color:#cbb998}
+.card.flash{animation:flash 1.6s ease-out}
+@keyframes flash{0%{background:var(--accent-soft);border-color:var(--accent)}100%{background:var(--card)}}
+.c-src{font-size:11.5px;color:var(--accent);font-weight:500;margin-bottom:5px;line-height:1.35}
+.c-src.me{color:#5a6a8a}
+.c-src.none{color:var(--muted);font-style:italic;font-weight:400}
+.c-text{font-family:var(--serif);font-size:14px;line-height:1.55;color:var(--print);white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.card.open .c-text{-webkit-line-clamp:unset;display:block}
+.c-note{font-size:12px;color:var(--muted);font-style:italic;margin-top:6px}
+.c-actions{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px;opacity:0;transition:opacity .12s}
+.card:hover .c-actions,.card:focus-within .c-actions{opacity:1}
+.card.editing{cursor:default}
+.card.editing textarea,.card.editing input{width:100%;border:1px solid var(--line);border-radius:6px;padding:7px 9px;font:inherit;font-size:13px;margin-bottom:6px;outline:none;background:var(--card)efb;color:var(--ink)}
+.card.editing textarea{font-family:var(--serif);font-size:14px;line-height:1.5;min-height:110px;resize:vertical}
+.card.editing label{display:block;font-size:11px;color:var(--muted);margin:2px 0 3px}
+.drop-line{height:3px;background:var(--accent);border-radius:2px;margin:-6px 0;flex:none}
+.side-empty{color:var(--muted);font-size:13px;line-height:1.65;text-align:center;padding:34px 20px;border:1.5px dashed #d6c9b1;border-radius:8px}
+.side-empty b{color:var(--ink)}
+
+/* floating bars */
+#cutbar{position:fixed;z-index:50;display:none;background:var(--ink);border-radius:9px;padding:4px;box-shadow:0 8px 24px rgba(20,25,40,.25)}
+#cutbar button{background:transparent;border:0;color:#fff;padding:7px 12px;border-radius:6px;font-size:13px;display:flex;align-items:center;gap:8px}
+#cutbar button:hover{background:rgba(255,255,255,.13)}
+kbd{font-family:var(--sans);font-size:10.5px;opacity:.6;border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:0 5px}
+#placebar{position:fixed;left:50%;top:calc(var(--hh) + 12px);transform:translateX(-50%);z-index:40;display:none;align-items:center;gap:12px;background:var(--accent);color:#fff;padding:8px 8px 8px 16px;border-radius:30px;box-shadow:0 8px 24px rgba(120,40,10,.25);font-size:13px}
+body.placing #placebar{display:flex}
+#placebar .btn{background:var(--card);color:var(--accent);border-color:#fff;border-radius:20px;padding:4px 12px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;transition:.18s;z-index:70;background:var(--ink);color:#fff;border-radius:9px;padding:9px 10px 9px 16px;font-size:13px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(20,25,40,.25)}
+#toast.show{opacity:1;transform:translateX(-50%);pointer-events:auto}
+#toast button{background:rgba(255,255,255,.14);border:0;color:#fff;border-radius:6px;padding:4px 10px;font-size:12.5px}
+#toast button:hover{background:rgba(255,255,255,.25)}
+
+/* popover */
+.pop{position:fixed;z-index:55;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 14px 40px rgba(60,40,10,.18);min-width:270px;max-width:380px;max-height:62vh;overflow:auto;padding:6px}
+.pop-item{display:block;width:100%;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:6px;font-size:13.5px;color:var(--ink);line-height:1.35}
+.pop-item:hover{background:var(--strip)}
+.pop-item.cur{font-weight:600}
+.pop-item small{display:block;color:var(--muted);font-size:11.5px;font-weight:400;margin-top:2px}
+.pop-item.danger{color:var(--accent)}
+.pop-sep{height:1px;background:var(--line);margin:5px 4px}
+.pop input{width:100%;border:1px solid var(--line);border-radius:7px;padding:7px 9px;font:inherit;font-size:13px;margin-bottom:4px;outline:none}
+.pop .pi-src{font-size:11px;color:var(--accent);font-weight:500}
+.pop .pi-src.me{color:#5a6a8a}
+.pop .pi-txt{font-family:var(--serif);font-size:13px;color:var(--print);display:block;margin-top:2px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(45,32,12,.3);display:flex;align-items:flex-start;justify-content:center;padding:9vh 16px 16px;z-index:60;overflow:auto}
+.modal{background:var(--paper);border-radius:12px;width:min(540px,100%);box-shadow:0 24px 70px rgba(40,25,5,.28);padding:22px 24px 20px}
+.modal h3{font-family:var(--serif);font-weight:600;font-size:20px;margin:0 0 12px;color:var(--ink)}
+.modal p{line-height:1.6;margin:0 0 10px}
+.field label{display:block;font-size:12px;color:var(--muted);margin:14px 0 5px}
+.field input,.field textarea,.modal textarea.big{width:100%;border:1px solid var(--line);border-radius:7px;padding:9px 11px;font:inherit;font-size:14px;background:var(--card);color:var(--ink);outline:none}
+.field input:focus,.field textarea:focus,.modal textarea.big:focus{border-color:#9c8b6c}
+.modal textarea.big{font-family:var(--serif);min-height:220px;line-height:1.6;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--print);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.me{border-style:dashed;color:#4f5f80}
+.preview{font-family:var(--serif);font-size:14px;line-height:1.55;background:var(--strip);padding:10px 12px;border-radius:6px;max-height:150px;overflow:auto;color:var(--print);white-space:pre-wrap}
+.err-msg{color:var(--accent);font-size:12px;margin-top:7px;min-height:1em}
+.m-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chks{display:flex;flex-direction:column;gap:8px;margin:4px 0 16px}
+.chk{display:flex;align-items:center;gap:9px;font-size:13.5px;cursor:pointer}
+.chk input{accent-color:var(--accent);width:16px;height:16px}
+.fmts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fmt{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:9px;padding:11px 13px;display:flex;flex-direction:column;gap:3px}
+.fmt:hover:not(:disabled){border-color:var(--ink)}
+.fmt b{font-size:13.5px;color:var(--ink);font-weight:600}
+.fmt small{font-size:11.5px;color:var(--muted);line-height:1.4}
+.fmt.wide{grid-column:1/-1;margin-top:8px;background:#f8f4ec}
+.fmt:disabled{opacity:.45}
+.fb-ta{width:100%;min-height:220px;border:1px solid var(--line);border-radius:7px;padding:10px;font-family:var(--serif);font-size:13px;line-height:1.5;background:var(--card)}
+
+/* start */
+.paper.start{padding:52px 64px 60px}
+.start-h{font-family:var(--serif);font-weight:600;font-size:30px;color:var(--ink);margin:0 0 8px}
+.start-p{font-size:14px;line-height:1.65;color:#6b6253;margin:0 0 24px;max-width:560px}
+.lbl{display:block;font-size:12px;color:var(--muted);margin:16px 0 6px}
+.field-in{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:var(--serif);font-size:17px;color:var(--ink);outline:none;background:var(--card)}
+.start-ta{width:100%;min-height:300px;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--serif);font-size:15px;line-height:1.65;color:var(--print);outline:none;background:var(--strip);resize:vertical}
+.field-in:focus,.start-ta:focus{border-color:#9c8b6c}
+.start-row{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.start-row.small{margin-top:20px}
+.start-h2{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--ink);margin:42px 0 10px;padding-top:24px;border-top:1px solid var(--line)}
+.proj-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;width:100%;text-align:left;border:0;border-bottom:1px solid #efe8db;background:transparent;padding:11px 4px;font-family:var(--serif);font-size:16px;color:var(--ink)}
+.proj-row:hover{background:#faf6ee}
+.proj-row small{font-family:var(--sans);font-size:12px;color:var(--muted);white-space:nowrap}
+
+@media (max-width:1000px){
+  .layout{grid-template-columns:1fr}
+  aside.side{position:static;height:auto;min-height:260px;border-left:0;border-top:1px solid var(--line)}
+  .cards{overflow:visible}
+  main{padding:18px 10px 60px}
+  .paper,.paper.start{padding:30px 20px 50px 34px}
+  .b-label{display:none}
+  .b-quote{margin-left:16px}
+  .status{order:10;width:100%;margin-left:0;padding:0}
+}
+@media (hover:none){
+  .c-actions,.b-actions,.gap-acts,.handle{opacity:1!important;pointer-events:auto!important}
+  .b-actions{position:static;justify-content:flex-end;margin-bottom:6px;flex-wrap:wrap}
+}
+
+/* night mode: antrasit */
+body.dark{
+  --desk:#2b2d31; --paper:#34373c; --strip:#3c3b38; --strip-edge:#4b4842;
+  --ink:#d8e1f1; --print:#e3dccf; --muted:#9b958a; --line:#4a4d53;
+  --accent:#e08a5f; --accent-soft:#4b3a30; --card:#3a3d42;
+  color-scheme:dark;
+}
+body.dark header.top{background:rgba(43,45,49,.94)}
+body.dark .btn.primary{background:#d8e1f1;color:#23262b;border-color:#d8e1f1}
+body.dark .btn.primary:hover:not(:disabled){background:#eef2f9}
+body.dark .btn.accent{color:#23262b}
+body.dark .btn:hover:not(:disabled){border-color:#6a6d74}
+body.dark .btn.ghost:hover:not(:disabled){background:rgba(255,255,255,.06)}
+body.dark .doc-title::placeholder{color:#5f6268}
+body.dark .hint{background:#2f3236;color:var(--muted)}
+body.dark .hint .x:hover{background:#3d4045}
+body.dark .block textarea::selection{background:#6d4b39}
+body.dark .b-mine:focus-within{box-shadow:inset 0 0 0 1px #4d5466}
+body.dark .b-mine textarea::placeholder{color:#727a8c}
+body.dark .b-quote{background:#3b3532}
+body.dark .b-quote textarea{color:#ecdfcd}
+body.dark .q-meta input:hover{border-bottom-color:#7a5643}
+body.dark .b-label{color:#6f6b63}
+body.dark .b-mine .b-label{color:#6c7488}
+body.dark .handle{color:#77736b}
+body.dark .handle:hover{background:#3f4247;color:var(--ink)}
+body.dark .sw.quote{background:#3b3532}
+body.dark aside.side{background:#2f3135}
+body.dark aside.side.over{background:#383a3f}
+body.dark .card{border-color:#4a4d53}
+body.dark .card:hover{border-color:#686b72}
+body.dark .card.editing textarea,body.dark .card.editing input{background:#2f3236}
+body.dark .c-src.me,body.dark .pop .pi-src.me{color:#a9b7d4}
+body.dark .chip.me{color:#a9b7d4}
+body.dark .side-empty{border-color:#4a4d53}
+body.dark .fmt.wide{background:#33363a}
+body.dark .proj-row{border-bottom-color:#41444a}
+body.dark .proj-row:hover{background:#3a3d42}
+body.dark #cutbar,body.dark #toast{background:#1f2125;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+body.dark #placebar{color:#23262b}
+body.dark #placebar .btn{background:#23262b;color:var(--accent);border-color:#23262b}
+body.dark .overlay{background:rgba(10,10,12,.5)}
+body.dark .field input:focus,body.dark .field textarea:focus,body.dark .field-in:focus,body.dark .start-ta:focus{border-color:#7d808a}
+.sig{max-width:780px;margin:18px auto 0;text-align:center;font-size:12px;color:var(--muted);letter-spacing:.02em}
+.sig a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+.sig a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* ---- v2 additions ---- */
+.b-atif{color:var(--ink);box-shadow:inset 3px 0 0 #9cadcc;border-radius:0 3px 3px 0}
+.b-atif .b-label{color:#8e9bb6}
+.sw.atif{background:var(--paper);box-shadow:inset 3px 0 0 #9cadcc,inset 0 0 0 1px var(--line)}
+.q-meta .srcbtn{border:0;background:transparent;padding:1px 0;font:inherit;font-weight:500;color:inherit;border-bottom:1px dashed transparent;text-align:left;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.q-meta .srcbtn:hover{border-bottom-color:currentColor}
+.q-meta .srcbtn.none{color:var(--muted);font-style:italic}
+.q-meta .pg{flex:none;width:64px}
+.b-atif .q-meta{color:#5d6f94}
+.cites{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cite-chip{display:inline-flex;align-items:center;border:1px solid #e5cdbd;background:#fcf4ed;border-radius:20px;font-size:11.5px;color:var(--accent);max-width:100%}
+.cite-chip.lost{border-style:dashed;opacity:.75}
+.cite-chip button{border:0;background:transparent;color:inherit;padding:3px 4px 3px 10px;font-size:11.5px;max-width:420px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cite-chip button.cc-x{padding:3px 9px 3px 4px;opacity:.7}
+.cite-chip button:hover{text-decoration:underline}
+.doc-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.linkbtn{border:0;background:transparent;padding:0;font-size:12px;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.linkbtn:hover{color:var(--accent);text-decoration-color:var(--accent)}
+.goal{display:inline-flex;align-items:center;gap:7px}
+.goal i{display:inline-block;width:90px;height:5px;border-radius:3px;background:var(--line);overflow:hidden;position:relative}
+.goal i b{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+.chip.sel{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip.new{border-style:dashed}
+.sp-form{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;padding:12px;border-radius:8px;background:var(--strip)}
+.sp-form label{display:block;font-size:11.5px;color:var(--muted);margin:0 0 3px}
+.sp-form input{width:100%;border:1px solid var(--line);border-radius:6px;padding:7px 9px;font:inherit;font-size:13.5px;background:var(--card);color:var(--ink);outline:none}
+.sp-form .wide{grid-column:1/-1}
+.sp-search{width:100%;border:1px solid var(--line);border-radius:7px;padding:7px 10px;font:inherit;font-size:13px;background:var(--card);color:var(--ink);outline:none;margin-bottom:2px}
+.row2{display:flex;gap:10px;align-items:flex-end}
+.row2 .field{flex:1;min-width:0}
+.row2 .field.pgf{flex:none;width:110px}
+.side-title{justify-content:space-between}
+.side-title .linkbtn{font-family:var(--sans);font-weight:400}
+.piles{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pile{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);background:var(--card);color:var(--print)}
+.pile .dot{width:8px;height:8px;border-radius:50%}
+.pile.sel{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.pile.over{background:var(--accent-soft);border-color:var(--accent)}
+.pile.add{border-style:dashed;color:var(--muted)}
+.card.piled{border-left-width:4px}
+.c-top{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.c-pile{font-size:10.5px;color:var(--muted);white-space:nowrap}
+.c-page{color:var(--muted);font-weight:400}
+.readbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font-size:12.5px;color:var(--muted);padding:10px 14px;background:var(--strip);border-radius:8px;margin-bottom:34px}
+.readbar select{border:1px solid var(--line);border-radius:6px;padding:3px 6px;font:inherit;font-size:12.5px;background:var(--card);color:var(--ink)}
+.readbar .chk{font-size:12.5px;gap:6px}
+.readbar .btn{margin-left:auto}
+.reading-art{font-family:var(--serif);font-size:17.5px;line-height:1.8;color:var(--print)}
+.reading-art h1{font-size:30px;line-height:1.25;color:var(--ink);margin:0 0 30px;font-weight:600}
+.reading-art h2{font-size:19px;color:var(--ink);margin:44px 0 12px;font-weight:600}
+.reading-art p{margin:0 0 18px}
+.reading-art blockquote{margin:0 2.2em 18px;font-style:italic;font-size:16.5px}
+.reading-art sup{font-size:11px;color:var(--accent);font-style:normal;margin-left:1px}
+.reading-art .note{font-size:14px;color:var(--muted);margin-left:2.2em;font-style:italic}
+.reading-art ol.fns{font-size:14px;line-height:1.6;color:#6b6253;border-top:1px solid var(--line);padding-top:16px;margin-top:40px}
+.reading-art ul{list-style:none;padding:0}
+.reading-art ul li{margin:6px 0;padding-left:1.6em;text-indent:-1.6em}
+.reading-art .src-left{opacity:.62}
+.paper.start{max-width:1100px;padding:44px 56px 50px}
+.start-ta{min-height:60vh;font-size:15.5px}
+.start-ta.drop,.modal textarea.big.drop{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.upl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0 8px;font-size:13px;color:var(--muted)}
+.upl .btn{font-weight:500}
+.modal.wide{width:min(820px,100%)}
+.vrow{display:flex;align-items:center;gap:10px;padding:10px 2px;border-bottom:1px solid var(--line)}
+.vrow .vn{flex:1;min-width:0}
+.vrow .vn b{display:block;font-weight:500;color:var(--ink);font-size:14px}
+.vrow .vn small{color:var(--muted);font-size:12px}
+.lrow{padding:10px 2px;border-bottom:1px solid var(--line)}
+.lrow .lt{display:flex;align-items:baseline;gap:10px}
+.lrow .lt span{flex:1;min-width:0;font-family:var(--serif);font-size:14px;color:var(--ink)}
+.lrow .lt small{color:var(--muted);font-size:11.5px;white-space:nowrap}
+.radio{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.opt-label{font-size:12px;color:var(--muted);margin:2px 0 4px}
+body.dark .b-quote,body.dark .cite-chip{background:#3b3532}
+body.dark .cite-chip{border-color:#5a473c}
+body.dark .b-atif{box-shadow:inset 3px 0 0 #6d7ea3}
+body.dark .b-atif .q-meta{color:#a9b7d4}
+body.dark .reading-art ol.fns{color:var(--muted)}
+
+.btn.addcard{width:100%;justify-content:center;margin-top:10px;border-style:dashed;color:var(--accent);background:transparent}
+.btn.addcard:hover:not(:disabled){border-color:var(--accent);background:var(--card)}
+
+.guide{display:grid;grid-template-columns:1fr 1fr;gap:4px 26px;margin-top:6px}
+.g-sec h4{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--ink);margin:14px 0 4px}
+.g-sec p{font-size:13.5px;line-height:1.6;margin:0}
+.g-sec b{color:var(--ink);font-weight:600}
+@media (max-width:700px){.guide{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="brand">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>
+    Makas
+  </div>
+  <button class="btn ghost proj" id="projBtn" title="Çalışmalarım"><span id="projName">Çalışmalarım</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button>
+  <span class="status" id="status"></span>
+  <button class="btn icon" id="themeBtn" title="Gece modu" aria-label="Gece modu"></button>
+  <button class="btn icon" id="undoBtn" title="Geri al (Ctrl+Z)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+  <button class="btn icon" id="redoBtn" title="Yinele (Ctrl+Shift+Z)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+  <button class="btn" id="readBtn" title="Metni okurun göreceği hâliyle gör"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="readTxt">Oku</span></button>
+  <button class="btn icon" id="helpBtn" title="Nasıl kullanılır?" aria-label="Nasıl kullanılır?"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
+  <button class="btn" id="addBtn" title="Kâğıdın sonuna yeni metin ekle">+ Metin ekle</button>
+  <button class="btn primary" id="expBtn">İndir / Çıktı</button>
+</header>
+
+<noscript><div style="max-width:680px;margin:40px auto;padding:0 24px;font-family:Georgia,serif;line-height:1.7"><h1>Makas — Alıntı ve Deneme Masası</h1><p>Araştırma denemeleri için dijital yazı masası. Alıntılarını ve notlarını getir, kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz; Word çıktısında kaynaklar dipnot olur. Makas’ı kullanmak için tarayıcında JavaScript açık olmalı.</p></div></noscript>
+<div class="layout" id="layout">
+  <main id="main"></main>
+  <aside class="side" id="side"></aside>
+</div>
+
+<div id="cutbar"><button id="cutBtn" type="button">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>
+  Kes, kenara koy <kbd>Ctrl K</kbd></button></div>
+<div id="placebar"><span id="placeTxt"></span><button class="btn" id="placeCancel" type="button">Vazgeç</button></div>
+<div id="toast"></div>
+
+<script>
+(() => {
+'use strict';
+const KEY = 'makas.v1';
+const ME = 'me';
+const W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+const PILE_COLORS = ['#b5542c', '#4f7a4a', '#3f6aa1', '#8a5a9e', '#b08a2e', '#4f8a8a'];
+const $ = (s, r = document) => r.querySelector(s);
+const main = $('#main'), side = $('#side'), layout = $('#layout');
+const GRIP = '<svg width="12" height="16" viewBox="0 0 12 16" fill="currentColor"><circle cx="3" cy="3" r="1.4"/><circle cx="9" cy="3" r="1.4"/><circle cx="3" cy="8" r="1.4"/><circle cx="9" cy="8" r="1.4"/><circle cx="3" cy="13" r="1.4"/><circle cx="9" cy="13" r="1.4"/></svg>';
+
+/* ---------- state ---------- */
+let store = { projects: {}, current: null, hintClosed: false };
+try {
+  const raw = localStorage.getItem(KEY);
+  if (raw) { const s = JSON.parse(raw); if (s && s.projects) store = Object.assign(store, s); }
+} catch (e) {}
+const inArtifact = !!(window.claude && window.claude.use);
+const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
+
+/* migrate projects made with the first version (free-text sources) */
+function migrate(p) {
+  if (!p) return p;
+  // colours come from saved or imported files: accept plain hex colours only
+  (p.piles || []).forEach(pl => { if (!/^#[0-9a-f]{3,8}$/i.test(pl.color || '')) pl.color = '#8a8070'; });
+  if (p.v >= 2) return p;
+  const lib = [], map = {};
+  const sid = s => {
+    s = (s || '').trim();
+    if (!s) return '';
+    if (s === 'Kendi notum') return ME;
+    if (!map[s]) { const id = 's' + uid(); map[s] = id; lib.push({ id, author: '', title: s, translator: '', publisher: '', year: '' }); }
+    return map[s];
+  };
+  (p.cards || []).forEach(c => { c.srcId = sid(c.source); c.page = ''; delete c.source; });
+  (p.blocks || []).forEach(b => { if ('source' in b) { b.srcId = sid(b.source); b.page = ''; delete b.source; } });
+  (p.sources || []).forEach(sid);
+  p.recent = (p.sources || []).map(s => map[s]).filter(Boolean);
+  p.lastSrcId = sid(p.lastSource);
+  delete p.sources; delete p.lastSource;
+  p.lib = lib; p.piles = p.piles || []; p.versions = p.versions || [];
+  p.cards = p.cards || []; p.blocks = p.blocks || [];
+  p.v = 2;
+  return p;
+}
+Object.values(store.projects).forEach(migrate);
+
+const P = () => (store.current && store.projects[store.current]) || null;
+function recent() {
+  const l = Object.values(store.projects).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  return l[0] || null;
+}
+if (!P() && recent()) store.current = recent().id;
+let screen = P() ? 'desk' : 'start';
+let readMode = false;
+let hist = [], fut = [];
+let typingPending = false;
+let drag = null, placing = null, selInfo = null, lastCaret = null;
+let sideFilter = { q: '', src: '', pile: '' };
+let editedSinceLoad = false;
+
+function el(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v == null || v === false) continue;
+    if (k === 'class') e.className = v;
+    else if (k === 'text') e.textContent = v;
+    else if (k === 'html') e.innerHTML = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat()) {
+    if (c == null || c === false) continue;
+    e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  }
+  return e;
+}
+const mini = (label, fn, title) => el('button', { class: 'mini', type: 'button', title, onmousedown: e => e.preventDefault(), onclick: fn }, label);
+const fmtDate = ts => { try { return new Date(ts).toLocaleString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const trunc = (s, n) => (s = (s || '').replace(/\s+/g, ' ').trim()).length > n ? s.slice(0, n - 1) + '…' : s;
+const lc = s => (s || '').toLocaleLowerCase('tr-TR');
+const countWords = s => ((s || '').match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || []).length;
+const fmtNum = n => n.toLocaleString('tr-TR');
+
+function splitText(t) {
+  t = (t || '').replace(/\r\n?/g, '\n').trim();
+  if (!t) return [];
+  let parts = t.split(/\n[ \t]*\n+/);
+  if (parts.length === 1 && t.includes('\n')) parts = t.split('\n');
+  return parts.map(s => s.trim()).filter(Boolean);
+}
+function defaultPiles() { return [['Giriş', '#3f6aa1'], ['Gelişme', '#b08a2e'], ['Sonuç', '#4f7a4a']].map(([name, color]) => ({ id: 'y' + uid(), name, color })); }
+function defaultOpts() { return { cite: 'paren', biblio: true, src: true, left: false }; }
+function opts() { const p = P(); if (!p.opts) p.opts = defaultOpts(); return p.opts; }
+
+/* ---------- sources ---------- */
+function libGet(id) { const p = P(); return (p && p.lib || []).find(e => e.id === id) || null; }
+function surname(a) {
+  a = (a || '').trim(); if (!a) return '';
+  if (a.includes(',')) return a.split(',')[0].trim();
+  if (/\s(ve|&|and)\s/i.test(a)) return a;
+  const w = a.split(/\s+/); return w[w.length - 1];
+}
+function invertAuthor(a) {
+  a = (a || '').trim();
+  if (!a || a.includes(',') || /\s(ve|&|and)\s/i.test(a)) return a;
+  const w = a.split(/\s+/); if (w.length < 2) return a;
+  return w[w.length - 1] + ', ' + w.slice(0, -1).join(' ');
+}
+function srcLabel(id) {
+  if (id === ME) return 'Kendi notum';
+  const e = libGet(id); if (!e) return '';
+  return [surname(e.author), e.title].filter(Boolean).join(', ') || 'Adsız kaynak';
+}
+function srcShort(id, page) { const l = srcLabel(id); return l ? l + (page && id !== ME ? ', s. ' + page : '') : ''; }
+function srcLong(e) { return [e.author, e.title, e.translator && 'çev. ' + e.translator, e.publisher, e.year].filter(Boolean).join(', '); }
+function joinRuns(segs, sep, end) {
+  const out = [];
+  segs.filter(s => s && s.t).forEach((s, i) => { if (i) out.push({ t: sep }); out.push(s); });
+  if (out.length) out.push({ t: end });
+  return out;
+}
+function fullRuns(id, page) {
+  const e = libGet(id); if (!e) return [{ t: srcShort(id, page) + '.' }];
+  return joinRuns([{ t: e.author }, { t: e.title, i: true }, { t: e.translator && 'çev. ' + e.translator }, { t: e.publisher }, { t: e.year }, { t: page && 's. ' + page }], ', ', '.');
+}
+function shortRuns(id, page) {
+  const e = libGet(id); if (!e) return [{ t: srcShort(id, page) + '.' }];
+  return joinRuns([{ t: surname(e.author) }, { t: e.title, i: true }, { t: page && 's. ' + page }], ', ', '.');
+}
+function biblioRuns(e) {
+  return joinRuns([{ t: invertAuthor(e.author) }, { t: e.title, i: true }, { t: e.translator && 'Çev. ' + e.translator }, { t: [e.publisher, e.year].filter(Boolean).join(', ') }], '. ', '.');
+}
+function touchSrc(id) {
+  const p = P(); if (!p) return;
+  p.lastSrcId = id || '';
+  if (id && id !== ME) p.recent = [id, ...(p.recent || []).filter(x => x !== id)].slice(0, 60);
+}
+function recentLib() {
+  const p = P(); const r = p.recent || [];
+  return [...p.lib].sort((a, b) => {
+    const ia = r.indexOf(a.id), ib = r.indexOf(b.id);
+    if (ia >= 0 || ib >= 0) return (ia < 0 ? 1e9 : ia) - (ib < 0 ? 1e9 : ib);
+    return lc(srcLabel(a.id)).localeCompare(lc(srcLabel(b.id)), 'tr');
+  });
+}
+function srcUseCount(id) {
+  const p = P(); let n = 0;
+  p.cards.forEach(c => { if (c.srcId === id) n++; });
+  p.blocks.forEach(b => { if (b.srcId === id) n++; (b.cites || []).forEach(c => { if (c.srcId === id) n++; }); });
+  return n;
+}
+
+/* ---------- undo ---------- */
+function snapshot() {
+  const p = P(); if (!p) return;
+  hist.push(JSON.stringify(p));
+  if (hist.length > 80) hist.shift();
+  fut = [];
+  updateUndo();
+}
+function undo() {
+  const p = P(); if (!p || !hist.length) return;
+  fut.push(JSON.stringify(p));
+  const q = JSON.parse(hist.pop());
+  store.projects[q.id] = q;
+  typingPending = false;
+  renderAll(); saveSoon(); toast('Geri alındı');
+}
+function redo() {
+  const p = P(); if (!p || !fut.length) return;
+  hist.push(JSON.stringify(p));
+  const q = JSON.parse(fut.pop());
+  store.projects[q.id] = q;
+  typingPending = false;
+  renderAll(); saveSoon(); toast('Yinelendi');
+}
+function updateUndo() {
+  const on = screen === 'desk' && P() && !readMode;
+  $('#undoBtn').disabled = !(on && hist.length);
+  $('#redoBtn').disabled = !(on && fut.length);
+}
+
+/* ---------- toast / modal / popover ---------- */
+let toastT;
+function toast(msg, actLabel, fn) {
+  const t = $('#toast');
+  t.replaceChildren(el('span', { text: msg }));
+  if (actLabel) t.append(el('button', { type: 'button', onclick: () => { t.classList.remove('show'); fn(); } }, actLabel));
+  t.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), actLabel ? 5000 : 2400);
+}
+const modals = [];
+function modal(children, cls) {
+  const box = el('div', { class: 'modal' + (cls ? ' ' + cls : ''), role: 'dialog' }, children);
+  const ov = el('div', { class: 'overlay' }, box);
+  const close = () => { ov.remove(); const i = modals.indexOf(api); if (i >= 0) modals.splice(i, 1); };
+  ov.addEventListener('mousedown', e => { if (e.target === ov) close(); });
+  const api = { close, box };
+  modals.push(api);
+  document.body.append(ov);
+  return api;
+}
+let pop = null, popAnchor = null;
+function openPop(anchor) {
+  closePop();
+  pop = el('div', { class: 'pop' });
+  popAnchor = anchor;
+  document.body.append(pop);
+  const r = anchor.getBoundingClientRect();
+  pop.style.left = r.left + 'px'; pop.style.top = (r.bottom + 6) + 'px';
+  requestAnimationFrame(() => {
+    if (!pop) return;
+    const w = pop.offsetWidth, h = pop.offsetHeight;
+    let x = Math.min(r.left, innerWidth - w - 10), y = r.bottom + 6;
+    if (y + h > innerHeight - 10) y = Math.max(10, r.top - h - 6);
+    pop.style.left = Math.max(10, x) + 'px'; pop.style.top = y + 'px';
+  });
+  return pop;
+}
+function closePop() { if (pop) { pop.remove(); pop = null; popAnchor = null; } }
+document.addEventListener('mousedown', e => {
+  if (pop && !pop.contains(e.target) && !(popAnchor && popAnchor.contains(e.target))) closePop();
+  if (!e.target.closest('#cutbar')) hideCut();
+});
+
+/* ---------- status / saving ---------- */
+let statusKind = '';
+function setStatus(k) {
+  statusKind = k;
+  const s = $('#status');
+  const map = {
+    saving: 'Kaydediliyor…', saved: 'Kaydedildi ✓', local: 'Bu tarayıcıda kaydedildi',
+    slow: 'Bağlantı bekleniyor…', error: 'Kaydedilemedi — İndir › Proje dosyası ile yedek al',
+    quota: 'Kayıt alanı doldu — proje dosyasını indir'
+  };
+  s.textContent = screen === 'desk' && P() ? (map[k] || '') : '';
+  s.title = k === 'local' ? 'Çalışma bu tarayıcıda duruyor. Başka bir yere taşımak ya da yedeklemek için: İndir › Proje dosyası.' : '';
+  s.classList.toggle('err', k === 'error' || k === 'quota');
+}
+const deletedIds = new Set();
+function persistLocal() {
+  try {
+    // another tab may have saved other projects meanwhile: keep them
+    const raw = localStorage.getItem(KEY);
+    if (raw) {
+      const other = JSON.parse(raw);
+      Object.values((other && other.projects) || {}).forEach(op => {
+        if (!op || !op.id || deletedIds.has(op.id)) return;
+        const mine = store.projects[op.id];
+        if (!mine || ((op.updated || 0) > (mine.updated || 0) && op.id !== store.current)) store.projects[op.id] = migrate(op);
+      });
+    }
+    localStorage.setItem(KEY, JSON.stringify(store));
+  } catch (e) {}
+}
+let saveT = null;
+function saveSoon() {
+  const p = P(); if (!p) return;
+  p.updated = Date.now();
+  editedSinceLoad = true;
+  setStatus('saving');
+  clearTimeout(saveT);
+  const id = p.id;
+  saveT = setTimeout(() => {
+    saveT = null;
+    persistLocal();
+    if (db) remoteSave(id); else setStatus('local');
+  }, 900);
+}
+addEventListener('beforeunload', () => persistLocal());
+
+/* ---------- remote (account) storage ---------- */
+let db = null, uidv = null;
+const remoteMeta = {}, lastParts = {}, writing = {}, pendingW = {};
+const metaRef = id => db.doc('data/users/' + uidv + '/' + id);
+const partsCol = id => metaRef(id).collection('parts');
+async function withRetry(fn) {
+  try { return await fn(); }
+  catch (e) {
+    if (e && e.code === 'unavailable') { await sleep(400 + Math.random() * 700); return fn(); }
+    throw e;
+  }
+}
+function chunkStr(s, n) {
+  const out = []; let i = 0;
+  while (i < s.length) {
+    let end = Math.min(s.length, i + n);
+    const c = s.charCodeAt(end - 1);
+    if (end < s.length && c >= 0xD800 && c <= 0xDBFF) end--;
+    out.push(s.slice(i, end)); i = end;
+  }
+  return out.length ? out : [''];
+}
+async function remoteSave(id) {
+  if (!db) return;
+  if (writing[id]) { pendingW[id] = true; return; }
+  writing[id] = true;
+  try {
+    do {
+      pendingW[id] = false;
+      const pr = store.projects[id];
+      if (!pr) break;
+      const chunks = chunkStr(JSON.stringify(pr), 60000);
+      const lp = lastParts[id] || (lastParts[id] = []);
+      for (let i = 0; i < chunks.length; i++) {
+        if (lp[i] !== chunks[i]) {
+          await withRetry(() => partsCol(id).doc(String(i)).set({ s: chunks[i] }));
+          lp[i] = chunks[i];
+        }
+      }
+      const meta = { title: pr.title || '', updated: pr.updated || Date.now(), created: pr.created || Date.now(), n: chunks.length };
+      await withRetry(() => metaRef(id).set(meta));
+      remoteMeta[id] = meta;
+    } while (pendingW[id]);
+    if (!saveT) setStatus('saved');
+  } catch (e) {
+    setStatus(e && e.code === 'quota_exceeded' ? 'quota' : 'error');
+  } finally { writing[id] = false; }
+}
+async function loadParts(id, n) {
+  const arr = [];
+  for (let i = 0; i < n; i++) {
+    const s = await partsCol(id).doc(String(i)).get();
+    if (!s.exists) return null;
+    const v = (s.data() || {}).s;
+    if (typeof v !== 'string') return null;
+    arr.push(v);
+    (lastParts[id] || (lastParts[id] = []))[i] = v;
+  }
+  return arr.join('');
+}
+async function remoteDelete(id) {
+  if (!db) return;
+  const m = remoteMeta[id];
+  try {
+    await metaRef(id).delete();
+    for (let i = 0; i < ((m && m.n) || 0); i++) await partsCol(id).doc(String(i)).delete();
+  } catch (e) {}
+  delete remoteMeta[id]; delete lastParts[id];
+}
+async function initRemote() {
+  if (!(window.claude && window.claude.use)) { setStatus('local'); return; }
+  let d = null, u = null;
+  try { [d, u] = await Promise.all([window.claude.use('db'), window.claude.use('user')]); } catch (e) {}
+  if (!d || !u) { setStatus('local'); return; }
+  try { uidv = await u.id(); } catch (e) {}
+  if (!uidv) { setStatus('local'); return; }
+  db = d;
+  let done = false;
+  const timer = setTimeout(() => { if (!done) setStatus('slow'); }, 10000);
+  try {
+    const snap = await db.collection('data/users/' + uidv).get();
+    let changedCurrent = false, gotNew = false;
+    for (const ds of snap.docs) {
+      const m = ds.data();
+      if (!m || typeof m.n !== 'number') continue;
+      remoteMeta[ds.id] = m;
+      const loc = store.projects[ds.id];
+      if (!loc || (m.updated || 0) > (loc.updated || 0)) {
+        if (loc && ds.id === store.current && editedSinceLoad) continue;
+        const s = await loadParts(ds.id, m.n);
+        if (!s) continue;
+        try {
+          const pr = migrate(JSON.parse(s));
+          if (pr && Array.isArray(pr.blocks)) {
+            store.projects[ds.id] = pr; gotNew = true;
+            if (ds.id === store.current) changedCurrent = true;
+          }
+        } catch (e) {}
+      }
+    }
+    done = true; clearTimeout(timer);
+    for (const id of Object.keys(store.projects)) {
+      const m = remoteMeta[id];
+      if (!m || (store.projects[id].updated || 0) > (m.updated || 0)) remoteSave(id);
+    }
+    persistLocal();
+    if (screen === 'start') {
+      const ta = $('.start-ta'), ti = $('.field-in');
+      const untouched = !ta || (!ta.value && !(ti && ti.value));
+      if (gotNew && untouched) {
+        if (!store.current) { const r = recent(); if (r) { store.current = r.id; screen = 'desk'; } }
+        renderAll();
+      }
+    } else if (changedCurrent) { hist = []; fut = []; renderAll(); }
+    setStatus('saved');
+  } catch (e) {
+    done = true; clearTimeout(timer); db = null; setStatus('local');
+  }
+}
+
+/* ---------- downloads ---------- */
+let dlP = null;
+function getDl() {
+  if (!(window.claude && window.claude.use)) return Promise.resolve(null);
+  if (!dlP) dlP = Promise.race([
+    Promise.resolve(window.claude.use('downloads')).catch(() => null),
+    new Promise(r => setTimeout(() => r(null), 10000))
+  ]);
+  return dlP;
+}
+async function offer(name, data, altText) {
+  if (!(window.claude && window.claude.use)) {
+    try {
+      const type = name.endsWith('.html') ? 'text/html' : name.endsWith('.json') ? 'application/json' : name.endsWith('.docx') ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'text/plain';
+      const blob = data instanceof Blob ? data : new Blob([data], { type: type + ';charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = el('a', { href: url, download: name, style: 'display:none' });
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      toast('İndirildi: ' + name); return;
+    } catch (e) {}
+  }
+  const dl = await getDl();
+  if (dl) {
+    try { await dl.save({ filename: name, data }); toast('İndirildi: ' + name); return; }
+    catch (e) {
+      const c = e && e.code;
+      if (c === 'declined') { toast('İndirme iptal edildi'); return; }
+      if (c === 'rate_limited') { toast('Bir indirme penceresi zaten açık'); return; }
+    }
+  }
+  showFallback(name, typeof data === 'string' ? data : altText);
+}
+function showFallback(name, text) {
+  const ta = el('textarea', { class: 'fb-ta', readonly: true });
+  ta.value = text || '';
+  const m = modal([
+    el('h3', { text: 'Dosya burada indirilemedi' }),
+    el('p', { text: 'Bu görünüm dosya indirmeye izin vermedi (“' + name + '”). Metni kopyalayıp istediğin yere yapıştırabilirsin.' }),
+    ta,
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: async () => { try { await navigator.clipboard.writeText(ta.value); toast('Kopyalandı'); } catch (e) { ta.select(); toast('Seçtim, Ctrl+C ile kopyala'); } } }, 'Kopyala'),
+      el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Tamam'))
+  ]);
+}
+
+/* ---------- files in ---------- */
+async function readDocx(file) {
+  if (!window.JSZip) throw new Error('nozip');
+  const zip = await JSZip.loadAsync(file);
+  const f = zip.file('word/document.xml');
+  if (!f) throw new Error('nodoc');
+  const xml = await f.async('string');
+  const doc = new DOMParser().parseFromString(xml, 'application/xml');
+  const out = [];
+  for (const p of doc.getElementsByTagNameNS(W_NS, 'p')) {
+    let t = '';
+    for (const n of p.getElementsByTagNameNS(W_NS, '*')) {
+      if (n.localName === 't') t += n.textContent;
+      else if (n.localName === 'tab') t += '\t';
+      else if (n.localName === 'br' || n.localName === 'cr') t += '\n';
+    }
+    if (t.trim()) out.push(t.trim());
+  }
+  return out.join('\n\n');
+}
+let pdfP = null;
+function loadPdfJs() {
+  if (window.pdfjsLib) return Promise.resolve();
+  if (!pdfP) pdfP = new Promise((res, rej) => {
+    const base = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+    const s1 = el('script', { src: base + 'pdf.worker.min.js' });
+    s1.onload = () => {
+      const s2 = el('script', { src: base + 'pdf.min.js' });
+      s2.onload = () => window.pdfjsLib ? res() : rej(new Error('nopdf'));
+      s2.onerror = rej; document.head.append(s2);
+    };
+    s1.onerror = rej; document.head.append(s1);
+  }).catch(e => { pdfP = null; throw e; });
+  return pdfP;
+}
+async function readPdf(file) {
+  await loadPdfJs();
+  const pdf = await window.pdfjsLib.getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise;
+  const paras = [];
+  for (let n = 1; n <= pdf.numPages; n++) {
+    const page = await pdf.getPage(n);
+    const tc = await page.getTextContent();
+    const lines = []; let cur = { t: '', y: null };
+    for (const it of tc.items) {
+      if (!('str' in it)) continue;
+      const iy = it.transform[5];
+      if (cur.y !== null && it.str.trim() && Math.abs(iy - cur.y) > 2) { lines.push(cur); cur = { t: '', y: null }; }
+      if (cur.y === null && it.str.trim()) cur.y = iy;
+      cur.t += it.str;
+      if (it.hasEOL) { lines.push(cur); cur = { t: '', y: null }; }
+    }
+    if (cur.t.trim()) lines.push(cur);
+    const gaps = [];
+    for (let i = 1; i < lines.length; i++) if (lines[i].y != null && lines[i - 1].y != null) { const g = lines[i - 1].y - lines[i].y; if (g > 0) gaps.push(g); }
+    gaps.sort((a, b) => a - b);
+    const med = gaps.length ? gaps[Math.floor((gaps.length - 1) / 4)] : 12;
+    let para = '', prevY = null;
+    const flush = () => { if (para.trim()) paras.push(para.trim()); para = ''; };
+    for (const L of lines) {
+      const t = L.t.replace(/\s+/g, ' ').trim();
+      if (!t) { flush(); continue; }
+      if (prevY != null && L.y != null) { const g = prevY - L.y; if (g > med * 1.45 || g < 0) flush(); }
+      if (L.y != null) prevY = L.y;
+      if (!para) para = t;
+      else if (/[-‐]$/.test(para) && /^\p{Ll}/u.test(t)) para = para.replace(/[-‐]$/, '') + t;
+      else para += ' ' + t;
+    }
+    flush();
+  }
+  const out = paras.join('\n\n');
+  if (!out.trim()) throw new Error('notext');
+  return out;
+}
+async function readFileText(file) {
+  if (/\.docx$/i.test(file.name)) return readDocx(file);
+  if (/\.pdf$/i.test(file.name) || file.type === 'application/pdf') return readPdf(file);
+  return (await file.text()).replace(/^﻿/, '');
+}
+const ACCEPT = '.txt,.md,.docx,.pdf,text/plain,text/markdown,application/pdf';
+function pickFile(accept, cb) {
+  const i = el('input', { type: 'file', accept, style: 'display:none' });
+  i.addEventListener('change', () => { const f = i.files[0]; i.remove(); if (f) cb(f); });
+  document.body.append(i);
+  i.click();
+}
+async function loadInto(ta, file, titleIn) {
+  toast('Dosya okunuyor…');
+  try {
+    const t = await readFileText(file);
+    ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + t;
+    if (titleIn && !titleIn.value) titleIn.value = file.name.replace(/\.[^.]+$/, '');
+    ta.dispatchEvent(new Event('input'));
+    ta.scrollTop = 0;
+    toast('“' + file.name + '” yüklendi');
+  } catch (e) {
+    toast(e && e.message === 'notext' ? 'Bu PDF’te seçilebilir metin yok; taranmış bir belge olabilir' : 'Dosya okunamadı');
+  }
+}
+function fileDropTarget(ta, titleIn) {
+  ta.addEventListener('dragover', e => { if (hasFiles(e)) { e.preventDefault(); ta.classList.add('drop'); } });
+  ta.addEventListener('dragleave', () => ta.classList.remove('drop'));
+  ta.addEventListener('drop', e => {
+    if (!hasFiles(e)) return;
+    e.preventDefault(); e.stopPropagation(); ta.classList.remove('drop');
+    const f = e.dataTransfer.files[0]; if (f) loadInto(ta, f, titleIn);
+  });
+}
+const hasFiles = e => e.dataTransfer && [...(e.dataTransfer.types || [])].includes('Files');
+addEventListener('dragover', e => { if (hasFiles(e)) e.preventDefault(); });
+addEventListener('drop', e => {
+  if (!hasFiles(e)) return;
+  e.preventDefault();
+  const f = e.dataTransfer.files[0]; if (!f) return;
+  if (screen === 'start') { const ta = $('.start-ta'); if (ta) loadInto(ta, f, $('.field-in')); }
+  else if (P() && !readMode) addTextModal(f);
+});
+function importProjectFile() {
+  pickFile('.json,application/json', async f => {
+    try {
+      const pr = migrate(JSON.parse(await f.text()));
+      if (!pr || !Array.isArray(pr.blocks) || !Array.isArray(pr.cards)) throw new Error('bad');
+      if (!pr.id || store.projects[pr.id]) { const dup = !!(pr.id && store.projects[pr.id]); pr.id = 'p' + uid(); if (dup) pr.title = (pr.title || 'Adsız çalışma') + ' (kopya)'; }
+      pr.updated = Date.now(); pr.created = pr.created || Date.now();
+      store.projects[pr.id] = pr;
+      openProject(pr.id); saveSoon();
+      toast('Proje açıldı');
+    } catch (e) { toast('Bu bir Makas proje dosyası değil gibi'); }
+  });
+}
+
+/* ---------- projects ---------- */
+function newProject(title, text) {
+  const p = {
+    id: 'p' + uid(), v: 2, title: title || 'Adsız çalışma', created: Date.now(), updated: Date.now(),
+    blocks: splitText(text).map(t => ({ id: uid(), type: 'src', text: t })),
+    cards: [], lib: [], recent: [], piles: defaultPiles(), versions: [], lastSrcId: '', opts: defaultOpts()
+  };
+  store.projects[p.id] = p;
+  openProject(p.id);
+  saveSoon();
+}
+function openProject(id) {
+  store.current = id; screen = 'desk'; readMode = false;
+  hist = []; fut = []; sideFilter = { q: '', src: '', pile: '' }; lastCaret = null;
+  stopPlacing();
+  persistLocal(); renderAll(); window.scrollTo(0, 0);
+  setStatus(db ? 'saved' : 'local');
+}
+function showStart() { stopPlacing(); readMode = false; screen = 'start'; renderAll(); window.scrollTo(0, 0); }
+function confirmDelete() {
+  const p = P(); if (!p) return;
+  const m = modal([
+    el('h3', { text: 'Bu çalışmayı sil?' }),
+    el('p', { text: '“' + (p.title || 'Adsız çalışma') + '” kâğıdı, kenardaki parçaları ve saklanan hâlleriyle birlikte silinecek. Bu geri alınamaz. İstersen önce İndir › Proje dosyası ile yedek al.' }),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn accent', type: 'button', onclick: () => {
+        m.close();
+        const id = p.id;
+        delete store.projects[id]; deletedIds.add(id);
+        remoteDelete(id);
+        store.current = null;
+        const r = recent();
+        if (r) openProject(r.id); else { persistLocal(); showStart(); }
+        toast('Çalışma silindi');
+      } }, 'Sil'))
+  ]);
+}
+function projMenu(anchor) {
+  const pp = openPop(anchor);
+  const list = Object.values(store.projects).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  list.forEach(pr => pp.append(el('button', { class: 'pop-item' + (pr.id === store.current && screen === 'desk' ? ' cur' : ''), type: 'button', onclick: () => { closePop(); openProject(pr.id); } },
+    pr.title || 'Adsız çalışma', el('small', { text: fmtDate(pr.updated) }))));
+  if (list.length) pp.append(el('div', { class: 'pop-sep' }));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); showStart(); } }, '+ Yeni çalışma'));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); importProjectFile(); } }, 'Proje dosyası aç (.json)'));
+  if (P() && screen === 'desk') {
+    const n = (P().versions || []).length;
+    pp.append(el('div', { class: 'pop-sep' }));
+    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); saveVersionDialog(); } }, 'Bu hâlini sakla…'));
+    pp.append(el('button', { class: 'pop-item', type: 'button', disabled: n ? null : true, style: n ? null : 'opacity:.45', onclick: () => { closePop(); versionsModal(); } }, 'Saklanan hâller' + (n ? ' (' + n + ')' : '')));
+    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); libraryModal(); } }, 'Kaynaklar (' + P().lib.length + ')'));
+    pp.append(el('div', { class: 'pop-sep' }));
+    pp.append(el('button', { class: 'pop-item danger', type: 'button', onclick: () => { closePop(); confirmDelete(); } }, 'Bu çalışmayı sil'));
+  }
+}
+
+/* ---------- versions ---------- */
+function saveVersionDialog() {
+  const p = P();
+  const inp = el('input', { type: 'text', placeholder: 'Örn. ilk taslak, girişi değiştirmeden önce' });
+  let m;
+  const ok = () => {
+    m.close();
+    snapshot();
+    const data = JSON.stringify({ title: p.title, blocks: p.blocks, cards: p.cards, lib: p.lib, piles: p.piles, goal: p.goal || 0 });
+    p.versions = [{ id: uid(), name: inp.value.trim() || 'Adsız hâl', at: Date.now(), words: myWords(p), data }, ...(p.versions || [])].slice(0, 20);
+    saveSoon(); toast('Bu hâli saklandı');
+  };
+  m = modal([
+    el('h3', { text: 'Bu hâlini sakla' }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Kâğıdın ve kenarın şu anki hâli saklanır. Sonra cesurca kesip biçebilirsin; istediğin zaman bu hâle dönersin. En fazla 20 hâl tutulur.' }),
+    el('div', { class: 'field' }, el('label', { text: 'Ad' }), inp),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Sakla'))
+  ]);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
+  setTimeout(() => inp.focus(), 30);
+}
+function versionsModal() {
+  const p = P();
+  const list = el('div');
+  let m;
+  const draw = () => {
+    list.replaceChildren();
+    if (!(p.versions || []).length) { list.append(el('p', { text: 'Saklanan hâl yok.' })); return; }
+    p.versions.forEach(v => list.append(el('div', { class: 'vrow' },
+      el('div', { class: 'vn' }, el('b', { text: v.name }), el('small', { text: fmtDate(v.at) + (v.words != null ? ' · ' + fmtNum(v.words) + ' kelime' : '') })),
+      el('button', { class: 'btn', type: 'button', onclick: () => {
+        try {
+          const d = JSON.parse(v.data);
+          snapshot();
+          Object.assign(p, { title: d.title, blocks: d.blocks, cards: d.cards, lib: d.lib || p.lib, piles: d.piles || [], goal: d.goal || 0 });
+          m.close(); renderAll(); saveSoon();
+          toast('“' + v.name + '” hâline dönüldü', 'Geri al', undo);
+        } catch (e) { toast('Bu hâl açılamadı'); }
+      } }, 'Bu hâle dön'),
+      el('button', { class: 'btn ghost', type: 'button', onclick: () => { snapshot(); p.versions = p.versions.filter(x => x !== v); saveSoon(); draw(); } }, 'Sil'))));
+  };
+  draw();
+  m = modal([
+    el('h3', { text: 'Saklanan hâller' }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Bir hâle döndüğünde şimdiki hâl kaybolmaz: “Geri al” ile hemen geri gelirsin. Emin olmak için önce şimdiki hâli de saklayabilirsin.' }),
+    list,
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Kapat'))
+  ], 'wide');
+}
+
+/* ---------- source picker & piece dialog ---------- */
+function sourcePicker(initial, opts2) {
+  const p = P();
+  let sel = initial || '', newMode = false;
+  const fields = {};
+  const fin = (key, label, ph, wide) => {
+    const i = el('input', { type: 'text', placeholder: ph || '', autocomplete: 'off' });
+    fields[key] = i;
+    return el('div', { class: wide ? 'wide' : '' }, el('label', { text: label }), i);
+  };
+  const form = el('div', { class: 'sp-form', style: 'display:none' },
+    fin('author', 'Yazar', 'Örn. Walter Benjamin'), fin('title', 'Eser', 'Örn. Pasajlar'),
+    fin('translator', 'Çevirmen', 'varsa'), fin('publisher', 'Yayınevi', 'varsa'), fin('year', 'Yıl', 'varsa'));
+  const lib = recentLib();
+  const search = lib.length > 8 ? el('input', { type: 'search', class: 'sp-search', placeholder: 'Kaynaklarda ara' }) : null;
+  const chips = el('div', { class: 'chips' });
+  const draw = () => {
+    chips.replaceChildren();
+    const q = search ? lc(search.value) : '';
+    let l = lib.filter(e => !q || lc(e.author + ' ' + e.title + ' ' + e.translator).includes(q));
+    if (!q) l = l.slice(0, 10);
+    if (sel && sel !== ME && !l.some(e => e.id === sel) && libGet(sel)) l.unshift(libGet(sel));
+    l.forEach(e => chips.append(el('button', { class: 'chip' + (sel === e.id && !newMode ? ' sel' : ''), type: 'button', title: srcLong(e), onclick: () => { sel = e.id; newMode = false; form.style.display = 'none'; draw(); opts2 && opts2.onPick && opts2.onPick(); } }, srcLabel(e.id))));
+    if (!(opts2 && opts2.noMe)) chips.append(el('button', { class: 'chip me' + (sel === ME && !newMode ? ' sel' : ''), type: 'button', onclick: () => { sel = ME; newMode = false; form.style.display = 'none'; draw(); opts2 && opts2.onPick && opts2.onPick(); } }, '✎ Kendi notum'));
+    chips.append(el('button', { class: 'chip new' + (newMode ? ' sel' : ''), type: 'button', onclick: () => { newMode = true; form.style.display = 'grid'; draw(); fields.author.focus(); opts2 && opts2.onPick && opts2.onPick(); } }, '+ Yeni kaynak'));
+  };
+  if (search) search.addEventListener('input', draw);
+  if (!lib.length && !initial) { newMode = true; form.style.display = 'grid'; }
+  draw();
+  return {
+    el: el('div', {}, search, chips, form),
+    get() {
+      if (newMode) {
+        const e = { id: 's' + uid() };
+        ['author', 'title', 'translator', 'publisher', 'year'].forEach(k => e[k] = fields[k].value.trim());
+        if (!e.author && !e.title) return null;
+        return { srcId: e.id, newEntry: e };
+      }
+      return sel ? { srcId: sel } : null;
+    },
+    focus() { (newMode ? fields.author : (search || chips.querySelector('.chip.sel') || chips.querySelector('.chip'))).focus(); },
+    fields
+  };
+}
+function pileChips(initial) {
+  const p = P();
+  let sel = initial || '';
+  const box = el('div', { class: 'piles' });
+  const draw = () => {
+    box.replaceChildren();
+    box.append(el('button', { class: 'pile' + (!sel ? ' sel' : ''), type: 'button', onclick: () => { sel = ''; draw(); } }, 'yığın yok'));
+    p.piles.forEach(pl => box.append(el('button', { class: 'pile' + (sel === pl.id ? ' sel' : ''), type: 'button', onclick: () => { sel = pl.id; draw(); } }, el('i', { class: 'dot', style: 'background:' + pl.color }), pl.name)));
+  };
+  draw();
+  return { el: box, get: () => sel };
+}
+/* generic dialog for a piece: cut, edit card, edit source of a block or inline quote */
+function pieceDialog(o, onOk) {
+  const p = P();
+  const sp = sourcePicker(o.srcId != null ? o.srcId : (p.lastSrcId || ''), { onPick: () => { err.textContent = ''; } });
+  const pg = el('input', { type: 'text', placeholder: 'örn. 42', autocomplete: 'off' }); pg.value = o.page || '';
+  const note = el('input', { type: 'text', placeholder: 'Örn. girişte kullan', autocomplete: 'off' }); note.value = o.note || '';
+  const err = el('div', { class: 'err-msg' });
+  const textTa = o.editText ? el('textarea', { class: 'big', style: 'min-height:120px' }) : null;
+  if (textTa) textTa.value = o.text;
+  const piles = o.piles && p.piles.length ? pileChips(o.pileId) : null;
+  const splitCb = o.split ? el('input', { type: 'checkbox' }) : null;
+  let m;
+  const ok = () => {
+    const r = sp.get();
+    if (!r) { err.textContent = 'Bir kaynak seç, yeni kaynak gir ya da “Kendi notum”u işaretle; yoksa sonra karışır.'; sp.focus(); return; }
+    if (textTa && !textTa.value.trim()) { err.textContent = 'Parça boş kalamaz.'; return; }
+    m.close();
+    onOk({ split: !!(splitCb && splitCb.checked), srcId: r.srcId, newEntry: r.newEntry, page: r.srcId === ME ? '' : pg.value.trim(), note: note.value.trim(), pileId: piles ? piles.get() : (o.pileId || ''), text: textTa ? textTa.value.trim() : o.text });
+  };
+  m = modal([
+    el('h3', { text: o.title }),
+    textTa, splitCb ? el('label', { class: 'chk', style: 'margin-top:8px;font-size:12.5px;color:var(--muted)' }, splitCb, 'Her paragrafı ayrı parça yap (hepsi aynı kaynakla)') : null,
+    textTa ? null : (o.text ? el('div', { class: 'preview', text: o.text.length > 700 ? o.text.slice(0, 700) + '…' : o.text }) : null),
+    el('div', { class: 'field' }, el('label', { text: 'Kaynak' }), sp.el, err),
+    el('div', { class: 'row2' },
+      o.noNote ? null : el('div', { class: 'field' }, el('label', { text: 'Not (isteğe bağlı)' }), note),
+      el('div', { class: 'field pgf' }, el('label', { text: 'Sayfa' }), pg)),
+    piles ? el('div', { class: 'field' }, el('label', { text: 'Yığın' }), piles.el) : null,
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn accent', type: 'button', onclick: ok }, o.okLabel || 'Tamam'))
+  ]);
+  m.box.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); ok(); } });
+  setTimeout(() => sp.focus(), 30);
+}
+function applySrc(r) {
+  const p = P();
+  if (r.newEntry) p.lib.push(r.newEntry);
+  touchSrc(r.srcId);
+}
+
+/* ---------- block operations ---------- */
+function findBlock(id) { const p = P(); const i = p.blocks.findIndex(b => b.id === id); return [p, i, p.blocks[i]]; }
+const isTextBlock = b => b && (b.type === 'src' || b.type === 'mine' || b.type === 'atif');
+
+function splitCites(cites, before, after) {
+  const a = [], b = [];
+  (cites || []).forEach(c => { if (after.includes(c.text) && !before.includes(c.text)) b.push(c); else a.push(c); });
+  return [a, b];
+}
+function doCut(blockId, s, e) {
+  const [, , b] = findBlock(blockId); if (!b) return;
+  const piece = b.text.slice(s, e).trim(); if (!piece) return;
+  pieceDialog({ title: 'Kenara koy', text: piece, srcId: (b.type === 'quote' || b.type === 'atif') ? b.srcId : null, page: (b.type === 'quote' || b.type === 'atif') ? b.page : '', piles: true, okLabel: '✂ Kenara koy' }, r => {
+    const [p, i, bb] = findBlock(blockId); if (!bb) return;
+    snapshot(); applySrc(r);
+    const before = bb.text.slice(0, s).replace(/\s+$/, '');
+    const after = bb.text.slice(e).replace(/^\s+/, '');
+    const [ca, cb] = splitCites(bb.cites, before, after);
+    const repl = [];
+    if (before) repl.push(Object.assign({}, bb, { text: before, cites: ca }));
+    if (after) repl.push(Object.assign({}, bb, { id: uid(), text: after, cardId: undefined, cites: before ? cb : ca.concat(cb) }));
+    p.blocks.splice(i, 1, ...repl);
+    const card = { id: uid(), text: piece, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId };
+    p.cards.push(card);
+    renderAll(); flashCard(card.id); saveSoon();
+    toast('Kenara kondu', 'Geri al', undo);
+  });
+}
+function wholeToSide(id, beforeCardId) {
+  const [, , b] = findBlock(id); if (!b) return;
+  if (!b.text.trim()) { deleteBlock(id); return; }
+  pieceDialog({ title: 'Kenara koy', text: b.text.trim(), srcId: b.srcId || null, page: b.page, piles: true, okLabel: '✂ Kenara koy' }, r => {
+    const [p, i] = findBlock(id); if (i < 0) return;
+    snapshot(); applySrc(r);
+    p.blocks.splice(i, 1);
+    const card = { id: uid(), text: b.text.trim(), srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId };
+    insertCard(p, card, beforeCardId);
+    (b.cites || []).forEach(c => p.cards.push({ id: c.id || uid(), text: stripQ(c.text), srcId: c.srcId, page: c.page, note: c.note || '', pileId: c.pileId || '' }));
+    renderAll(); flashCard(card.id); saveSoon();
+    toast('Kenara kondu', 'Geri al', undo);
+  });
+}
+function blockToSide(id, beforeCardId) {
+  const [p, i, b] = findBlock(id); if (!b) return;
+  snapshot();
+  p.blocks.splice(i, 1);
+  const card = { id: b.cardId || uid(), text: b.text, srcId: b.srcId || '', page: b.page || '', note: b.note || '', pileId: b.pileId || '' };
+  insertCard(p, card, beforeCardId);
+  renderAll(); flashCard(card.id); saveSoon();
+}
+function insertCard(p, card, beforeId) {
+  let idx = beforeId ? p.cards.findIndex(c => c.id === beforeId) : -1;
+  if (idx < 0) idx = p.cards.length;
+  p.cards.splice(idx, 0, card);
+}
+function deleteBlock(id) {
+  const [p, i] = findBlock(id); if (i < 0) return;
+  snapshot(); p.blocks.splice(i, 1);
+  renderAll(); saveSoon();
+  toast('Parça silindi', 'Geri al', undo);
+}
+function mergeNext(id) {
+  const [p, i, b] = findBlock(id); const n = p.blocks[i + 1];
+  if (!b || !n) return;
+  snapshot();
+  b.text = b.text.replace(/\s+$/, '') + ' ' + n.text.replace(/^\s+/, '');
+  b.cites = (b.cites || []).concat(n.cites || []);
+  p.blocks.splice(i + 1, 1);
+  renderAll(); saveSoon();
+}
+function moveBlock(id, gi) {
+  const [p, from] = findBlock(id); if (from < 0) return;
+  if (gi === from || gi === from + 1) return;
+  snapshot();
+  const [b] = p.blocks.splice(from, 1);
+  if (from < gi) gi--;
+  p.blocks.splice(gi, 0, b);
+  renderAll(); saveSoon();
+}
+function setType(id, t) {
+  const [, , b] = findBlock(id); if (!b) return;
+  if (t === 'plain') t = (b.type === 'src' || b.type === 'mine') ? b.type : (b.origin || 'src');
+  if (b.type === t) return;
+  snapshot();
+  if ((b.type === 'src' || b.type === 'mine') && (t === 'quote' || t === 'atif')) b.origin = b.type;
+  b.type = t;
+  renderAll(); saveSoon();
+  if ((t === 'quote' || t === 'atif') && (!b.srcId || b.srcId === ME)) editBlockSource(b.id, true);
+}
+function editBlockSource(id, fresh) {
+  const [, , b] = findBlock(id); if (!b) return;
+  pieceDialog({ title: fresh ? (b.type === 'atif' ? 'Bu atıf kime ait?' : 'Bu alıntı kime ait?') : 'Kaynağı düzenle', text: b.text, srcId: b.srcId && b.srcId !== ME ? b.srcId : null, page: b.page, note: b.note, okLabel: 'Kaydet' }, r => {
+    const [, , bb] = findBlock(id); if (!bb) return;
+    snapshot(); applySrc(r);
+    bb.srcId = r.srcId; bb.page = r.page; bb.note = r.note;
+    renderAll(); saveSoon();
+  });
+}
+function typeMenu(anchor, b) {
+  const pp = openPop(anchor);
+  const plainLabel = (b.type === 'mine' || b.origin === 'mine') ? 'Senin yazın' : 'Düz metin';
+  const cur = b.type === 'quote' ? 'quote' : b.type === 'atif' ? 'atif' : 'plain';
+  const item = (key, label, sub) => el('button', { class: 'pop-item' + (cur === key ? ' cur' : ''), type: 'button', onclick: () => { closePop(); setType(b.id, key); } }, (cur === key ? '✓ ' : '') + label, el('small', { text: sub }));
+  pp.append(
+    item('plain', plainLabel, 'Kaynak gösterilmez'),
+    item('quote', 'Alıntı', 'Kelimesi kelimesine; girintili, kaynağıyla'),
+    item('atif', 'Atıf', 'Fikir onun, cümle senin; tırnaksız, kaynağıyla'));
+}
+
+/* ---------- placing cards ---------- */
+const stripQ = s => (s || '').replace(/^\s*[“"«]/, '').replace(/[”"»]\s*$/, '');
+function placeCard(cardId, gi) {
+  const p = P();
+  const ci = p.cards.findIndex(c => c.id === cardId); if (ci < 0) return;
+  snapshot();
+  const [c] = p.cards.splice(ci, 1);
+  const b = c.srcId === ME
+    ? { id: uid(), type: 'mine', text: c.text, cardId: c.id, srcId: ME, note: c.note, pileId: c.pileId }
+    : { id: uid(), type: 'quote', text: c.text, srcId: c.srcId, page: c.page, note: c.note, cardId: c.id, pileId: c.pileId };
+  p.blocks.splice(gi, 0, b);
+  renderAll(); saveSoon();
+  const n = main.querySelector('.block[data-id="' + b.id + '"]');
+  if (n) n.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+function insertInline(cardId, blockId, pos) {
+  const p = P();
+  const ci = p.cards.findIndex(c => c.id === cardId); if (ci < 0) return;
+  const [, , b] = findBlock(blockId);
+  if (!isTextBlock(b)) { toast('Önce yazında alıntının gireceği yere tıkla'); return; }
+  snapshot();
+  const [c] = p.cards.splice(ci, 1);
+  pos = Math.max(0, Math.min(pos == null ? b.text.length : pos, b.text.length));
+  const own = c.srcId === ME;
+  let q = c.text.replace(/\s+/g, ' ').trim();
+  if (!own && !/^[“"«]/.test(q)) q = '“' + q + '”';
+  const before = b.text.slice(0, pos), after = b.text.slice(pos);
+  const s1 = before && !/[\s(\[“"«]$/.test(before) ? ' ' : '';
+  const s2 = after && !/^[\s.,;:!?)\]…”"»]/.test(after) ? ' ' : '';
+  b.text = before + s1 + q + s2 + after;
+  if (!own) b.cites = (b.cites || []).concat({ id: c.id, text: q, srcId: c.srcId, page: c.page || '', note: c.note || '', pileId: c.pileId || '' });
+  const caret = (before + s1 + q).length;
+  renderAll(); saveSoon();
+  const ta = main.querySelector('.block[data-id="' + b.id + '"] textarea');
+  if (ta) { ta.focus(); try { ta.setSelectionRange(caret, caret); } catch (e) {} }
+  toast(own ? 'Notun cümleye eklendi' : 'Alıntı cümleye eklendi', 'Geri al', undo);
+}
+function inlineBack(blockId, citeId) {
+  const [p, , b] = findBlock(blockId); if (!b) return;
+  const c = (b.cites || []).find(x => x.id === citeId); if (!c) return;
+  snapshot();
+  const k = b.text.indexOf(c.text);
+  if (k >= 0) b.text = (b.text.slice(0, k).replace(/[ \t]+$/, '') + ' ' + b.text.slice(k + c.text.length).replace(/^[ \t]+/, '')).replace(/^ | $/g, '').replace(/ ([.,;:!?])/g, '$1');
+  b.cites = b.cites.filter(x => x !== c);
+  const card = { id: c.id || uid(), text: stripQ(c.text), srcId: c.srcId, page: c.page, note: c.note || '', pileId: c.pileId || '' };
+  p.cards.push(card);
+  renderAll(); flashCard(card.id); saveSoon();
+}
+function editCite(blockId, citeId) {
+  const [, , b] = findBlock(blockId); if (!b) return;
+  const c = (b.cites || []).find(x => x.id === citeId); if (!c) return;
+  pieceDialog({ title: 'Alıntının kaynağı', text: c.text, srcId: c.srcId, page: c.page, note: c.note, okLabel: 'Kaydet' }, r => {
+    snapshot(); applySrc(r);
+    c.srcId = r.srcId; c.page = r.page; c.note = r.note;
+    renderAll(); saveSoon();
+  });
+}
+function cardToCaret(cardId) {
+  const lc2 = lastCaret;
+  const [, , b] = lc2 ? findBlock(lc2.id) : [null, -1, null];
+  if (!isTextBlock(b)) { toast('Önce yazında alıntının gireceği yere tıkla, sonra “Cümleye ekle”ye bas'); return; }
+  insertInline(cardId, b.id, lc2.pos);
+}
+function dropOnGap(d, gi) {
+  if (d.kind === 'card') placeCard(d.id, gi);
+  else moveBlock(d.id, gi);
+}
+function dropOnSide(d, beforeId) {
+  const p = P();
+  if (d.kind === 'card') {
+    if (d.id === beforeId) return;
+    const from = p.cards.findIndex(c => c.id === d.id); if (from < 0) return;
+    snapshot();
+    const [c] = p.cards.splice(from, 1);
+    insertCard(p, c, beforeId);
+    renderSide(); saveSoon();
+  } else {
+    const [, , b] = findBlock(d.id); if (!b) return;
+    if ((b.type === 'quote' || b.type === 'atif') && b.srcId) blockToSide(b.id, beforeId);
+    else wholeToSide(b.id, beforeId);
+  }
+}
+function gatherLeftovers() {
+  const p = P();
+  const n = p.blocks.filter(b => b.type === 'src').length;
+  if (!n) { toast('Kâğıtta kalan kaynak metin yok'); return; }
+  let choice = ME;
+  const rb = (val, label) => {
+    const i = el('input', { type: 'radio', name: 'lo' }); i.checked = choice === val;
+    i.addEventListener('change', () => { choice = val; });
+    return el('label', { class: 'chk' }, i, label);
+  };
+  const m = modal([
+    el('h3', { text: 'Kalanları kenara topla' }),
+    el('p', { text: 'Kâğıtta yazına katmadığın ' + n + ' kaynak metin parçası var. Hepsi sırasıyla kenara taşınacak; kâğıtta yalnızca senin yazın, alıntıların ve atıfların kalacak.' }),
+    el('div', { class: 'opt-label', text: 'Kenarda nasıl görünsünler?' }),
+    el('div', { class: 'chks' }, rb(ME, 'Kendi notum olarak'), rb('', 'Kaynaksız; kaynaklarını sonra yazarım')),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn accent', type: 'button', onclick: () => {
+        m.close(); snapshot();
+        p.blocks.filter(b => b.type === 'src').forEach(b => {
+          p.cards.push({ id: uid(), text: b.text.trim(), srcId: b.srcId && b.srcId !== ME ? b.srcId : choice, page: b.page || '', note: '', pileId: '' });
+          (b.cites || []).forEach(c => p.cards.push({ id: c.id || uid(), text: stripQ(c.text), srcId: c.srcId, page: c.page, note: c.note || '', pileId: c.pileId || '' }));
+        });
+        p.blocks = p.blocks.filter(b => b.type !== 'src' && (b.type !== 'mine' || b.text.trim()));
+        renderAll(); saveSoon();
+        toast(n + ' parça kenara toplandı', 'Geri al', undo);
+      } }, 'Kenara topla'))
+  ]);
+}
+
+/* ---------- placing mode ---------- */
+function startPlacing(kind, id) {
+  placing = { kind, id };
+  document.body.classList.add('placing');
+  $('#placeTxt').textContent = kind === 'card' ? 'Parçayı koyacağın yeri seç' : 'Parçayı taşıyacağın yeri seç';
+  hideCut();
+}
+function stopPlacing() { placing = null; document.body.classList.remove('placing'); }
+function placeAt(gi) { const pl = placing; stopPlacing(); if (pl) dropOnGap(pl, gi); }
+$('#placeCancel').addEventListener('click', stopPlacing);
+
+/* ---------- cut bar ---------- */
+const cutbar = $('#cutbar');
+function hideCut() { cutbar.style.display = 'none'; }
+function checkSel(ev) {
+  const ta = document.activeElement;
+  if (!ta || ta.tagName !== 'TEXTAREA' || !ta.closest('.block') || placing) { hideCut(); return; }
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  if (e - s < 1 || !ta.value.slice(s, e).trim()) { hideCut(); selInfo = null; return; }
+  selInfo = { id: ta.closest('.block').dataset.id, s, e };
+  let x, y;
+  if (ev && ev.clientX != null) { x = ev.clientX; y = ev.clientY - 52; }
+  else { const r = ta.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top - 46; }
+  cutbar.style.display = 'block';
+  const w = cutbar.offsetWidth;
+  cutbar.style.left = Math.max(8, Math.min(innerWidth - w - 8, x - w / 2)) + 'px';
+  cutbar.style.top = Math.max(8, y) + 'px';
+}
+cutbar.addEventListener('mousedown', e => e.preventDefault());
+$('#cutBtn').addEventListener('click', () => { hideCut(); if (selInfo) doCut(selInfo.id, selInfo.s, selInfo.e); });
+main.addEventListener('mouseup', e => setTimeout(() => checkSel(e), 0));
+main.addEventListener('keyup', e => { if (e.shiftKey || e.key === 'Shift' || (e.key === 'a' && (e.ctrlKey || e.metaKey))) checkSel(null); });
+addEventListener('scroll', hideCut, { passive: true });
+
+/* ---------- drag & drop ---------- */
+function startDrag(e, info, ghost, text) {
+  drag = info;
+  e.dataTransfer.effectAllowed = 'move';
+  try { e.dataTransfer.setData('text/plain', text || ''); } catch (er) {}
+  if (ghost) { try { e.dataTransfer.setDragImage(ghost, 18, 18); } catch (er) {} }
+  hideCut(); stopPlacing();
+  setTimeout(() => document.body.classList.add('dragging'), 0);
+}
+function clearDropMarks() {
+  main.querySelectorAll('.gap.over').forEach(g => g.classList.remove('over'));
+  side.classList.remove('over');
+  side.querySelectorAll('.drop-line').forEach(x => x.remove());
+  side.querySelectorAll('.pile.over').forEach(x => x.classList.remove('over'));
+}
+function endDrag() { drag = null; document.body.classList.remove('dragging'); clearDropMarks(); }
+function nearestGap(y) {
+  let best = null, bd = Infinity;
+  main.querySelectorAll('.gap').forEach(g => {
+    const r = g.getBoundingClientRect(); const c = r.top + r.height / 2; const d = Math.abs(c - y);
+    if (d < bd) { bd = d; best = g; }
+  });
+  return best;
+}
+main.addEventListener('dragover', e => {
+  if (!drag || readMode) return;
+  e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+  const g = nearestGap(e.clientY);
+  main.querySelectorAll('.gap.over').forEach(x => { if (x !== g) x.classList.remove('over'); });
+  if (g) g.classList.add('over');
+});
+main.addEventListener('dragleave', e => { if (!main.contains(e.relatedTarget)) main.querySelectorAll('.gap.over').forEach(x => x.classList.remove('over')); });
+main.addEventListener('drop', e => {
+  if (!drag) return;
+  e.preventDefault();
+  const g = nearestGap(e.clientY); const d = drag; endDrag();
+  if (g) dropOnGap(d, +g.dataset.i);
+}, true);
+function beforeCardAt(y) {
+  for (const c of side.querySelectorAll('.card')) {
+    const r = c.getBoundingClientRect();
+    if (y < r.top + r.height / 2) return c;
+  }
+  return null;
+}
+side.addEventListener('dragover', e => {
+  if (!drag) return;
+  e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+  side.classList.add('over');
+  const pileEl = e.target.closest && e.target.closest('.pile[data-pile]');
+  side.querySelectorAll('.pile.over').forEach(x => { if (x !== pileEl) x.classList.remove('over'); });
+  const list = $('#cards'); if (!list) return;
+  if (pileEl && drag.kind === 'card') { pileEl.classList.add('over'); list.querySelectorAll('.drop-line').forEach(x => x.remove()); return; }
+  const bc = beforeCardAt(e.clientY);
+  let line = list.querySelector('.drop-line');
+  if (!line) line = el('div', { class: 'drop-line' });
+  if (bc) { if (line.nextSibling !== bc) list.insertBefore(line, bc); }
+  else if (line !== list.lastChild) list.append(line);
+});
+side.addEventListener('dragleave', e => { if (!side.contains(e.relatedTarget)) clearDropMarks(); });
+side.addEventListener('drop', e => {
+  if (!drag) return;
+  e.preventDefault();
+  const pileEl = e.target.closest && e.target.closest('.pile[data-pile]');
+  const d = drag;
+  if (pileEl && d.kind === 'card') { endDrag(); setPile(d.id, pileEl.dataset.pile); return; }
+  const bc = beforeCardAt(e.clientY); endDrag();
+  dropOnSide(d, bc ? bc.dataset.id : null);
+}, true);
+
+/* ---------- piles ---------- */
+function setPile(cardId, pileId) {
+  const p = P(); const c = p.cards.find(x => x.id === cardId); if (!c) return;
+  if ((c.pileId || '') === (pileId || '')) return;
+  snapshot(); c.pileId = pileId || '';
+  renderSide(); saveSoon();
+  const pl = p.piles.find(x => x.id === pileId);
+  toast(pl ? '“' + pl.name + '” yığınına kondu' : 'Yığından çıkarıldı');
+}
+function newPileDialog(then) {
+  const p = P();
+  const inp = el('input', { type: 'text', placeholder: 'Örn. giriş, karşı görüş, sona sakla' });
+  let color = PILE_COLORS[p.piles.length % PILE_COLORS.length];
+  const sw = el('div', { class: 'piles' });
+  const drawSw = () => { sw.replaceChildren(...PILE_COLORS.map(c => el('button', { class: 'pile' + (c === color ? ' sel' : ''), type: 'button', onclick: () => { color = c; drawSw(); } }, el('i', { class: 'dot', style: 'background:' + c, }), ' '))); };
+  drawSw();
+  let m;
+  const ok = () => {
+    const name = inp.value.trim(); if (!name) { inp.focus(); return; }
+    m.close(); snapshot();
+    const pl = { id: 'y' + uid(), name, color };
+    p.piles.push(pl);
+    if (then) then(pl);
+    renderSide(); saveSoon();
+  };
+  m = modal([
+    el('h3', { text: 'Yeni yığın' }),
+    el('div', { class: 'field' }, el('label', { text: 'Adı' }), inp),
+    el('div', { class: 'field' }, el('label', { text: 'Rengi' }), sw),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Oluştur'))
+  ]);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
+  setTimeout(() => inp.focus(), 30);
+}
+function pileMenu(anchor, c) {
+  const p = P(); const pp = openPop(anchor);
+  p.piles.forEach(pl => pp.append(el('button', { class: 'pop-item' + (c.pileId === pl.id ? ' cur' : ''), type: 'button', onclick: () => { closePop(); setPile(c.id, pl.id); } },
+    el('i', { class: 'dot', style: 'display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:' + pl.color }), pl.name)));
+  if (c.pileId) pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); setPile(c.id, ''); } }, 'Yığından çıkar'));
+  if (p.piles.length) pp.append(el('div', { class: 'pop-sep' }));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); newPileDialog(pl => { const cc = P().cards.find(x => x.id === c.id); if (cc) cc.pileId = pl.id; }); } }, '+ Yeni yığın'));
+}
+function editPileDialog(pl) {
+  const p = P();
+  const inp = el('input', { type: 'text' }); inp.value = pl.name;
+  let m;
+  m = modal([
+    el('h3', { text: 'Yığını düzenle' }),
+    el('div', { class: 'field' }, el('label', { text: 'Adı' }), inp),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn ghost', type: 'button', style: 'margin-right:auto;color:var(--accent)', onclick: () => {
+        m.close(); snapshot();
+        p.piles = p.piles.filter(x => x !== pl);
+        p.cards.forEach(c => { if (c.pileId === pl.id) c.pileId = ''; });
+        sideFilter.pile = ''; renderSide(); saveSoon();
+        toast('Yığın kaldırıldı; parçalar kenarda duruyor', 'Geri al', undo);
+      } }, 'Yığını kaldır'),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn primary', type: 'button', onclick: () => {
+        if (!inp.value.trim()) return;
+        m.close(); snapshot(); pl.name = inp.value.trim(); renderSide(); saveSoon();
+      } }, 'Kaydet'))
+  ]);
+  setTimeout(() => inp.focus(), 30);
+}
+
+/* ---------- library ---------- */
+function libraryModal() {
+  const p = P();
+  const list = el('div');
+  let m;
+  const draw = () => {
+    list.replaceChildren();
+    if (!p.lib.length) { list.append(el('p', { style: 'color:var(--muted)', text: 'Henüz kaynak yok. Bir parça kestiğinde kaynağını burada da görürsün.' })); return; }
+    [...p.lib].sort((a, b) => lc(surname(a.author) + a.title).localeCompare(lc(surname(b.author) + b.title), 'tr')).forEach(e => {
+      const n = srcUseCount(e.id);
+      const row = el('div', { class: 'lrow' });
+      const view = () => row.replaceChildren(el('div', { class: 'lt' },
+        el('span', {}, ...biblioRuns(e).map(r => r.i ? el('em', { text: r.t }) : r.t)),
+        el('small', { text: n + ' parça' }),
+        mini('düzenle', edit),
+        mini('sil', () => {
+          if (n) { toast('Bu kaynak ' + n + ' parçada kullanılıyor; önce onların kaynağını değiştir'); return; }
+          snapshot(); p.lib = p.lib.filter(x => x !== e); saveSoon(); draw();
+        })));
+      const edit = () => {
+        const f = {};
+        const fin = (k, label, wide) => { const i = el('input', { type: 'text' }); i.value = e[k] || ''; f[k] = i; return el('div', { class: wide ? 'wide' : '' }, el('label', { text: label }), i); };
+        row.replaceChildren(el('div', { class: 'sp-form' },
+          fin('author', 'Yazar'), fin('title', 'Eser'), fin('translator', 'Çevirmen'), fin('publisher', 'Yayınevi'), fin('year', 'Yıl'),
+          el('div', { class: 'wide', style: 'display:flex;gap:6px;justify-content:flex-end' },
+            mini('Vazgeç', view),
+            mini('Kaydet', () => {
+              if (!f.author.value.trim() && !f.title.value.trim()) { toast('Yazar ya da eser adı gerekli'); return; }
+              snapshot(); Object.keys(f).forEach(k => e[k] = f[k].value.trim());
+              saveSoon(); draw(); renderAll();
+            }))));
+        f.author.focus();
+      };
+      view();
+      list.append(row);
+    });
+  };
+  draw();
+  m = modal([
+    el('h3', { text: 'Kaynaklar' }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Bir kaynağı burada düzelttiğinde, ona bağlı bütün parçalarda ve çıktıda düzelir. Sayfa numaraları parçalarda ayrı ayrı durur.' }),
+    list,
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Kapat'))
+  ], 'wide');
+}
+
+/* ---------- render: paper ---------- */
+function fit(ta) { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; }
+function fitAll() { main.querySelectorAll('.block textarea').forEach(fit); }
+const labels = { src: 'kaynak metin', mine: 'senin yazın', quote: 'alıntı', atif: 'atıf' };
+function myWords(p) {
+  let n = 0;
+  p.blocks.forEach(b => {
+    if (b.type !== 'mine' && b.type !== 'atif') return;
+    n += countWords(b.text);
+    (b.cites || []).forEach(c => { if (b.text.includes(c.text)) n -= countWords(c.text); });
+  });
+  return Math.max(0, n);
+}
+function allWords(p) {
+  const o = p.opts || defaultOpts();
+  return p.blocks.reduce((n, b) => n + (b.type === 'src' && !o.src ? 0 : countWords(b.text)), 0);
+}
+function goalDialog() {
+  const p = P();
+  const inp = el('input', { type: 'number', min: '0', step: '50', placeholder: 'Örn. 1500' }); if (p.goal) inp.value = p.goal;
+  let m;
+  const ok = () => { m.close(); p.goal = Math.max(0, parseInt(inp.value, 10) || 0); renderPaper(); saveSoon(); };
+  m = modal([
+    el('h3', { text: 'Kelime hedefi' }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Yalnızca senin yazdıkların ve atıfların sayılır; alıntılar ve kâğıtta kalan kaynak metin sayılmaz. Hedefi kaldırmak için boş bırak.' }),
+    el('div', { class: 'field' }, el('label', { text: 'Hedef (kelime)' }), inp),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Tamam'))
+  ]);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
+  setTimeout(() => inp.focus(), 30);
+}
+function metaLine(p) {
+  const mine = myWords(p);
+  const nSrc = p.blocks.filter(b => b.type === 'src').length;
+  const box = el('div', { class: 'doc-meta', id: 'docMeta' });
+  box.append(el('span', { text: 'Senin yazın: ' + fmtNum(mine) + ' kelime' }));
+  if (p.goal) {
+    const pct = Math.min(100, Math.round(mine / p.goal * 100));
+    box.append(el('button', { class: 'linkbtn goal', type: 'button', title: 'Hedefi değiştir', onclick: goalDialog }, 'hedef ' + fmtNum(p.goal), el('i', {}, el('b', { style: 'width:' + pct + '%' })), '%' + pct));
+  } else box.append(el('button', { class: 'linkbtn', type: 'button', onclick: goalDialog }, 'hedef koy'));
+  box.append(el('span', { text: p.cards.length + ' parça kenarda' }));
+  if (nSrc) box.append(el('button', { class: 'linkbtn', type: 'button', title: 'Yazına katmadığın kaynak metin parçalarını kenara taşı', onclick: gatherLeftovers }, 'kalan ' + nSrc + ' kaynak parçayı kenara topla'));
+  return box;
+}
+function refreshMeta() { const p = P(); const old = $('#docMeta'); if (p && old) old.replaceWith(metaLine(p)); }
+
+function gapEl(i, isEnd, isEmpty) {
+  return el('div', { class: 'gap' + (isEnd ? ' end' : '') + (isEmpty ? ' empty' : ''), 'data-i': i },
+    el('div', { class: 'gap-line' }),
+    el('div', { class: 'empty-msg', text: 'Kâğıtta parça kalmadı. Yazmaya başla ya da kenardan bir parça getir.' }),
+    el('div', { class: 'gap-acts' },
+      el('button', { type: 'button', onclick: () => insertWrite(i) }, '+ yaz'),
+      el('button', { type: 'button', onclick: e => cardPicker(e.currentTarget, id => placeCard(id, i)) }, '+ kenardan parça')),
+    el('button', { class: 'place-btn', type: 'button', onclick: () => placeAt(i) }, 'buraya'));
+}
+function insertWrite(gi) {
+  const p = P();
+  snapshot();
+  const b = { id: uid(), type: 'mine', text: '' };
+  p.blocks.splice(gi, 0, b);
+  renderPaper(b.id);
+  const ta = main.querySelector('.block[data-id="' + b.id + '"] textarea');
+  if (ta) { ta.focus(); typingPending = false; }
+}
+function blockEl(b, i, p) {
+  const blk = el('div', { class: 'block b-' + b.type, 'data-id': b.id });
+  const handle = el('div', { class: 'handle', draggable: 'true', title: 'Tut ve sürükle: başka araya taşı ya da kenara at', html: GRIP });
+  handle.addEventListener('dragstart', e => startDrag(e, { kind: 'block', id: b.id }, blk, ''));
+  handle.addEventListener('dragend', endDrag);
+  const ta = el('textarea', { rows: '1', spellcheck: (b.type === 'mine' || b.type === 'atif') ? 'true' : 'false', placeholder: b.type === 'mine' ? 'Buraya yaz…' : null });
+  ta.value = b.text;
+  const acts = el('div', { class: 'b-actions' });
+  const typeBtn = mini('tür ▾', e => typeMenu(e.currentTarget, b), 'Düz metin, alıntı ya da atıf');
+  if (b.type === 'quote' || b.type === 'atif') {
+    acts.append(mini('↩ kenara geri', () => (b.srcId ? blockToSide(b.id) : wholeToSide(b.id))), typeBtn);
+    if (b.type === 'atif') acts.append(mini('＋ alıntı', e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), 'İmlecin olduğu yere kenardan bir alıntı ekle'));
+    acts.append(mini('taşı', () => startPlacing('block', b.id)), mini('sil', () => deleteBlock(b.id)));
+  } else {
+    acts.append(mini('✂ hepsini kenara', () => wholeToSide(b.id)), typeBtn,
+      mini('＋ alıntı', e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), 'İmlecin olduğu yere kenardan bir alıntı ekle'),
+      mini('taşı', () => startPlacing('block', b.id)));
+    const nx = p.blocks[i + 1];
+    if (nx && nx.type === b.type && b.type !== 'quote') acts.append(mini('birleştir', () => mergeNext(b.id), 'Alttaki parçayla tek paragraf yap'));
+    acts.append(mini('sil', () => deleteBlock(b.id)));
+  }
+  const saveCaret = () => { lastCaret = { id: b.id, pos: ta.selectionStart }; };
+  ta.addEventListener('focus', () => { typingPending = true; });
+  ta.addEventListener('input', () => {
+    if (typingPending) { snapshot(); typingPending = false; }
+    b.text = ta.value; fit(ta); hideCut(); saveCaret(); saveSoon(); scheduleMeta();
+  });
+  ['keyup', 'click', 'select'].forEach(ev => ta.addEventListener(ev, saveCaret));
+  ta.addEventListener('blur', () => {
+    saveCaret();
+    if (b.type === 'mine' && !b.text.trim()) setTimeout(() => {
+      if (ta.isConnected && document.activeElement !== ta && !b.text.trim()) renderPaper();
+    }, 160);
+  });
+  ta.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+      e.preventDefault();
+      if (ta.selectionEnd > ta.selectionStart) { hideCut(); doCut(b.id, ta.selectionStart, ta.selectionEnd); }
+    }
+  });
+  blk.append(handle, el('div', { class: 'b-label', text: labels[b.type] }), acts, ta);
+  if (b.type === 'quote' || b.type === 'atif') {
+    const lbl = srcLabel(b.srcId);
+    const pg = el('input', { type: 'text', class: 'pg', placeholder: 'sayfa', autocomplete: 'off' });
+    pg.value = b.page || '';
+    pg.addEventListener('focus', () => { typingPending = true; });
+    pg.addEventListener('input', () => { if (typingPending) { snapshot(); typingPending = false; } b.page = pg.value.trim(); saveSoon(); });
+    blk.append(el('div', { class: 'q-meta' }, el('span', { text: '—' }),
+      el('button', { class: 'srcbtn' + (lbl && b.srcId !== ME ? '' : ' none'), type: 'button', title: 'Kaynağı değiştir', onclick: () => editBlockSource(b.id) }, lbl && b.srcId !== ME ? lbl : 'kaynak seç'),
+      el('span', { text: 's.' }), pg));
+    if (b.note) blk.append(el('div', { class: 'q-note', text: 'Not: ' + b.note }));
+  }
+  if ((b.cites || []).length) {
+    blk.append(el('div', { class: 'cites' }, b.cites.map(c => {
+      const lost = !b.text.includes(c.text);
+      return el('span', { class: 'cite-chip' + (lost ? ' lost' : ''), title: lost ? 'Bu alıntının metni değişmiş; çıktıda kaynak paragrafın sonuna eklenir' : 'Cümle içindeki alıntı' },
+        el('button', { type: 'button', title: 'Kaynağı düzenle', onmousedown: e => e.preventDefault(), onclick: () => editCite(b.id, c.id) }, '“' + trunc(stripQ(c.text), 26) + '” — ' + (srcShort(c.srcId, c.page) || 'kaynak yok')),
+        el('button', { class: 'cc-x', type: 'button', title: 'Metinden çıkar, kenara geri koy', onmousedown: e => e.preventDefault(), onclick: () => inlineBack(b.id, c.id) }, '↩'));
+    })));
+  }
+  return blk;
+}
+let metaT;
+function scheduleMeta() { clearTimeout(metaT); metaT = setTimeout(refreshMeta, 600); }
+
+function renderPaper(keepId) {
+  const p = P(); if (!p) return;
+  const ae = document.activeElement; let keep = null;
+  if (ae && ae.tagName === 'TEXTAREA' && ae.closest && ae.closest('.block')) keep = { id: ae.closest('.block').dataset.id, s: ae.selectionStart, e: ae.selectionEnd };
+  const heights = {};
+  main.querySelectorAll('.block').forEach(n => { const t = n.querySelector('textarea'); if (t) heights[n.dataset.id] = t.offsetHeight; });
+  const sy = window.scrollY;
+  const keepIds = new Set([keepId, keep && keep.id].filter(Boolean));
+  p.blocks = p.blocks.filter(b => b.type !== 'mine' || b.text.trim() || keepIds.has(b.id));
+
+  const paper = el('div', { class: 'paper', id: 'paper' });
+  const title = el('input', { class: 'doc-title', placeholder: 'Çalışmanın adı', spellcheck: 'false' });
+  title.value = p.title || '';
+  title.addEventListener('focus', () => { typingPending = true; });
+  title.addEventListener('input', () => {
+    if (typingPending) { snapshot(); typingPending = false; }
+    p.title = title.value; $('#projName').textContent = p.title || 'Adsız çalışma'; saveSoon();
+  });
+  paper.append(title, metaLine(p),
+    el('div', { class: 'legend' },
+      el('span', {}, el('i', { class: 'sw src' }), 'kaynak metin'),
+      el('span', {}, el('i', { class: 'sw mine' }), 'senin yazın'),
+      el('span', {}, el('i', { class: 'sw quote' }), 'alıntı'),
+      el('span', {}, el('i', { class: 'sw atif' }), 'atıf')));
+  if (!store.hintClosed) {
+    paper.append(el('div', { class: 'hint' },
+      el('b', { text: 'Kesmek: ' }), 'metinde bir yeri seç, ', el('b', { text: '✂ Kes' }), ' düğmesine bas (ya da Ctrl+K). Parça kaynağıyla birlikte kenara gider. ',
+      el('b', { text: 'Yazmak: ' }), 'iki parçanın arasına gelince ', el('b', { text: '+ yaz' }), ' çıkar. ',
+      el('b', { text: 'Alıntı: ' }), 'kenardaki parçayı bir araya sürükle ya da ', el('b', { text: 'Metne koy' }), ' de. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki ', el('b', { text: 'Cümleye ekle' }), '’ye bas. ',
+      el('b', { text: 'Atıf: ' }), 'bir parçanın ', el('b', { text: 'tür' }), ' menüsünden seçilir.',
+      el('button', { class: 'x', type: 'button', title: 'Kapat', onclick: e => { store.hintClosed = true; persistLocal(); e.currentTarget.parentNode.remove(); } }, '×')));
+  }
+  if (!p.blocks.length) paper.append(gapEl(0, true, true));
+  else {
+    paper.append(gapEl(0, false));
+    p.blocks.forEach((b, i) => {
+      const n = blockEl(b, i, p);
+      if (heights[b.id]) n.querySelector('textarea').style.height = heights[b.id] + 'px';
+      paper.append(n, gapEl(i + 1, i === p.blocks.length - 1));
+    });
+  }
+  main.replaceChildren(paper, sig());
+  fitAll();
+  window.scrollTo(0, sy);
+  if (keep) {
+    const t = main.querySelector('.block[data-id="' + keep.id + '"] textarea');
+    if (t) { t.focus({ preventScroll: true }); try { t.setSelectionRange(keep.s, keep.e); } catch (e) {} typingPending = true; }
+  }
+}
+
+/* ---------- render: reading mode ---------- */
+function runsInto(node, runs) {
+  runs.forEach(r => {
+    if (r.fn) node.append(el('sup', { text: String(r.fn) }));
+    else if (r.i) node.append(el('em', { text: r.t }));
+    else node.append(r.t);
+  });
+  return node;
+}
+function renderReading() {
+  const p = P(); const o = opts();
+  const { parts, notes } = resolveDoc(buildDoc(o), o.cite);
+  const art = el('article', { class: 'reading-art' });
+  let ul = null;
+  const fnList = () => notes.length ? el('ol', { class: 'fns' }, notes.map(n => runsInto(el('li'), n.runs))) : null;
+  let fnDone = false;
+  parts.forEach(x => {
+    if (x.bib && !fnDone) { fnDone = true; const f = fnList(); if (f) art.append(f); }
+    if (x.k !== 'li') ul = null;
+    if (x.k === 'title') art.append(runsInto(el('h1'), x.runs));
+    else if (x.k === 'p') art.append(runsInto(el('p', { class: x.left ? 'src-left' : null }), x.runs));
+    else if (x.k === 'quote') art.append(runsInto(el('blockquote'), x.runs));
+    else if (x.k === 'h') art.append(runsInto(el('h2'), x.runs));
+    else if (x.k === 'note') art.append(runsInto(el('p', { class: 'note' }), x.runs));
+    else if (x.k === 'li') { if (!ul) { ul = el('ul'); art.append(ul); } ul.append(runsInto(el('li'), x.runs)); }
+  });
+  if (!fnDone) { const f = fnList(); if (f) art.append(f); }
+  const chk = (key, label) => { const i = el('input', { type: 'checkbox' }); i.checked = !!o[key]; i.addEventListener('change', () => { o[key] = i.checked; saveSoon(); renderReading(); }); return el('label', { class: 'chk' }, i, label); };
+  const sel = el('select', {}, el('option', { value: 'paren' }, 'parantez içinde'), el('option', { value: 'foot' }, 'dipnot'), el('option', { value: 'none' }, 'gösterme'));
+  sel.value = o.cite; sel.addEventListener('change', () => { o.cite = sel.value; saveSoon(); renderReading(); });
+  const paper = el('div', { class: 'paper' },
+    el('div', { class: 'readbar' },
+      el('span', {}, 'Kaynaklar: ', sel),
+      chk('biblio', 'kaynakça'),
+      chk('src', 'kalan kaynak metni göster'),
+      el('span', { text: fmtNum(myWords(p)) + ' kelime senin' }),
+      el('button', { class: 'btn', type: 'button', onclick: () => { readMode = false; renderAll(); } }, 'Düzenlemeye dön')),
+    art);
+  main.replaceChildren(paper, sig());
+}
+function sig() {
+  return el('div', { class: 'sig' }, 'Makas · ', el('a', { href: 'https://gamzeguckiran.com/apps.html', target: inArtifact ? '_blank' : null, rel: inArtifact ? 'noopener' : null }, 'Bir Lryiu Labs projesi'));
+}
+
+/* ---------- render: side ---------- */
+function matchCard(c) {
+  if (sideFilter.src && (c.srcId || '') !== sideFilter.src) return false;
+  if (sideFilter.pile && (c.pileId || '') !== sideFilter.pile) return false;
+  if (sideFilter.q) return lc((c.text || '') + ' ' + srcShort(c.srcId, c.page) + ' ' + (c.note || '')).includes(lc(sideFilter.q));
+  return true;
+}
+function renderSide() {
+  const p = P(); if (!p) { side.replaceChildren(); return; }
+  const head = el('div', { class: 'side-head' },
+    el('div', { class: 'side-title' },
+      el('span', {}, 'Kenar ', el('small', { text: p.cards.length ? p.cards.length + ' parça' : 'boş' })),
+      el('button', { class: 'linkbtn', type: 'button', onclick: libraryModal }, 'Kaynaklar (' + p.lib.length + ')')),
+    el('button', { class: 'btn addcard', type: 'button', onclick: newCardDialog }, '+ Kenara not ya da alıntı ekle'));
+  if (p.cards.length > 3) {
+    const srcs = [...new Set(p.cards.map(c => c.srcId || ''))];
+    if (!srcs.includes(sideFilter.src)) sideFilter.src = '';
+    const q = el('input', { type: 'search', placeholder: 'Parçalarda ara' });
+    q.value = sideFilter.q;
+    q.addEventListener('input', () => { sideFilter.q = q.value; renderCards(); });
+    const sel = el('select', {}, el('option', { value: '' }, 'Tüm kaynaklar'), srcs.map(s => el('option', { value: s }, s === ME ? '✎ Kendi notlarım' : (srcLabel(s) || '(kaynaksız)'))));
+    sel.value = sideFilter.src;
+    sel.addEventListener('change', () => { sideFilter.src = sel.value; renderCards(); });
+    head.append(el('div', { class: 'side-tools' }, q, sel));
+  } else { sideFilter.q = ''; sideFilter.src = ''; }
+  {
+    if (sideFilter.pile && !p.piles.some(x => x.id === sideFilter.pile)) sideFilter.pile = '';
+    const piles = el('div', { class: 'piles' });
+    piles.append(el('button', { class: 'pile' + (!sideFilter.pile ? ' sel' : ''), type: 'button', onclick: () => { sideFilter.pile = ''; renderSide(); } }, 'Tümü'));
+    p.piles.forEach(pl => {
+      const n = p.cards.filter(c => c.pileId === pl.id).length;
+      piles.append(el('button', { class: 'pile' + (sideFilter.pile === pl.id ? ' sel' : ''), 'data-pile': pl.id, type: 'button', title: sideFilter.pile === pl.id ? 'Yığını düzenlemek için tekrar tıkla' : 'Bu yığını göster; parçayı buraya sürükleyerek de yığına koyabilirsin',
+        onclick: () => { if (sideFilter.pile === pl.id) editPileDialog(pl); else { sideFilter.pile = pl.id; renderSide(); } } },
+        el('i', { class: 'dot', style: 'background:' + pl.color }), pl.name + ' ' + n));
+    });
+    if (!p.piles.length) piles.append(el('button', { class: 'pile add', type: 'button', title: 'Giriş, Gelişme ve Sonuç yığınlarını ekle', onclick: () => { snapshot(); p.piles = defaultPiles(); renderSide(); saveSoon(); } }, '+ Giriş · Gelişme · Sonuç'));
+    piles.append(el('button', { class: 'pile add', type: 'button', onclick: () => newPileDialog() }, '+ yığın'));
+    head.append(piles);
+  }
+  side.replaceChildren(head, el('div', { class: 'cards', id: 'cards' }));
+  renderCards();
+}
+function renderCards() {
+  const list = $('#cards'); if (!list) return;
+  const p = P();
+  list.replaceChildren();
+  if (!p.cards.length) {
+    list.append(el('div', { class: 'side-empty' },
+      'Metinden bir yer seçip ', el('b', { text: '✂ Kes' }), ' dediğinde parça buraya, kaynağıyla birlikte gelir.',
+      el('br'), el('br'), 'Kâğıttaki bir parçayı soldaki tutamağından tutup buraya sürükleyerek de kenara atabilirsin.'));
+    return;
+  }
+  const vis = p.cards.filter(matchCard);
+  if (!vis.length) list.append(el('div', { class: 'side-empty', text: 'Burada eşleşen parça yok.' }));
+  vis.forEach(c => list.append(cardEl(c)));
+}
+function cardEl(c) {
+  const p = P();
+  const pl = c.pileId ? p.piles.find(x => x.id === c.pileId) : null;
+  const card = el('div', { class: 'card' + (pl ? ' piled' : ''), 'data-id': c.id, draggable: 'true', style: pl ? 'border-left-color:' + pl.color : null });
+  card.addEventListener('dragstart', e => startDrag(e, { kind: 'card', id: c.id }, card, c.text));
+  card.addEventListener('dragend', endDrag);
+  const isMe = c.srcId === ME, lbl = srcLabel(c.srcId);
+  card.append(el('div', { class: 'c-top' },
+    el('div', { class: 'c-src' + (isMe ? ' me' : (lbl ? '' : ' none')) }, isMe ? '✎ Kendi notum' : (lbl || 'kaynak yazılmamış'), c.page && !isMe ? el('span', { class: 'c-page', text: ' · s. ' + c.page }) : null),
+    pl ? el('span', { class: 'c-pile', text: pl.name }) : null));
+  const t = el('div', { class: 'c-text', text: c.text, title: 'Tamamını görmek için tıkla' });
+  t.addEventListener('click', () => card.classList.toggle('open'));
+  card.append(t);
+  if (c.note) card.append(el('div', { class: 'c-note', text: c.note }));
+  card.append(el('div', { class: 'c-actions' },
+    mini('Metne koy', () => startPlacing('card', c.id), 'Ayrı paragraf olarak bir araya koy'),
+    mini('Cümleye ekle', () => cardToCaret(c.id), 'Yazında en son tıkladığın yere, cümlenin içine ekle'),
+    mini('Yığın', e => pileMenu(e.currentTarget, c)),
+    mini('Düzenle', () => editCard(c.id)),
+    mini('Sil', () => deleteCard(c.id))));
+  return card;
+}
+function newCardDialog() {
+  const p = P();
+  pieceDialog({ title: 'Kenara ekle', text: '', editText: true, split: true, srcId: p.lastSrcId || null, pileId: sideFilter.pile || '', piles: true, okLabel: 'Kenara koy' }, r => {
+    snapshot(); applySrc(r);
+    const texts = r.split ? splitText(r.text) : [r.text];
+    const made = texts.map(t => ({ id: uid(), text: t, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId }));
+    p.cards.push(...made);
+    if (sideFilter.src && sideFilter.src !== r.srcId) sideFilter.src = '';
+    if (sideFilter.pile && sideFilter.pile !== r.pileId) sideFilter.pile = '';
+    sideFilter.q = '';
+    renderAll(); made.forEach(c => flashCard(c.id)); saveSoon();
+    toast(made.length > 1 ? made.length + ' parça kenara kondu' : 'Kenara kondu', 'Geri al', undo);
+  });
+}
+function editCard(id) {
+  const c = P().cards.find(x => x.id === id); if (!c) return;
+  pieceDialog({ title: 'Parçayı düzenle', text: c.text, editText: true, srcId: c.srcId || '', page: c.page, note: c.note, pileId: c.pileId, piles: true, okLabel: 'Kaydet' }, r => {
+    snapshot(); applySrc(r);
+    Object.assign(c, { text: r.text, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId });
+    renderAll(); saveSoon();
+  });
+}
+function deleteCard(id) {
+  const p = P(); const i = p.cards.findIndex(c => c.id === id); if (i < 0) return;
+  snapshot(); p.cards.splice(i, 1);
+  renderAll(); saveSoon();
+  toast('Parça silindi', 'Geri al', undo);
+}
+function flashCard(id) {
+  requestAnimationFrame(() => {
+    const n = side.querySelector('.card[data-id="' + id + '"]');
+    if (n) { n.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); n.classList.add('flash'); }
+  });
+}
+function cardPicker(anchor, onPick) {
+  const p = P();
+  if (!p.cards.length) { toast('Kenarda parça yok; önce metinden bir yer kes'); return; }
+  const pp = openPop(anchor);
+  const q = el('input', { type: 'search', placeholder: 'Parça ara' });
+  const box = el('div');
+  const draw = () => {
+    box.replaceChildren();
+    const ql = lc(q.value);
+    p.cards.filter(c => !ql || lc(c.text + ' ' + srcShort(c.srcId, c.page)).includes(ql)).forEach(c => {
+      const me = c.srcId === ME;
+      box.append(el('button', { class: 'pop-item', type: 'button', onmousedown: e => e.preventDefault(), onclick: () => { closePop(); onPick(c.id); } },
+        el('span', { class: 'pi-src' + (me ? ' me' : ''), text: me ? '✎ Kendi notum' : (srcShort(c.srcId, c.page) || 'kaynak yok') }),
+        el('span', { class: 'pi-txt', text: trunc(c.text, 120) })));
+    });
+    if (!box.childNodes.length) box.append(el('div', { class: 'pop-item', text: 'Eşleşen parça yok' }));
+  };
+  q.addEventListener('input', draw);
+  pp.append(q, box); draw();
+}
+
+/* ---------- render: start ---------- */
+function renderStart() {
+  const tIn = el('input', { class: 'field-in', placeholder: 'Örn. Kayıp Zaman Üzerine' });
+  const txt = el('textarea', { class: 'start-ta', placeholder: 'Alıntılarını, notlarını, yarım cümlelerini buraya yapıştır…\n\nYa da bir dosyayı (.txt, .md, .docx, .pdf) buraya sürükleyip bırak.' });
+  fileDropTarget(txt, tIn);
+  const go = () => {
+    if (!txt.value.trim()) { toast('Önce bir metin yapıştır ya da dosya yükle'); txt.focus(); return; }
+    newProject(tIn.value.trim(), txt.value);
+  };
+  const paper = el('div', { class: 'paper start' },
+    el('h1', { class: 'start-h', text: 'Yeni bir çalışma' }),
+    el('p', { class: 'start-p', text: 'Alıntılarını ve notlarını getir. Her paragraf kâğıtta ayrı bir parça olur. İstediğin yeri kesip kaynağıyla kenara koyarsın; kalanların üstüne, altına, arasına kendi cümlelerini yazarsın.' }),
+    el('button', { class: 'linkbtn', type: 'button', style: 'font-size:13px;margin:-12px 0 8px', onclick: guideModal }, 'Makas nedir, nasıl kullanılır?'),
+    el('label', { class: 'lbl', text: 'Çalışmanın adı' }), tIn,
+    el('div', { class: 'upl' },
+      el('button', { class: 'btn', type: 'button', onclick: () => pickFile(ACCEPT, f => loadInto(txt, f, tIn)) },
+        el('span', { html: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 21H4"/></svg>' }), 'Dosya yükle'),
+      el('span', { text: '.txt, .md, .docx ya da .pdf — dosyayı aşağıdaki alana sürükleyip bırakabilir ya da metni yapıştırabilirsin.' })),
+    txt,
+    el('div', { class: 'start-row' },
+      el('span', { style: 'flex:1' }),
+      el('button', { class: 'btn primary', type: 'button', onclick: go }, 'Parçalara ayır →')));
+  const list = Object.values(store.projects).sort((a, b) => (b.updated || 0) - (a.updated || 0));
+  if (list.length) {
+    paper.append(el('h2', { class: 'start-h2', text: 'Çalışmalarım' }));
+    list.forEach(pr => paper.append(el('button', { class: 'proj-row', type: 'button', onclick: () => openProject(pr.id) },
+      el('span', { text: pr.title || 'Adsız çalışma' }), el('small', { text: fmtDate(pr.updated) }))));
+  }
+  paper.append(el('div', { class: 'start-row small' },
+    el('button', { class: 'btn ghost', type: 'button', onclick: importProjectFile }, 'Daha önce indirdiğin bir proje dosyasını aç (.json)')));
+  main.replaceChildren(paper, sig());
+}
+
+/* ---------- night mode ---------- */
+const MOON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+const SUN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+function applyTheme(dark) {
+  document.body.classList.toggle('dark', dark);
+  const b = $('#themeBtn');
+  b.innerHTML = dark ? SUN : MOON;
+  b.title = dark ? 'Gündüz modu' : 'Gece modu';
+  b.setAttribute('aria-label', b.title);
+}
+let darkOn = false;
+try { darkOn = localStorage.getItem('makas.theme') === 'dark'; } catch (e) {}
+applyTheme(darkOn);
+$('#themeBtn').addEventListener('click', () => {
+  darkOn = !darkOn; applyTheme(darkOn);
+  try { localStorage.setItem('makas.theme', darkOn ? 'dark' : 'light'); } catch (e) {}
+});
+
+function renderHeader() {
+  const p = P();
+  const desk = screen === 'desk' && p;
+  $('#projName').textContent = desk ? (p.title || 'Adsız çalışma') : 'Çalışmalarım';
+  $('#addBtn').disabled = !desk || readMode;
+  $('#expBtn').disabled = !desk;
+  $('#readBtn').disabled = !desk;
+  $('#readTxt').textContent = readMode ? 'Düzenle' : 'Oku';
+  updateUndo();
+  setStatus(statusKind || (db ? 'saved' : 'local'));
+}
+function renderAll() {
+  if (screen !== 'desk' || !P()) {
+    screen = 'start'; readMode = false;
+    layout.classList.add('solo');
+    side.replaceChildren();
+    renderStart();
+  } else if (readMode) {
+    layout.classList.add('solo');
+    side.replaceChildren();
+    stopPlacing(); hideCut();
+    renderReading();
+  } else {
+    layout.classList.remove('solo');
+    renderPaper(); renderSide();
+  }
+  renderHeader();
+}
+
+/* ---------- add text ---------- */
+function addTextModal(file) {
+  const ta = el('textarea', { class: 'big', style: 'min-height:46vh', placeholder: 'Yeni alıntıları, notları buraya yapıştır ya da bir dosya sürükle…' });
+  fileDropTarget(ta);
+  let m;
+  const ok = () => {
+    const parts = splitText(ta.value);
+    if (!parts.length) { ta.focus(); return; }
+    m.close();
+    const p = P(); snapshot();
+    const first = { id: uid(), type: 'src', text: parts[0] };
+    p.blocks.push(first, ...parts.slice(1).map(t => ({ id: uid(), type: 'src', text: t })));
+    renderAll(); saveSoon();
+    const n = main.querySelector('.block[data-id="' + first.id + '"]');
+    if (n) n.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    toast(parts.length + ' parça kâğıdın sonuna eklendi');
+  };
+  m = modal([
+    el('h3', { text: 'Kâğıda metin ekle' }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Eklediğin metin kâğıdın sonuna, kaynak metin olarak gelir.' }),
+    ta,
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', style: 'margin-right:auto', onclick: () => pickFile(ACCEPT, f => loadInto(ta, f)) }, 'Dosya yükle (.txt .md .docx .pdf)'),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Parçalara ayır, ekle'))
+  ], 'wide');
+  if (file) loadInto(ta, file);
+  setTimeout(() => ta.focus(), 30);
+}
+
+/* ---------- document model for output ---------- */
+function splitParas(t) { return (t || '').split(/\n+/).map(s => s.trim()).filter(Boolean); }
+const citeRun = x => (x.srcId && x.srcId !== ME && libGet(x.srcId)) ? { cite: { srcId: x.srcId, page: x.page || '' } } : null;
+function textWithCites(text, cites, used) {
+  const found = [], rest = [], taken = [];
+  (cites || []).forEach(c => {
+    let from = 0, k = -1;
+    while ((k = text.indexOf(c.text, from)) >= 0 && taken.includes(k)) from = k + 1;
+    if (k >= 0 && c.text) { taken.push(k); found.push({ end: k + c.text.length, c }); } else rest.push(c);
+  });
+  found.sort((a, b) => a.end - b.end);
+  const segs = []; let pos = 0;
+  found.forEach(f => { segs.push({ t: text.slice(pos, f.end) }); const r = citeRun(f.c); if (r) { segs.push(r); used(f.c.srcId); } pos = f.end; });
+  segs.push({ t: text.slice(pos) });
+  rest.forEach(c => { const r = citeRun(c); if (r) { segs.push(r); used(c.srcId); } });
+  const paras = []; let cur = [];
+  segs.forEach(s => {
+    if (s.cite) { cur.push(s); return; }
+    const pieces = s.t.split(/\n+/);
+    pieces.forEach((pc, j) => { if (j > 0) { paras.push(cur); cur = []; } if (pc) cur.push({ t: pc }); });
+  });
+  paras.push(cur);
+  return paras.map(runs => {
+    const r = runs.slice();
+    const fi = r.findIndex(x => !x.cite); if (fi >= 0) r[fi] = { t: r[fi].t.replace(/^\s+/, '') };
+    for (let i = r.length - 1; i >= 0; i--) if (!r[i].cite) { r[i] = { t: r[i].t.replace(/\s+$/, '') }; break; }
+    return r.filter(x => x.cite || x.t);
+  }).filter(r => r.some(x => !x.cite && x.t.trim()));
+}
+function buildDoc(o) {
+  const p = P();
+  const out = [{ k: 'title', runs: [{ t: p.title || 'Adsız çalışma' }] }];
+  const usedIds = [];
+  const used = id => { if (id && id !== ME && libGet(id) && !usedIds.includes(id)) usedIds.push(id); };
+  for (const b of p.blocks) {
+    if (b.type === 'src' && !o.src) continue;
+    if (b.type === 'quote' || b.type === 'atif') {
+      const ps = splitParas(b.text); if (!ps.length) continue;
+      const cr = citeRun(b); if (cr) used(b.srcId);
+      ps.forEach((t, j) => {
+        const runs = [{ t, i: b.type === 'quote' }];
+        if (j === ps.length - 1 && cr) runs.push(cr);
+        out.push({ k: b.type === 'quote' ? 'quote' : 'p', runs });
+      });
+    } else {
+      textWithCites(b.text, b.cites, used).forEach(runs => out.push({ k: 'p', runs, left: b.type === 'src' }));
+    }
+  }
+  if (o.left && p.cards.length) {
+    out.push({ k: 'h', runs: [{ t: 'Kenarda kalan parçalar' }] });
+    p.cards.forEach(c => {
+      const ps = splitParas(c.text); const cr = citeRun(c);
+      ps.forEach((t, j) => {
+        const runs = [{ t, i: true }];
+        if (j === ps.length - 1) { if (cr) runs.push(cr); else if (c.srcId === ME) runs.push({ t: ' (kendi notum)' }); }
+        out.push({ k: 'quote', runs });
+      });
+      if (c.note) out.push({ k: 'note', runs: [{ t: 'Not: ' + c.note }] });
+    });
+  }
+  if (o.biblio && usedIds.length) {
+    out.push({ k: 'h', bib: true, runs: [{ t: 'Kaynakça' }] });
+    usedIds.map(libGet).sort((a, b) => lc(invertAuthor(a.author) || a.title).localeCompare(lc(invertAuthor(b.author) || b.title), 'tr'))
+      .forEach(e => out.push({ k: 'li', runs: biblioRuns(e) }));
+  }
+  return out;
+}
+function resolveDoc(parts, mode) {
+  const notes = []; const seen = new Set();
+  const out = parts.map(pt => {
+    const runs = [];
+    pt.runs.forEach(r => {
+      if (!r.cite) { runs.push(r); return; }
+      if (mode === 'none') return;
+      if (mode === 'paren') { runs.push({ t: ' (' + srcShort(r.cite.srcId, r.cite.page) + ')' }); return; }
+      const full = !seen.has(r.cite.srcId); seen.add(r.cite.srcId);
+      const n = notes.length + 1;
+      notes.push({ n, runs: full ? fullRuns(r.cite.srcId, r.cite.page) : shortRuns(r.cite.srcId, r.cite.page) });
+      runs.push({ fn: n });
+    });
+    return Object.assign({}, pt, { runs });
+  });
+  return { parts: out, notes };
+}
+const plain = runs => runs.map(r => r.fn ? '[' + r.fn + ']' : r.t).join('');
+function buildTxt(o) {
+  const { parts, notes } = resolveDoc(buildDoc(o), o.cite);
+  const nt = notes.length ? '\nNOTLAR\n\n' + notes.map(n => n.n + '. ' + plain(n.runs)).join('\n') : '';
+  let put = false;
+  let s = parts.map(x => {
+    const t = plain(x.runs);
+    if (x.bib && nt && !put) { put = true; return nt + '\n\n\n' + t.toLocaleUpperCase('tr-TR'); }
+    switch (x.k) {
+      case 'title': return t + '\n' + '='.repeat(Math.min(60, t.length));
+      case 'quote': return '    ' + t;
+      case 'h': return '\n' + t.toLocaleUpperCase('tr-TR');
+      case 'li': return '• ' + t;
+      case 'note': return '    ' + t;
+      default: return t;
+    }
+  }).join('\n\n');
+  if (nt && !put) s += '\n\n\n' + nt;
+  return s + '\n';
+}
+function buildMd(o) {
+  const { parts, notes } = resolveDoc(buildDoc(o), o.cite);
+  const md = runs => runs.map(r => r.fn ? '[^' + r.fn + ']' : r.i ? '*' + r.t.trim() + '*' + (/\s$/.test(r.t) ? ' ' : '') : r.t).join('');
+  let s = parts.map(x => {
+    const t = md(x.runs);
+    switch (x.k) {
+      case 'title': return '# ' + plain(x.runs);
+      case 'quote': return '> ' + t;
+      case 'h': return '## ' + t;
+      case 'li': return '- ' + t;
+      case 'note': return '> ' + t;
+      default: return t;
+    }
+  }).join('\n\n');
+  if (notes.length) s += '\n\n' + notes.map(n => '[^' + n.n + ']: ' + md(n.runs)).join('\n');
+  return s + '\n';
+}
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+function buildHtml(o, title) {
+  const { parts, notes } = resolveDoc(buildDoc(o), o.cite);
+  const h = runs => runs.map(r => r.fn ? '<sup><a href="#n' + r.fn + '" id="r' + r.fn + '">' + r.fn + '</a></sup>' : r.i ? '<em>' + esc(r.t) + '</em>' : esc(r.t)).join('');
+  let body = '', inList = false;
+  const fnHtml = notes.length ? '<ol class="fns">\n' + notes.map(n => '<li id="n' + n.n + '">' + h(n.runs) + ' <a href="#r' + n.n + '">↩</a></li>').join('\n') + '\n</ol>\n' : '';
+  let fnPut = false;
+  for (const x of parts) {
+    if (x.k !== 'li' && inList) { body += '</ul>\n'; inList = false; }
+    if (x.bib && !fnPut) { fnPut = true; body += fnHtml; }
+    if (x.k === 'title') body += '<h1>' + h(x.runs) + '</h1>\n';
+    else if (x.k === 'p') body += '<p>' + h(x.runs) + '</p>\n';
+    else if (x.k === 'quote') body += '<blockquote>' + h(x.runs) + '</blockquote>\n';
+    else if (x.k === 'h') body += '<h2>' + h(x.runs) + '</h2>\n';
+    else if (x.k === 'li') { if (!inList) { body += '<ul class="bib">\n'; inList = true; } body += '<li>' + h(x.runs) + '</li>\n'; }
+    else if (x.k === 'note') body += '<p class="note">' + h(x.runs) + '</p>\n';
+  }
+  if (inList) body += '</ul>\n';
+  if (!fnPut) body += fnHtml;
+  return '<!DOCTYPE html>\n<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + esc(title || 'Çalışma') + '</title>' +
+    '<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">' +
+    '<style>body{font-family:Literata,Georgia,serif;font-size:17px;line-height:1.75;color:#222;max-width:680px;margin:64px auto;padding:0 28px}' +
+    'h1{font-size:30px;line-height:1.25;margin:0 0 36px}h2{font-size:19px;margin:48px 0 12px}p{margin:0 0 16px;text-align:justify;hyphens:auto}' +
+    'blockquote{margin:0 2.4em 16px;font-style:italic;font-size:16px;color:#333}sup a{color:#a4441d;text-decoration:none;font-size:.75em}' +
+    'ul.bib{list-style:none;padding:0}ul.bib li{padding-left:1.6em;text-indent:-1.6em;margin:6px 0}.note{font-size:14px;color:#777;margin-left:2.4em;font-style:italic}' +
+    'ol.fns{font-size:14px;line-height:1.6;color:#555;border-top:1px solid #ccc;margin-top:48px;padding-top:16px}ol.fns a{color:#999;text-decoration:none}' +
+    '@page{margin:2.4cm}@media print{body{margin:0 auto;max-width:none;padding:0;font-size:12pt}h1{font-size:20pt}ol.fns a{display:none}}</style></head><body>\n' + body + '</body></html>\n';
+}
+async function buildDocx(o) {
+  const { parts, notes } = resolveDoc(buildDoc(o), o.cite === 'foot' ? 'foot' : o.cite);
+  const x = s => String(s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/\t/g, ' ').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const run = (r, base = {}) => {
+    if (r.fn) return '<w:r><w:rPr><w:rStyle w:val="FootnoteReference"/></w:rPr><w:footnoteReference w:id="' + r.fn + '"/></w:r>';
+    const o2 = Object.assign({}, base, r.i ? { i: 1 } : {});
+    return '<w:r><w:rPr>' + (o2.b ? '<w:b/>' : '') + (o2.i ? '<w:i/>' : '') + (o2.color ? '<w:color w:val="' + o2.color + '"/>' : '') + (o2.sz ? '<w:sz w:val="' + o2.sz + '"/><w:szCs w:val="' + o2.sz + '"/>' : '') + '</w:rPr><w:t xml:space="preserve">' + x(r.t) + '</w:t></w:r>';
+  };
+  const para = (ppr, runs, base) => '<w:p><w:pPr>' + ppr + '</w:pPr>' + runs.map(r => run(r, base)).join('') + '</w:p>';
+  let body = '';
+  for (const p of parts) {
+    if (p.k === 'title') body += para('<w:spacing w:after="480"/>', p.runs, { b: 1, sz: 36 });
+    else if (p.k === 'p') body += para('<w:jc w:val="both"/>', p.runs);
+    else if (p.k === 'quote') body += para('<w:ind w:left="720" w:right="720"/><w:jc w:val="both"/>', p.runs, { sz: 23 });
+    else if (p.k === 'h') body += para('<w:spacing w:before="480" w:after="200"/><w:keepNext/>', p.runs, { b: 1, sz: 26 });
+    else if (p.k === 'li') body += para('<w:ind w:left="567" w:hanging="567"/><w:spacing w:after="100"/>', p.runs);
+    else if (p.k === 'note') body += para('<w:ind w:left="720"/>', p.runs, { i: 1, sz: 20, color: '777777' });
+  }
+  const doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="' + W_NS + '"><w:body>' + body +
+    '<w:sectPr><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1418" w:left="1418" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>';
+  const styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="' + W_NS + '"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="tr-TR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="200" w:line="360" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
+    '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>' +
+    '<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="60" w:line="240" w:lineRule="auto"/><w:jc w:val="both"/></w:pPr><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr></w:style>' +
+    '<w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style></w:styles>';
+  const sep = '<w:footnote w:type="separator" w:id="-1"><w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:separator/></w:r></w:p></w:footnote><w:footnote w:type="continuationSeparator" w:id="0"><w:p><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/></w:pPr><w:r><w:continuationSeparator/></w:r></w:p></w:footnote>';
+  const fns = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:footnotes xmlns:w="' + W_NS + '">' + sep +
+    notes.map(n => '<w:footnote w:id="' + n.n + '"><w:p><w:pPr><w:pStyle w:val="FootnoteText"/></w:pPr><w:r><w:rPr><w:rStyle w:val="FootnoteReference"/></w:rPr><w:footnoteRef/></w:r><w:r><w:t xml:space="preserve"> </w:t></w:r>' + n.runs.map(r => run(r)).join('') + '</w:p></w:footnote>').join('') + '</w:footnotes>';
+  const settings = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:settings xmlns:w="' + W_NS + '"><w:footnotePr><w:footnote w:id="-1"/><w:footnote w:id="0"/></w:footnotePr><w:compat><w:compatSetting w:name="compatibilityMode" w:uri="http://schemas.microsoft.com/office/word" w:val="15"/></w:compat></w:settings>';
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/footnotes.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footnotes+xml"/><Override PartName="/word/settings.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml"/></Types>');
+  zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
+  zip.file('word/_rels/document.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes" Target="footnotes.xml"/><Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/></Relationships>');
+  zip.file('word/document.xml', doc);
+  zip.file('word/styles.xml', styles);
+  zip.file('word/footnotes.xml', fns);
+  zip.file('word/settings.xml', settings);
+  return zip.generateAsync({ type: 'blob' });
+}
+const fileBase = t => ((t || 'calisma').replace(/[\\/:*?"<>|\n\r\t]+/g, ' ').trim().slice(0, 80) || 'calisma');
+function exportModal() {
+  const p = P(); if (!p) return;
+  const o = opts();
+  const chk = (k, label) => { const i = el('input', { type: 'checkbox' }); i.checked = !!o[k]; i.addEventListener('change', () => { o[k] = i.checked; saveSoon(); }); return el('label', { class: 'chk' }, i, label); };
+  const radios = el('div', { class: 'radio' });
+  const drawR = () => radios.replaceChildren(...[['paren', 'Parantez içinde'], ['foot', 'Dipnot'], ['none', 'Gösterme']].map(([v, l]) => el('button', { class: 'chip' + (o.cite === v ? ' sel' : ''), type: 'button', onclick: () => { o.cite = v; saveSoon(); drawR(); } }, l)));
+  drawR();
+  const fmt = (label, sub, fn, dis, wide) => el('button', { class: 'fmt' + (wide ? ' wide' : ''), type: 'button', disabled: dis || null, onclick: fn }, el('b', { text: label }), sub ? el('small', { text: sub }) : null);
+  const base = fileBase(p.title);
+  let m;
+  m = modal([
+    el('h3', { text: 'İndir / Çıktı al' }),
+    el('div', { class: 'opt-label', text: 'Alıntı ve atıfların kaynağı' }),
+    radios,
+    el('div', { class: 'chks' },
+      chk('biblio', 'Sona kaynakça ekle'),
+      chk('src', 'Kâğıtta kalan kaynak metni de çıktıya kat'),
+      chk('left', 'Kenarda kalan parçaları ek olarak koy')),
+    el('div', { class: 'fmts' },
+      fmt('Word (.docx)', 'Dipnotlar gerçek Word dipnotu olur; Word, Pages, Google Dokümanlar açar', async () => {
+        try { offer(base + '.docx', await buildDocx(o), buildTxt(o)); } catch (e) { toast('Word dosyası hazırlanamadı'); }
+      }, !window.JSZip),
+      fmt('Yazdırılabilir sayfa (.html)', 'Tarayıcıda aç, Ctrl+P ile yazdır ya da PDF olarak kaydet', () => offer(base + '.html', buildHtml(o, p.title))),
+      fmt('Düz metin (.txt)', 'Her yere yapıştırılır', () => offer(base + '.txt', buildTxt(o))),
+      fmt('Markdown (.md)', 'Blog dosyaların için', () => offer(base + '.md', buildMd(o))),
+      fmt('Proje dosyası (.json)', 'Kesikleri, kenarı, kaynakları ve saklanan hâlleri olduğu gibi saklar. Sonra buraya geri açıp kaldığın yerden sürersin; yedek olarak da durur.', () => offer(base + '.makas.json', JSON.stringify(p, null, 1)), false, true)),
+    el('div', { class: 'm-actions' },
+      el('button', { class: 'btn', type: 'button', style: 'margin-right:auto', onclick: async () => {
+        try { await navigator.clipboard.writeText(buildTxt(o)); toast('Metin kopyalandı'); } catch (e) { toast('Kopyalanamadı'); }
+      } }, 'Metni kopyala'),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Kapat'))
+  ]);
+}
+
+/* ---------- guide ---------- */
+function guideModal() {
+  const sec = (title, ...kids) => el('div', { class: 'g-sec' }, el('h4', { text: title }), ...kids);
+  const pp = (...kids) => el('p', {}, ...kids);
+  const b = t => el('b', { text: t });
+  let m;
+  m = modal([
+    el('h3', { text: 'Makas nedir?' }),
+    pp('Araştırma denemesi yazarken alıntıları ve notları kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleleri yazmanın dijital hâli. Kâğıt harcamadan; kestiğin her parça kaynağıyla birlikte.'),
+    el('div', { class: 'guide' },
+      sec('1 · Metni getir', pp('Alıntılarını ve notlarını yapıştır ya da ', b('Dosya yükle'), ' ile .txt, .md, .docx veya .pdf getir; dosyayı alana sürükleyip bırakmak da olur. ', b('Parçalara ayır'), ' dediğinde her paragraf kâğıtta ayrı bir parça olur.')),
+      sec('2 · Kes', pp('Bir yeri seç, çıkan ', b('✂ Kes'), ' düğmesine bas (ya da Ctrl+K). Kaynağı seç ya da yeni kaynak gir (yazar, eser, çevirmen, yayınevi, yıl), sayfayı yaz. Parça kaynağıyla birlikte sağdaki kenara gider; kalanlar kâğıtta durur. Kendi notunsa ', b('Kendi notum'), '’u seç.')),
+      sec('3 · Kenar', pp('Kesiklerin burada birikir. Yazarken yeni bir not ya da alıntı bulursan ', b('+ Kenara not ya da alıntı ekle'), ' ile doğrudan buraya koy. Parçaları ', b('Giriş · Gelişme · Sonuç'), ' gibi yığınlara ayır: yığının adına tıklayınca yalnızca o yığın listelenir, parçayı yığının adına sürükleyince o yığına girer.')),
+      sec('4 · Yaz', pp('İki parçanın arasına gelince ', b('+ yaz'), ' çıkar; bağlantı cümlelerini oraya yazarsın. Kâğıttaki her parçayı soldaki tutamağından tutup başka bir araya taşıyabilirsin.')),
+      sec('5 · Yerleştir', pp('Kenardaki parçayı kâğıtta bir araya sürükle ya da ', b('Metne koy'), ' de: ayrı, girintili bir alıntı olur. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki ', b('Cümleye ekle'), '’ye bas: tırnak içinde o noktaya girer, kaynağı altında görünür.')),
+      sec('6 · Alıntı mı, atıf mı?', pp('Her parçanın ', b('tür'), ' menüsünden seçersin. ', b('Alıntı'), ' kelimesi kelimesine; ', b('atıf'), ' fikir onun, cümle senin (tırnaksız ama kaynaklı); ', b('düz metin'), ' kaynaksız.')),
+      sec('7 · Oku ve sakla', pp(b('Oku'), ' düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden ', inArtifact ? 'hesabına' : 'bu tarayıcıya', ' kaydedilir. Çalışmalarım menüsündeki ', b('Bu hâlini sakla'), ' ile bir taslağı saklayıp günler sonra ona dönebilirsin.')),
+      sec('8 · Çıktı al', pp(b('İndir / Çıktı'), ': Word (kaynaklar gerçek dipnot olarak), yazdırılabilir sayfa, düz metin ya da Markdown. Kaynaklar parantez içinde ya da dipnotta gösterilir, sona kaynakça eklenir. ', b('Proje dosyası'), ' ise çalışmanın tam yedeğidir; başka bir bilgisayarda Makas’a açıp kaldığın yerden sürersin.')),
+      sec('Kısayollar', pp(b('Ctrl+K'), ' seçili yeri kes · ', b('Ctrl+Z'), ' geri al · ', b('Ctrl+Shift+Z'), ' yinele · ', b('Esc'), ' vazgeç')),
+      inArtifact ? null : sec('Metinlerin nerede?', pp('Hiçbir sunucuya gönderilmez; yalnızca kullandığın tarayıcıda durur. Tarayıcı verilerini silersen çalışmaların da silinir; önemli bir çalışmayı ara ara proje dosyası olarak indirmeni öneririm.'))),
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Anladım'))
+  ], 'wide');
+}
+
+/* ---------- wiring ---------- */
+$('#projBtn').addEventListener('click', e => { if (pop) { closePop(); return; } projMenu(e.currentTarget); });
+$('#undoBtn').addEventListener('click', undo);
+$('#redoBtn').addEventListener('click', redo);
+$('#readBtn').addEventListener('click', () => { if (!P() || screen !== 'desk') return; readMode = !readMode; renderAll(); window.scrollTo(0, 0); });
+$('#addBtn').addEventListener('click', () => { if (P()) addTextModal(); });
+$('#expBtn').addEventListener('click', exportModal);
+$('#helpBtn').addEventListener('click', guideModal);
+document.addEventListener('keydown', e => {
+  const tag = (e.target && e.target.tagName) || '';
+  const inField = tag === 'TEXTAREA' || tag === 'INPUT' || tag === 'SELECT';
+  if (e.key === 'Escape') {
+    if (modals.length) { modals[modals.length - 1].close(); return; }
+    if (pop) { closePop(); return; }
+    if (placing) { stopPlacing(); return; }
+    hideCut(); return;
+  }
+  if (inField || modals.length || screen !== 'desk' || readMode) return;
+  const mod = e.ctrlKey || e.metaKey;
+  if (mod && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); e.shiftKey ? redo() : undo(); }
+  else if (mod && (e.key === 'y' || e.key === 'Y')) { e.preventDefault(); redo(); }
+});
+const setHH = () => document.documentElement.style.setProperty('--hh', $('#top').offsetHeight + 'px');
+let rsT;
+addEventListener('resize', () => { setHH(); clearTimeout(rsT); rsT = setTimeout(fitAll, 120); });
+setHH();
+renderAll();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+setStatus('local');
+initRemote();
+getDl();
+})();
+</script>
+</body>
+</html>

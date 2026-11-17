@@ -25,6 +25,8 @@ https://github.com/user-attachments/assets/08e0fa94-dd20-401b-92a8-28f3e4cdc055
 - **Kelime sayacı ve hedef** — yalnızca senin yazdıkların ve atıfların sayılır
 - **Dosya yükleme** — `.txt`, `.md`, `.docx` ve seçilebilir metni olan `.pdf`
 - **Çıktılar** — Word (`.docx`, gerçek Word dipnotlarıyla), yazdırılabilir sayfa (`.html`), düz metin (`.txt`), Markdown (`.md`) ve tam yedek için proje dosyası (`.json`)
+- **Türkçe / İngilizce** — arayüz, kılavuz ve çıktılar seçilen dile göre (İngilizcede *trans.*, *p.*, *Bibliography*); ilk açılışta tarayıcının diline göre seçilir, sonra hatırlanır
+- **Karşılama ekranı** — ilk ziyarette tanıtım videosuyla kısa bir karşılama
 - **Gece modu**, geri al / yinele
 
 ## 🔒 Metinlerin Nerede Saklanıyor?

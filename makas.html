@@ -21,6 +21,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Makas — alıntı ve deneme masası">
 <meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Makas — Alıntı ve Deneme Masası">
 <meta name="twitter:description" content="Alıntılarını kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz.">
@@ -34,10 +35,10 @@
  "alternateName": "Makas — Alıntı ve Deneme Masası",
  "url": "https://gamzeguckiran.com/makas.html",
  "description": "Araştırma denemeleri için dijital yazı masası: alıntı ve notları kaynağıyla birlikte kesip kenara dizme, aralarına yazma, alıntı ve atıfları ayırma, dipnotlu Word çıktısı.",
- "inLanguage": "tr",
+ "inLanguage": ["tr", "en"],
  "applicationCategory": "ProductivityApplication",
  "operatingSystem": "Web browser",
- "softwareVersion": "1.0",
+ "softwareVersion": "1.1",
  "isAccessibleForFree": true,
  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
  "featureList": ["Alıntıyı kaynağıyla birlikte kesme", "Kenarda Giriş, Gelişme, Sonuç yığınları", "Alıntı ve atıf ayrımı", "Cümle içine alıntı", "Dipnotlu Word (.docx) çıktısı", "PDF, Word ve metin dosyası yükleme", "Okuma modu", "Taslak hâllerini saklama"],
@@ -406,6 +407,26 @@ body.dark .reading-art ol.fns{color:var(--muted)}
 .g-sec p{font-size:13.5px;line-height:1.6;margin:0}
 .g-sec b{color:var(--ink);font-weight:600}
 @media (max-width:700px){.guide{grid-template-columns:1fr}}
+
+/* language switch */
+.btn.lang{padding:6px 9px;gap:5px;font-size:12px;letter-spacing:.04em}
+.btn.lang .lg{opacity:.45}
+.btn.lang .lg.on{opacity:1;font-weight:600;color:var(--accent)}
+.w-sub{font-size:12.5px;color:var(--muted);font-style:italic;margin:-8px 0 14px}
+
+/* first-visit welcome */
+.welcome{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:30px;align-items:center;margin:0 0 40px;padding:0 0 36px;border-bottom:1px solid var(--line)}
+.welcome.novid{grid-template-columns:1fr;max-width:620px}
+.welcome video{display:block;width:100%;max-height:62vh;border-radius:8px;background:var(--strip);box-shadow:0 1px 2px rgba(70,45,10,.06),0 10px 28px rgba(70,45,10,.12)}
+.w-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px;font-weight:500}
+.w-h{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2;color:var(--ink);margin:0 0 14px}
+.w-p{font-family:var(--serif);font-size:15.5px;line-height:1.72;color:var(--print);margin:0 0 12px}
+.w-p.last{font-size:14px;color:var(--muted);margin:0}
+.w-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.welcome .x{position:absolute;right:-8px;top:-10px;border:0;background:transparent;color:var(--muted);font-size:18px;line-height:1;padding:4px 8px;border-radius:4px}
+.welcome .x:hover{background:var(--strip);color:var(--ink)}
+@media (max-width:800px){.welcome{grid-template-columns:1fr;gap:20px}.w-h{font-size:26px}.welcome .x{display:none}}
+body.dark .welcome video{box-shadow:0 10px 28px rgba(0,0,0,.4)}
 </style>
 </head>
 <body>
@@ -421,12 +442,13 @@ body.dark .reading-art ol.fns{color:var(--muted)}
   <button class="btn icon" id="undoBtn" title="Geri al (Ctrl+Z)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
   <button class="btn icon" id="redoBtn" title="Yinele (Ctrl+Shift+Z)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
   <button class="btn" id="readBtn" title="Metni okurun göreceği hâliyle gör"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span id="readTxt">Oku</span></button>
+  <button class="btn lang" id="langBtn" type="button"></button>
   <button class="btn icon" id="helpBtn" title="Nasıl kullanılır?" aria-label="Nasıl kullanılır?"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></button>
   <button class="btn" id="addBtn" title="Kâğıdın sonuna yeni metin ekle">+ Metin ekle</button>
   <button class="btn primary" id="expBtn">İndir / Çıktı</button>
 </header>
 
-<noscript><div style="max-width:680px;margin:40px auto;padding:0 24px;font-family:Georgia,serif;line-height:1.7"><h1>Makas — Alıntı ve Deneme Masası</h1><p>Araştırma denemeleri için dijital yazı masası. Alıntılarını ve notlarını getir, kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz; Word çıktısında kaynaklar dipnot olur. Makas’ı kullanmak için tarayıcında JavaScript açık olmalı.</p></div></noscript>
+<noscript><div style="max-width:680px;margin:40px auto;padding:0 24px;font-family:Georgia,serif;line-height:1.7"><h1>Makas — Alıntı ve Deneme Masası</h1><p>Araştırma denemeleri için dijital yazı masası. Alıntılarını ve notlarını getir, kaynağıyla birlikte kes, kenara diz, aralarına kendi cümlelerini yaz; Word çıktısında kaynaklar dipnot olur. Makas’ı kullanmak için tarayıcında JavaScript açık olmalı.</p><p lang="en">Makas is a writing desk for research essays: cut your quotes and notes with their sources, set them aside, write between them. Please enable JavaScript to use it.</p></div></noscript>
 <div class="layout" id="layout">
   <main id="main"></main>
   <aside class="side" id="side"></aside>
@@ -434,7 +456,7 @@ body.dark .reading-art ol.fns{color:var(--muted)}
 
 <div id="cutbar"><button id="cutBtn" type="button">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>
-  Kes, kenara koy <kbd>Ctrl K</kbd></button></div>
+  <span id="cutTxt">Kes, kenara koy</span> <kbd>Ctrl K</kbd></button></div>
 <div id="placebar"><span id="placeTxt"></span><button class="btn" id="placeCancel" type="button">Vazgeç</button></div>
 <div id="toast"></div>
 
@@ -442,6 +464,7 @@ body.dark .reading-art ol.fns{color:var(--muted)}
 (() => {
 'use strict';
 const KEY = 'makas.v1';
+const VERSION = '1.1';
 const ME = 'me';
 const W_NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 const PILE_COLORS = ['#b5542c', '#4f7a4a', '#3f6aa1', '#8a5a9e', '#b08a2e', '#4f8a8a'];
@@ -456,6 +479,19 @@ try {
   if (raw) { const s = JSON.parse(raw); if (s && s.projects) store = Object.assign(store, s); }
 } catch (e) {}
 const inArtifact = !!(window.claude && window.claude.use);
+/* ---------- language ---------- */
+let lang = 'tr';
+try { lang = localStorage.getItem('makas.lang') || ''; } catch (e) {}
+if (lang !== 'tr' && lang !== 'en') lang = /^tr\b/i.test(navigator.language || '') ? 'tr' : 'en';
+const EN = { "Kendi notum": "My own note", "Adsız kaynak": "Untitled source", "s.": "p.", "çev.": "trans.", "Çev.": "Trans.", "Kaynakça": "Bibliography", "NOTLAR": "NOTES", " (kendi notum)": " (my own note)", "Kenarda kalan parçalar": "Pieces left in the margin", "Not: ": "Note: ", "Çalışma": "Project", "Giriş": "Introduction", "Gelişme": "Body", "Sonuç": "Conclusion", "Geri alındı": "Undone", "Yinelendi": "Redone", "Kaydediliyor…": "Saving…", "Kaydedildi ✓": "Saved ✓", "Bu tarayıcıda kaydedildi": "Saved in this browser", "Bağlantı bekleniyor…": "Waiting for connection…", "Kaydedilemedi — İndir › Proje dosyası ile yedek al": "Couldn’t save — back up via Download › Project file", "Kayıt alanı doldu — proje dosyasını indir": "Storage is full — download the project file", "Çalışma bu tarayıcıda duruyor. Başka bir yere taşımak ya da yedeklemek için: İndir › Proje dosyası.": "Your project lives in this browser. To move it or back it up: Download › Project file.", "İndirildi: {0}": "Downloaded: {0}", "İndirme iptal edildi": "Download cancelled", "Bir indirme penceresi zaten açık": "A download window is already open", "Dosya burada indirilemedi": "The file couldn’t be downloaded here", "Bu görünüm dosya indirmeye izin vermedi (“{0}”). Metni kopyalayıp istediğin yere yapıştırabilirsin.": "This view doesn’t allow downloads (“{0}”). You can copy the text and paste it wherever you like.", "Kopyalandı": "Copied", "Seçtim, Ctrl+C ile kopyala": "Selected — press Ctrl+C to copy", "Kopyala": "Copy", "Tamam": "OK", "Dosya okunuyor…": "Reading file…", "“{0}” yüklendi": "“{0}” loaded", "Bu PDF’te seçilebilir metin yok; taranmış bir belge olabilir": "This PDF has no selectable text; it may be a scanned document", "Dosya okunamadı": "Couldn’t read the file", "Adsız çalışma": "Untitled project", "(kopya)": "(copy)", "Proje açıldı": "Project opened", "Bu bir Makas proje dosyası değil gibi": "This doesn’t look like a Makas project file", "Bu çalışmayı sil?": "Delete this project?", "“{0}” kâğıdı, kenardaki parçaları ve saklanan hâlleriyle birlikte silinecek. Bu geri alınamaz. İstersen önce İndir › Proje dosyası ile yedek al.": "“{0}” will be deleted along with its margin pieces and saved drafts. This can’t be undone. You may want to back it up first via Download › Project file.", "Vazgeç": "Cancel", "Çalışma silindi": "Project deleted", "Sil": "Delete", "+ Yeni çalışma": "+ New project", "Proje dosyası aç (.json)": "Open project file (.json)", "Bu hâlini sakla…": "Save this draft…", "Saklanan hâller": "Saved drafts", "Kaynaklar": "Sources", "Bu çalışmayı sil": "Delete this project", "Örn. ilk taslak, girişi değiştirmeden önce": "e.g. first draft, before reworking the intro", "Adsız hâl": "Untitled draft", "Bu hâli saklandı": "Draft saved", "Bu hâlini sakla": "Save this draft", "Kâğıdın ve kenarın şu anki hâli saklanır. Sonra cesurca kesip biçebilirsin; istediğin zaman bu hâle dönersin. En fazla 20 hâl tutulur.": "The page and the margin are saved exactly as they are now. Then cut boldly; you can return to this draft any time. Up to 20 drafts are kept.", "Ad": "Name", "Sakla": "Save", "Saklanan hâl yok.": "No saved drafts.", "{0} kelime": [ "{0} word", "{0} words"], "“{0}” hâline dönüldü": "Restored “{0}”", "Geri al": "Undo", "Bu hâl açılamadı": "This draft couldn’t be opened", "Bu hâle dön": "Restore", "Bir hâle döndüğünde şimdiki hâl kaybolmaz: “Geri al” ile hemen geri gelirsin. Emin olmak için önce şimdiki hâli de saklayabilirsin.": "Restoring a draft doesn’t lose the current one: “Undo” brings it right back. To be safe, you can save the current state first.", "Kapat": "Close", "Yazar": "Author", "Örn. Walter Benjamin": "e.g. Walter Benjamin", "Eser": "Title", "Örn. Pasajlar": "e.g. The Arcades Project", "Çevirmen": "Translator", "varsa": "optional", "Yayınevi": "Publisher", "Yıl": "Year", "Kaynaklarda ara": "Search sources", "✎ Kendi notum": "✎ My own note", "+ Yeni kaynak": "+ New source", "yığın yok": "no pile", "örn. 42": "e.g. 42", "Örn. girişte kullan": "e.g. use in the intro", "Bir kaynak seç, yeni kaynak gir ya da “Kendi notum”u işaretle; yoksa sonra karışır.": "Pick a source, add a new one, or mark it “My own note” — otherwise it gets confusing later.", "Parça boş kalamaz.": "The piece can’t be empty.", "Her paragrafı ayrı parça yap (hepsi aynı kaynakla)": "Make each paragraph a separate piece (all with the same source)", "Kaynak": "Source", "Not (isteğe bağlı)": "Note (optional)", "Sayfa": "Page", "Yığın": "Pile", "Kenara koy": "Set aside", "✂ Kenara koy": "✂ Set aside", "Kenara kondu": "Set aside", "Parça silindi": "Piece deleted", "Bu atıf kime ait?": "Whose idea is this?", "Bu alıntı kime ait?": "Whose words are these?", "Kaynağı düzenle": "Edit source", "Kaydet": "Save", "Senin yazın": "Your writing", "Düz metin": "Plain text", "Kaynak gösterilmez": "No source shown", "Alıntı": "Quote", "Kelimesi kelimesine; girintili, kaynağıyla": "Word for word; indented, with its source", "Atıf": "Paraphrase", "Fikir onun, cümle senin; tırnaksız, kaynağıyla": "Their idea, your sentence; no quotation marks, with its source", "Önce yazında alıntının gireceği yere tıkla": "First click where the quote should go in your writing", "Notun cümleye eklendi": "Note added to the sentence", "Alıntı cümleye eklendi": "Quote added to the sentence", "Alıntının kaynağı": "Source of the quote", "Önce yazında alıntının gireceği yere tıkla, sonra “Cümleye ekle”ye bas": "First click where the quote should go in your writing, then press “Into sentence”", "Kâğıtta kalan kaynak metin yok": "No source text left on the page", "Kalanları kenara topla": "Move leftovers to the margin", "Kâğıtta yazına katmadığın {0} kaynak metin parçası var. Hepsi sırasıyla kenara taşınacak; kâğıtta yalnızca senin yazın, alıntıların ve atıfların kalacak.": [ "There is {0} piece of source text on the page that you haven’t used. It will move to the margin; only your writing, quotes and paraphrases will stay on the page.", "There are {0} pieces of source text on the page that you haven’t used. They’ll all move to the margin in order; only your writing, quotes and paraphrases will stay on the page."], "Kenarda nasıl görünsünler?": "How should they appear in the margin?", "Kendi notum olarak": "As my own notes", "Kaynaksız; kaynaklarını sonra yazarım": "Without a source; I’ll add sources later", "{0} parça kenara toplandı": [ "{0} piece moved to the margin", "{0} pieces moved to the margin"], "Kenara topla": "Move to margin", "Parçayı koyacağın yeri seç": "Choose where to place the piece", "Parçayı taşıyacağın yeri seç": "Choose where to move the piece", "“{0}” yığınına kondu": "Added to the “{0}” pile", "Yığından çıkarıldı": "Removed from the pile", "Örn. giriş, karşı görüş, sona sakla": "e.g. intro, counterpoint, save for the end", "Yeni yığın": "New pile", "Adı": "Name", "Rengi": "Colour", "Oluştur": "Create", "Yığından çıkar": "Remove from pile", "+ Yeni yığın": "+ New pile", "Yığını düzenle": "Edit pile", "Yığın kaldırıldı; parçalar kenarda duruyor": "Pile removed; its pieces are still in the margin", "Yığını kaldır": "Remove pile", "Henüz kaynak yok. Bir parça kestiğinde kaynağını burada da görürsün.": "No sources yet. When you cut a piece, its source shows up here too.", "{0} parça": [ "{0} piece", "{0} pieces"], "düzenle": "edit", "sil": "delete", "Bu kaynak {0} parçada kullanılıyor; önce onların kaynağını değiştir": [ "This source is used in {0} piece; change its source first", "This source is used in {0} pieces; change their source first"], "Yazar ya da eser adı gerekli": "An author or a title is required", "Bir kaynağı burada düzelttiğinde, ona bağlı bütün parçalarda ve çıktıda düzelir. Sayfa numaraları parçalarda ayrı ayrı durur.": "Fix a source here and it’s fixed in every piece that uses it and in the output. Page numbers stay with each piece.", "Örn. 1500": "e.g. 1500", "Kelime hedefi": "Word goal", "Yalnızca senin yazdıkların ve atıfların sayılır; alıntılar ve kâğıtta kalan kaynak metin sayılmaz. Hedefi kaldırmak için boş bırak.": "Only your own writing and paraphrases count; quotes and leftover source text don’t. Leave empty to remove the goal.", "Hedef (kelime)": "Goal (words)", "Senin yazın: {0} kelime": [ "Your writing: {0} word", "Your writing: {0} words"], "Hedefi değiştir": "Change goal", "hedef {0}": "goal {0}", "hedef koy": "set a goal", "{0} parça kenarda": [ "{0} piece in the margin", "{0} pieces in the margin"], "Yazına katmadığın kaynak metin parçalarını kenara taşı": "Move source text you haven’t used to the margin", "kalan {0} kaynak parçayı kenara topla": [ "move the leftover source piece to the margin", "move the {0} leftover source pieces to the margin"], "Kâğıtta parça kalmadı. Yazmaya başla ya da kenardan bir parça getir.": "The page is empty. Start writing or bring a piece from the margin.", "+ yaz": "+ write", "+ kenardan parça": "+ piece from margin", "buraya": "here", "Tut ve sürükle: başka araya taşı ya da kenara at": "Drag: move it elsewhere or drop it in the margin", "Buraya yaz…": "Write here…", "tür ▾": "type ▾", "Düz metin, alıntı ya da atıf": "Plain text, quote or paraphrase", "↩ kenara geri": "↩ back to margin", "＋ alıntı": "＋ quote", "İmlecin olduğu yere kenardan bir alıntı ekle": "Insert a quote from the margin at the cursor", "taşı": "move", "✂ hepsini kenara": "✂ all to margin", "birleştir": "merge", "Alttaki parçayla tek paragraf yap": "Merge with the piece below into one paragraph", "sayfa": "page", "Kaynağı değiştir": "Change source", "kaynak seç": "choose source", "Bu alıntının metni değişmiş; çıktıda kaynak paragrafın sonuna eklenir": "The quoted text has changed; in the output the source goes at the end of the paragraph", "Cümle içindeki alıntı": "Quote within the sentence", "kaynak yok": "no source", "Metinden çıkar, kenara geri koy": "Take it out of the text, back to the margin", "Çalışmanın adı": "Project title", "kaynak metin": "source text", "senin yazın": "your writing", "alıntı": "quote", "atıf": "paraphrase", "**Kesmek:** metinde bir yeri seç, **✂ Kes** düğmesine bas (ya da Ctrl+K). Parça kaynağıyla birlikte kenara gider. **Yazmak:** iki parçanın arasına gelince **+ yaz** çıkar. **Alıntı:** kenardaki parçayı bir araya sürükle ya da **Metne koy** de. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki **Cümleye ekle**’ye bas. **Atıf:** bir parçanın **tür** menüsünden seçilir.": "**Cut:** select a passage and press **✂ Cut & set aside** (or Ctrl+K). The piece goes to the margin with its source. **Write:** hover between two pieces and **+ write** appears. **Quote:** drag a piece from the margin into a gap, or press **Place in text**. To put it inside a sentence, first click the spot in your writing, then press **Into sentence** on the piece. **Paraphrase:** choose it from a piece’s **type** menu.", "parantez içinde": "in parentheses", "dipnot": "footnotes", "gösterme": "hide", "Kaynaklar: ": "Sources: ", "kaynakça": "bibliography", "kalan kaynak metni göster": "show leftover source text", "{0} kelime senin": [ "{0} word is yours", "{0} words are yours"], "Düzenlemeye dön": "Back to editing", "Bir Lryiu Labs projesi": "A Lryiu Labs project", "Kenar": "Margin", "boş": "empty", "+ Kenara not ya da alıntı ekle": "+ Add a note or quote to the margin", "Parçalarda ara": "Search pieces", "Tüm kaynaklar": "All sources", "✎ Kendi notlarım": "✎ My own notes", "(kaynaksız)": "(no source)", "Tümü": "All", "Yığını düzenlemek için tekrar tıkla": "Click again to edit the pile", "Bu yığını göster; parçayı buraya sürükleyerek de yığına koyabilirsin": "Show this pile; you can also drag a piece here to add it", "Giriş, Gelişme ve Sonuç yığınlarını ekle": "Add Introduction, Body and Conclusion piles", "+ Giriş · Gelişme · Sonuç": "+ Introduction · Body · Conclusion", "+ yığın": "+ pile", "Metinden bir yer seçip **✂ Kes** dediğinde parça buraya, kaynağıyla birlikte gelir.": "Select a passage and press **✂ Cut & set aside** — the piece lands here, together with its source.", "Kâğıttaki bir parçayı soldaki tutamağından tutup buraya sürükleyerek de kenara atabilirsin.": "You can also drag a piece from the page by its handle on the left and drop it here.", "Burada eşleşen parça yok.": "No matching pieces here.", "kaynak yazılmamış": "no source given", "Tamamını görmek için tıkla": "Click to see it all", "Metne koy": "Place in text", "Ayrı paragraf olarak bir araya koy": "Place it between pieces as its own paragraph", "Cümleye ekle": "Into sentence", "Yazında en son tıkladığın yere, cümlenin içine ekle": "Insert into the sentence, where you last clicked in your writing", "Düzenle": "Edit", "Kenara ekle": "Add to margin", "{0} parça kenara kondu": "{0} pieces set aside", "Parçayı düzenle": "Edit piece", "Kenarda parça yok; önce metinden bir yer kes": "The margin is empty; cut something from the text first", "Parça ara": "Search pieces", "Eşleşen parça yok": "No matching pieces", "Örn. Kayıp Zaman Üzerine": "e.g. On Lost Time", "Alıntılarını, notlarını, yarım cümlelerini buraya yapıştır…\n\nYa da bir dosyayı (.txt, .md, .docx, .pdf) buraya sürükleyip bırak.": "Paste your quotes, notes and half-finished sentences here…\n\nOr drag and drop a file (.txt, .md, .docx, .pdf).", "Önce bir metin yapıştır ya da dosya yükle": "Paste some text or upload a file first", "Makas tanıtım videosu": "Makas intro video", "Hoş geldin": "Welcome", "Bir araştırma yazısında beni en çok yoran şey, önce kâğıt yığınlarının, sonra onlarca Word dosyasının arasında kaybolmaktı. Makas’ı bunun için yaptım. Metnini getir, kes, parçala. Kestiğin her parça kaynağıyla birlikte kenara gider. Giriş · Gelişme · Sonuç diye yığarsın. Yazını yazarken notların yanı başında durur; alıntıyı tek hamlede cümlenin içine alırsın.": "What wore me out most when writing an essay built on research was getting lost — first in piles of paper, then in dozens of Word files. So I made Makas. Bring your text, cut it, break it into pieces. Every piece you cut goes to the margin with its source. You stack them as Introduction · Body · Conclusion. While you write, your notes sit right beside you; you drop a quote into your sentence in a single move.", "Metinlerin hiçbir yere gönderilmez, yalnızca bu tarayıcıda durur. Keyifle çalış.": "Your texts are never sent anywhere; they stay in this browser only. Happy writing.", "Başla": "Start", "Nasıl kullanılır?": "How does it work?", "Yeni bir çalışma": "A new project", "Alıntılarını ve notlarını getir. Her paragraf kâğıtta ayrı bir parça olur. İstediğin yeri kesip kaynağıyla kenara koyarsın; kalanların üstüne, altına, arasına kendi cümlelerini yazarsın.": "Bring in your quotes and notes. Each paragraph becomes a separate piece on the page. Cut whatever you want and set it aside with its source; then write your own sentences above, below and between what’s left.", "Makas nedir, nasıl kullanılır?": "What is Makas and how does it work?", "Dosya yükle": "Upload file", ".txt, .md, .docx ya da .pdf — dosyayı aşağıdaki alana sürükleyip bırakabilir ya da metni yapıştırabilirsin.": ".txt, .md, .docx or .pdf — drag and drop the file into the box below, or paste the text.", "Parçalara ayır →": "Split into pieces →", "Çalışmalarım": "My projects", "Daha önce indirdiğin bir proje dosyasını aç (.json)": "Open a project file you downloaded earlier (.json)", "Gündüz modu": "Day mode", "Gece modu": "Night mode", "Oku": "Read", "Yeni alıntıları, notları buraya yapıştır ya da bir dosya sürükle…": "Paste new quotes and notes here, or drag in a file…", "{0} parça kâğıdın sonuna eklendi": [ "{0} piece added to the end of the page", "{0} pieces added to the end of the page"], "Kâğıda metin ekle": "Add text to the page", "Eklediğin metin kâğıdın sonuna, kaynak metin olarak gelir.": "The text you add goes to the end of the page as source text.", "Dosya yükle (.txt .md .docx .pdf)": "Upload file (.txt .md .docx .pdf)", "Parçalara ayır, ekle": "Split and add", "Parantez içinde": "In parentheses", "Dipnot": "Footnotes", "Gösterme": "Hide", "İndir / Çıktı al": "Download / Export", "Alıntı ve atıfların kaynağı": "Sources of quotes and paraphrases", "Sona kaynakça ekle": "Add a bibliography at the end", "Kâğıtta kalan kaynak metni de çıktıya kat": "Include leftover source text from the page", "Kenarda kalan parçaları ek olarak koy": "Append the pieces left in the margin", "Dipnotlar gerçek Word dipnotu olur; Word, Pages, Google Dokümanlar açar": "Footnotes become real Word footnotes; opens in Word, Pages, Google Docs", "Word dosyası hazırlanamadı": "Couldn’t prepare the Word file", "Yazdırılabilir sayfa (.html)": "Printable page (.html)", "Tarayıcıda aç, Ctrl+P ile yazdır ya da PDF olarak kaydet": "Open in a browser; print with Ctrl+P or save as PDF", "Düz metin (.txt)": "Plain text (.txt)", "Her yere yapıştırılır": "Pastes anywhere", "Blog dosyaların için": "For your blog files", "Proje dosyası (.json)": "Project file (.json)", "Kesikleri, kenarı, kaynakları ve saklanan hâlleri olduğu gibi saklar. Sonra buraya geri açıp kaldığın yerden sürersin; yedek olarak da durur.": "Keeps your cuts, margin, sources and saved drafts exactly as they are. Open it here later and carry on where you left off; it also works as a backup.", "Metin kopyalandı": "Text copied", "Kopyalanamadı": "Couldn’t copy", "Metni kopyala": "Copy text", "Makas nedir?": "What is Makas?", "Araştırma denemesi yazarken alıntıları ve notları kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleleri yazmanın dijital hâli. Kâğıt harcamadan; kestiğin her parça kaynağıyla birlikte.": "The digital version of printing out your quotes and notes for a research essay, cutting them up with scissors, laying them out on the desk and writing the connecting sentences in between. No paper wasted, and every piece you cut keeps its source.", "1 · Metni getir": "1 · Bring your text", "Alıntılarını ve notlarını yapıştır ya da **Dosya yükle** ile .txt, .md, .docx veya .pdf getir; dosyayı alana sürükleyip bırakmak da olur. **Parçalara ayır** dediğinde her paragraf kâğıtta ayrı bir parça olur.": "Paste your quotes and notes, or use **Upload file** to bring in a .txt, .md, .docx or .pdf; dragging the file into the box works too. Press **Split into pieces** and each paragraph becomes a separate piece on the page.", "2 · Kes": "2 · Cut", "Bir yeri seç, çıkan **✂ Kes** düğmesine bas (ya da Ctrl+K). Kaynağı seç ya da yeni kaynak gir (yazar, eser, çevirmen, yayınevi, yıl), sayfayı yaz. Parça kaynağıyla birlikte sağdaki kenara gider; kalanlar kâğıtta durur. Kendi notunsa **Kendi notum**’u seç.": "Select a passage and press the **✂ Cut & set aside** button that appears (or Ctrl+K). Choose a source or add a new one (author, title, translator, publisher, year) and type the page. The piece goes to the margin on the right with its source; the rest stays on the page. If it’s your own note, choose **My own note**.", "3 · Kenar": "3 · The margin", "Kesiklerin burada birikir. Yazarken yeni bir not ya da alıntı bulursan **+ Kenara not ya da alıntı ekle** ile doğrudan buraya koy. Parçaları **Giriş · Gelişme · Sonuç** gibi yığınlara ayır: yığının adına tıklayınca yalnızca o yığın listelenir, parçayı yığının adına sürükleyince o yığına girer.": "Your cuttings collect here. If you find a new note or quote while writing, add it straight here with **+ Add a note or quote to the margin**. Sort pieces into piles such as **Introduction · Body · Conclusion**: click a pile’s name to list only that pile; drag a piece onto a pile’s name to add it.", "4 · Yaz": "4 · Write", "İki parçanın arasına gelince **+ yaz** çıkar; bağlantı cümlelerini oraya yazarsın. Kâğıttaki her parçayı soldaki tutamağından tutup başka bir araya taşıyabilirsin.": "Hover between two pieces and **+ write** appears; that’s where your connecting sentences go. Any piece on the page can be moved by dragging its handle on the left.", "5 · Yerleştir": "5 · Place", "Kenardaki parçayı kâğıtta bir araya sürükle ya da **Metne koy** de: ayrı, girintili bir alıntı olur. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki **Cümleye ekle**’ye bas: tırnak içinde o noktaya girer, kaynağı altında görünür.": "Drag a margin piece into a gap on the page, or press **Place in text**: it becomes a separate, indented quote. To put it inside a sentence, first click the spot in your writing, then press **Into sentence** on the piece: it goes in at that point, in quotation marks, with its source shown below.", "6 · Alıntı mı, atıf mı?": "6 · Quote or paraphrase?", "Her parçanın **tür** menüsünden seçersin. **Alıntı** kelimesi kelimesine; **atıf** fikir onun, cümle senin (tırnaksız ama kaynaklı); **düz metin** kaynaksız.": "Choose it from each piece’s **type** menu. A **quote** is word for word; a **paraphrase** is their idea in your sentence (no quotation marks, but with a source); **plain text** has no source.", "7 · Oku ve sakla": "7 · Read and save", "**Oku** düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden hesabına kaydedilir. Çalışmalarım menüsündeki **Bu hâlini sakla** ile bir taslağı saklayıp günler sonra ona dönebilirsin.": "The **Read** button shows the text as your reader will see it. Your project is saved to your account automatically. With **Save this draft** in the My projects menu you can keep a draft and come back to it days later.", "**Oku** düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden bu tarayıcıya kaydedilir. Çalışmalarım menüsündeki **Bu hâlini sakla** ile bir taslağı saklayıp günler sonra ona dönebilirsin.": "The **Read** button shows the text as your reader will see it. Your project is saved in this browser automatically. With **Save this draft** in the My projects menu you can keep a draft and come back to it days later.", "8 · Çıktı al": "8 · Export", "**İndir / Çıktı**: Word (kaynaklar gerçek dipnot olarak), yazdırılabilir sayfa, düz metin ya da Markdown. Kaynaklar parantez içinde ya da dipnotta gösterilir, sona kaynakça eklenir. **Proje dosyası** ise çalışmanın tam yedeğidir; başka bir bilgisayarda Makas’a açıp kaldığın yerden sürersin.": "**Download / Export**: Word (with sources as real footnotes), a printable page, plain text or Markdown. Sources appear in parentheses or as footnotes, with a bibliography at the end. The **Project file** is a complete backup of your project; open it in Makas on another computer and carry on where you left off.", "Kısayollar": "Shortcuts", "**Ctrl+K** seçili yeri kes · **Ctrl+Z** geri al · **Ctrl+Shift+Z** yinele · **Esc** vazgeç": "**Ctrl+K** cut the selection · **Ctrl+Z** undo · **Ctrl+Shift+Z** redo · **Esc** cancel", "Metinlerin nerede?": "Where are your texts?", "Hiçbir sunucuya gönderilmez; yalnızca kullandığın tarayıcıda durur. Tarayıcı verilerini silersen çalışmaların da silinir; önemli bir çalışmayı ara ara proje dosyası olarak indirmeni öneririm.": "They’re never sent to any server; they stay only in the browser you’re using. If you clear your browser data, your projects go too — so I’d suggest downloading important projects as a project file now and then.", "Anladım": "Got it", "Makas — Alıntı ve Deneme Masası | Lryiu Labs": "Makas — Quote & Essay Desk | Lryiu Labs", "Geri al (Ctrl+Z)": "Undo (Ctrl+Z)", "Yinele (Ctrl+Shift+Z)": "Redo (Ctrl+Shift+Z)", "Metni okurun göreceği hâliyle gör": "See the text as your reader will", "Kâğıdın sonuna yeni metin ekle": "Add new text to the end of the page", "+ Metin ekle": "+ Add text", "İndir / Çıktı": "Download / Export", "Kes, kenara koy": "Cut & set aside" };
+function t(s, ...a) {
+  let r = lang === 'en' && Object.prototype.hasOwnProperty.call(EN, s) ? EN[s] : s;
+  if (Array.isArray(r)) r = r[String(a[0]) === '1' ? 0 : 1];
+  a.forEach((v, i) => { r = r.split('{' + i + '}').join(String(v)); });
+  return r;
+}
+const LOC = () => lang === 'en' ? 'en-GB' : 'tr-TR';
+function rich(str) { return str.split(/\*\*(.+?)\*\*/).map((x, i) => i % 2 ? el('b', { text: x }) : x).filter(x => x !== ''); }
 const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-4);
 
 /* migrate projects made with the first version (free-text sources) */
@@ -516,12 +552,12 @@ function el(tag, props, ...kids) {
   return e;
 }
 const mini = (label, fn, title) => el('button', { class: 'mini', type: 'button', title, onmousedown: e => e.preventDefault(), onclick: fn }, label);
-const fmtDate = ts => { try { return new Date(ts).toLocaleString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
+const fmtDate = ts => { try { return new Date(ts).toLocaleString(LOC(), { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch (e) { return ''; } };
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const trunc = (s, n) => (s = (s || '').replace(/\s+/g, ' ').trim()).length > n ? s.slice(0, n - 1) + '…' : s;
 const lc = s => (s || '').toLocaleLowerCase('tr-TR');
 const countWords = s => ((s || '').match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || []).length;
-const fmtNum = n => n.toLocaleString('tr-TR');
+const fmtNum = n => n.toLocaleString(LOC());
 
 function splitText(t) {
   t = (t || '').replace(/\r\n?/g, '\n').trim();
@@ -530,7 +566,13 @@ function splitText(t) {
   if (parts.length === 1 && t.includes('\n')) parts = t.split('\n');
   return parts.map(s => s.trim()).filter(Boolean);
 }
-function defaultPiles() { return [['Giriş', '#3f6aa1'], ['Gelişme', '#b08a2e'], ['Sonuç', '#4f7a4a']].map(([name, color]) => ({ id: 'y' + uid(), name, color })); }
+function defaultPiles() { return [['Giriş', '#3f6aa1'], ['Gelişme', '#b08a2e'], ['Sonuç', '#4f7a4a']].map(([name, color]) => ({ id: 'y' + uid(), name: t(name), color })); }
+/* default pile names follow the interface language; renamed piles keep their own name */
+const PILE_PAIRS = [['Giriş', 'Introduction'], ['Gelişme', 'Body'], ['Sonuç', 'Conclusion']];
+function pn(pl) {
+  const pr = PILE_PAIRS.find(x => x.includes(pl.name));
+  return pr ? pr[lang === 'en' ? 1 : 0] : pl.name;
+}
 function defaultOpts() { return { cite: 'paren', biblio: true, src: true, left: false }; }
 function opts() { const p = P(); if (!p.opts) p.opts = defaultOpts(); return p.opts; }
 
@@ -549,12 +591,12 @@ function invertAuthor(a) {
   return w[w.length - 1] + ', ' + w.slice(0, -1).join(' ');
 }
 function srcLabel(id) {
-  if (id === ME) return 'Kendi notum';
+  if (id === ME) return t('Kendi notum');
   const e = libGet(id); if (!e) return '';
-  return [surname(e.author), e.title].filter(Boolean).join(', ') || 'Adsız kaynak';
+  return [surname(e.author), e.title].filter(Boolean).join(', ') || t('Adsız kaynak');
 }
-function srcShort(id, page) { const l = srcLabel(id); return l ? l + (page && id !== ME ? ', s. ' + page : '') : ''; }
-function srcLong(e) { return [e.author, e.title, e.translator && 'çev. ' + e.translator, e.publisher, e.year].filter(Boolean).join(', '); }
+function srcShort(id, page) { const l = srcLabel(id); return l ? l + (page && id !== ME ? ', ' + t('s.') + ' ' + page : '') : ''; }
+function srcLong(e) { return [e.author, e.title, e.translator && t('çev.') + ' ' + e.translator, e.publisher, e.year].filter(Boolean).join(', '); }
 function joinRuns(segs, sep, end) {
   const out = [];
   segs.filter(s => s && s.t).forEach((s, i) => { if (i) out.push({ t: sep }); out.push(s); });
@@ -563,14 +605,14 @@ function joinRuns(segs, sep, end) {
 }
 function fullRuns(id, page) {
   const e = libGet(id); if (!e) return [{ t: srcShort(id, page) + '.' }];
-  return joinRuns([{ t: e.author }, { t: e.title, i: true }, { t: e.translator && 'çev. ' + e.translator }, { t: e.publisher }, { t: e.year }, { t: page && 's. ' + page }], ', ', '.');
+  return joinRuns([{ t: e.author }, { t: e.title, i: true }, { t: e.translator && t('çev.') + ' ' + e.translator }, { t: e.publisher }, { t: e.year }, { t: page && t('s.') + ' ' + page }], ', ', '.');
 }
 function shortRuns(id, page) {
   const e = libGet(id); if (!e) return [{ t: srcShort(id, page) + '.' }];
-  return joinRuns([{ t: surname(e.author) }, { t: e.title, i: true }, { t: page && 's. ' + page }], ', ', '.');
+  return joinRuns([{ t: surname(e.author) }, { t: e.title, i: true }, { t: page && t('s.') + ' ' + page }], ', ', '.');
 }
 function biblioRuns(e) {
-  return joinRuns([{ t: invertAuthor(e.author) }, { t: e.title, i: true }, { t: e.translator && 'Çev. ' + e.translator }, { t: [e.publisher, e.year].filter(Boolean).join(', ') }], '. ', '.');
+  return joinRuns([{ t: invertAuthor(e.author) }, { t: e.title, i: true }, { t: e.translator && t('Çev.') + ' ' + e.translator }, { t: [e.publisher, e.year].filter(Boolean).join(', ') }], '. ', '.');
 }
 function touchSrc(id) {
   const p = P(); if (!p) return;
@@ -582,7 +624,7 @@ function recentLib() {
   return [...p.lib].sort((a, b) => {
     const ia = r.indexOf(a.id), ib = r.indexOf(b.id);
     if (ia >= 0 || ib >= 0) return (ia < 0 ? 1e9 : ia) - (ib < 0 ? 1e9 : ib);
-    return lc(srcLabel(a.id)).localeCompare(lc(srcLabel(b.id)), 'tr');
+    return lc(srcLabel(a.id)).localeCompare(lc(srcLabel(b.id)), lang);
   });
 }
 function srcUseCount(id) {
@@ -606,7 +648,7 @@ function undo() {
   const q = JSON.parse(hist.pop());
   store.projects[q.id] = q;
   typingPending = false;
-  renderAll(); saveSoon(); toast('Geri alındı');
+  renderAll(); saveSoon(); toast(t('Geri alındı'));
 }
 function redo() {
   const p = P(); if (!p || !fut.length) return;
@@ -614,7 +656,7 @@ function redo() {
   const q = JSON.parse(fut.pop());
   store.projects[q.id] = q;
   typingPending = false;
-  renderAll(); saveSoon(); toast('Yinelendi');
+  renderAll(); saveSoon(); toast(t('Yinelendi'));
 }
 function updateUndo() {
   const on = screen === 'desk' && P() && !readMode;
@@ -672,12 +714,12 @@ function setStatus(k) {
   statusKind = k;
   const s = $('#status');
   const map = {
-    saving: 'Kaydediliyor…', saved: 'Kaydedildi ✓', local: 'Bu tarayıcıda kaydedildi',
-    slow: 'Bağlantı bekleniyor…', error: 'Kaydedilemedi — İndir › Proje dosyası ile yedek al',
-    quota: 'Kayıt alanı doldu — proje dosyasını indir'
+    saving: t('Kaydediliyor…'), saved: t('Kaydedildi ✓'), local: t('Bu tarayıcıda kaydedildi'),
+    slow: t('Bağlantı bekleniyor…'), error: t('Kaydedilemedi — İndir › Proje dosyası ile yedek al'),
+    quota: t('Kayıt alanı doldu — proje dosyasını indir')
   };
   s.textContent = screen === 'desk' && P() ? (map[k] || '') : '';
-  s.title = k === 'local' ? 'Çalışma bu tarayıcıda duruyor. Başka bir yere taşımak ya da yedeklemek için: İndir › Proje dosyası.' : '';
+  s.title = k === 'local' ? t('Çalışma bu tarayıcıda duruyor. Başka bir yere taşımak ya da yedeklemek için: İndir › Proje dosyası.') : '';
   s.classList.toggle('err', k === 'error' || k === 'quota');
 }
 const deletedIds = new Set();
@@ -851,16 +893,16 @@ async function offer(name, data, altText) {
       const a = el('a', { href: url, download: name, style: 'display:none' });
       document.body.append(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
-      toast('İndirildi: ' + name); return;
+      toast(t('İndirildi: {0}', name)); return;
     } catch (e) {}
   }
   const dl = await getDl();
   if (dl) {
-    try { await dl.save({ filename: name, data }); toast('İndirildi: ' + name); return; }
+    try { await dl.save({ filename: name, data }); toast(t('İndirildi: {0}', name)); return; }
     catch (e) {
       const c = e && e.code;
-      if (c === 'declined') { toast('İndirme iptal edildi'); return; }
-      if (c === 'rate_limited') { toast('Bir indirme penceresi zaten açık'); return; }
+      if (c === 'declined') { toast(t('İndirme iptal edildi')); return; }
+      if (c === 'rate_limited') { toast(t('Bir indirme penceresi zaten açık')); return; }
     }
   }
   showFallback(name, typeof data === 'string' ? data : altText);
@@ -869,12 +911,12 @@ function showFallback(name, text) {
   const ta = el('textarea', { class: 'fb-ta', readonly: true });
   ta.value = text || '';
   const m = modal([
-    el('h3', { text: 'Dosya burada indirilemedi' }),
-    el('p', { text: 'Bu görünüm dosya indirmeye izin vermedi (“' + name + '”). Metni kopyalayıp istediğin yere yapıştırabilirsin.' }),
+    el('h3', { text: t('Dosya burada indirilemedi') }),
+    el('p', { text: t('Bu görünüm dosya indirmeye izin vermedi (“{0}”). Metni kopyalayıp istediğin yere yapıştırabilirsin.', name) }),
     ta,
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: async () => { try { await navigator.clipboard.writeText(ta.value); toast('Kopyalandı'); } catch (e) { ta.select(); toast('Seçtim, Ctrl+C ile kopyala'); } } }, 'Kopyala'),
-      el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Tamam'))
+      el('button', { class: 'btn', type: 'button', onclick: async () => { try { await navigator.clipboard.writeText(ta.value); toast(t('Kopyalandı')); } catch (e) { ta.select(); toast(t('Seçtim, Ctrl+C ile kopyala')); } } }, t('Kopyala')),
+      el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, t('Tamam')))
   ]);
 }
 
@@ -964,16 +1006,16 @@ function pickFile(accept, cb) {
   i.click();
 }
 async function loadInto(ta, file, titleIn) {
-  toast('Dosya okunuyor…');
+  toast(t('Dosya okunuyor…'));
   try {
-    const t = await readFileText(file);
-    ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + t;
+    const txt = await readFileText(file);
+    ta.value = (ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n\n' : '') + txt;
     if (titleIn && !titleIn.value) titleIn.value = file.name.replace(/\.[^.]+$/, '');
     ta.dispatchEvent(new Event('input'));
     ta.scrollTop = 0;
-    toast('“' + file.name + '” yüklendi');
+    toast(t('“{0}” yüklendi', file.name));
   } catch (e) {
-    toast(e && e.message === 'notext' ? 'Bu PDF’te seçilebilir metin yok; taranmış bir belge olabilir' : 'Dosya okunamadı');
+    toast(e && e.message === 'notext' ? t('Bu PDF’te seçilebilir metin yok; taranmış bir belge olabilir') : t('Dosya okunamadı'));
   }
 }
 function fileDropTarget(ta, titleIn) {
@@ -999,23 +1041,24 @@ function importProjectFile() {
     try {
       const pr = migrate(JSON.parse(await f.text()));
       if (!pr || !Array.isArray(pr.blocks) || !Array.isArray(pr.cards)) throw new Error('bad');
-      if (!pr.id || store.projects[pr.id]) { const dup = !!(pr.id && store.projects[pr.id]); pr.id = 'p' + uid(); if (dup) pr.title = (pr.title || 'Adsız çalışma') + ' (kopya)'; }
+      if (!pr.id || store.projects[pr.id]) { const dup = !!(pr.id && store.projects[pr.id]); pr.id = 'p' + uid(); if (dup) pr.title = (pr.title || t('Adsız çalışma')) + ' ' + t('(kopya)'); }
       pr.updated = Date.now(); pr.created = pr.created || Date.now();
       store.projects[pr.id] = pr;
       openProject(pr.id); saveSoon();
-      toast('Proje açıldı');
-    } catch (e) { toast('Bu bir Makas proje dosyası değil gibi'); }
+      toast(t('Proje açıldı'));
+    } catch (e) { toast(t('Bu bir Makas proje dosyası değil gibi')); }
   });
 }
 
 /* ---------- projects ---------- */
 function newProject(title, text) {
   const p = {
-    id: 'p' + uid(), v: 2, title: title || 'Adsız çalışma', created: Date.now(), updated: Date.now(),
+    id: 'p' + uid(), v: 2, title: title || t('Adsız çalışma'), created: Date.now(), updated: Date.now(),
     blocks: splitText(text).map(t => ({ id: uid(), type: 'src', text: t })),
     cards: [], lib: [], recent: [], piles: defaultPiles(), versions: [], lastSrcId: '', opts: defaultOpts()
   };
   store.projects[p.id] = p;
+  store.welcomeDone = true;
   openProject(p.id);
   saveSoon();
 }
@@ -1030,10 +1073,10 @@ function showStart() { stopPlacing(); readMode = false; screen = 'start'; render
 function confirmDelete() {
   const p = P(); if (!p) return;
   const m = modal([
-    el('h3', { text: 'Bu çalışmayı sil?' }),
-    el('p', { text: '“' + (p.title || 'Adsız çalışma') + '” kâğıdı, kenardaki parçaları ve saklanan hâlleriyle birlikte silinecek. Bu geri alınamaz. İstersen önce İndir › Proje dosyası ile yedek al.' }),
+    el('h3', { text: t('Bu çalışmayı sil?') }),
+    el('p', { text: t('“{0}” kâğıdı, kenardaki parçaları ve saklanan hâlleriyle birlikte silinecek. Bu geri alınamaz. İstersen önce İndir › Proje dosyası ile yedek al.', p.title || t('Adsız çalışma')) }),
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
       el('button', { class: 'btn accent', type: 'button', onclick: () => {
         m.close();
         const id = p.id;
@@ -1042,48 +1085,48 @@ function confirmDelete() {
         store.current = null;
         const r = recent();
         if (r) openProject(r.id); else { persistLocal(); showStart(); }
-        toast('Çalışma silindi');
-      } }, 'Sil'))
+        toast(t('Çalışma silindi'));
+      } }, t('Sil')))
   ]);
 }
 function projMenu(anchor) {
   const pp = openPop(anchor);
   const list = Object.values(store.projects).sort((a, b) => (b.updated || 0) - (a.updated || 0));
   list.forEach(pr => pp.append(el('button', { class: 'pop-item' + (pr.id === store.current && screen === 'desk' ? ' cur' : ''), type: 'button', onclick: () => { closePop(); openProject(pr.id); } },
-    pr.title || 'Adsız çalışma', el('small', { text: fmtDate(pr.updated) }))));
+    pr.title || t('Adsız çalışma'), el('small', { text: fmtDate(pr.updated) }))));
   if (list.length) pp.append(el('div', { class: 'pop-sep' }));
-  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); showStart(); } }, '+ Yeni çalışma'));
-  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); importProjectFile(); } }, 'Proje dosyası aç (.json)'));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); showStart(); } }, t('+ Yeni çalışma')));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); importProjectFile(); } }, t('Proje dosyası aç (.json)')));
   if (P() && screen === 'desk') {
     const n = (P().versions || []).length;
     pp.append(el('div', { class: 'pop-sep' }));
-    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); saveVersionDialog(); } }, 'Bu hâlini sakla…'));
-    pp.append(el('button', { class: 'pop-item', type: 'button', disabled: n ? null : true, style: n ? null : 'opacity:.45', onclick: () => { closePop(); versionsModal(); } }, 'Saklanan hâller' + (n ? ' (' + n + ')' : '')));
-    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); libraryModal(); } }, 'Kaynaklar (' + P().lib.length + ')'));
+    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); saveVersionDialog(); } }, t('Bu hâlini sakla…')));
+    pp.append(el('button', { class: 'pop-item', type: 'button', disabled: n ? null : true, style: n ? null : 'opacity:.45', onclick: () => { closePop(); versionsModal(); } }, t('Saklanan hâller') + (n ? ' (' + n + ')' : '')));
+    pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); libraryModal(); } }, t('Kaynaklar') + ' (' + P().lib.length + ')'));
     pp.append(el('div', { class: 'pop-sep' }));
-    pp.append(el('button', { class: 'pop-item danger', type: 'button', onclick: () => { closePop(); confirmDelete(); } }, 'Bu çalışmayı sil'));
+    pp.append(el('button', { class: 'pop-item danger', type: 'button', onclick: () => { closePop(); confirmDelete(); } }, t('Bu çalışmayı sil')));
   }
 }
 
 /* ---------- versions ---------- */
 function saveVersionDialog() {
   const p = P();
-  const inp = el('input', { type: 'text', placeholder: 'Örn. ilk taslak, girişi değiştirmeden önce' });
+  const inp = el('input', { type: 'text', placeholder: t('Örn. ilk taslak, girişi değiştirmeden önce') });
   let m;
   const ok = () => {
     m.close();
     snapshot();
     const data = JSON.stringify({ title: p.title, blocks: p.blocks, cards: p.cards, lib: p.lib, piles: p.piles, goal: p.goal || 0 });
-    p.versions = [{ id: uid(), name: inp.value.trim() || 'Adsız hâl', at: Date.now(), words: myWords(p), data }, ...(p.versions || [])].slice(0, 20);
-    saveSoon(); toast('Bu hâli saklandı');
+    p.versions = [{ id: uid(), name: inp.value.trim() || t('Adsız hâl'), at: Date.now(), words: myWords(p), data }, ...(p.versions || [])].slice(0, 20);
+    saveSoon(); toast(t('Bu hâli saklandı'));
   };
   m = modal([
-    el('h3', { text: 'Bu hâlini sakla' }),
-    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Kâğıdın ve kenarın şu anki hâli saklanır. Sonra cesurca kesip biçebilirsin; istediğin zaman bu hâle dönersin. En fazla 20 hâl tutulur.' }),
-    el('div', { class: 'field' }, el('label', { text: 'Ad' }), inp),
+    el('h3', { text: t('Bu hâlini sakla') }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: t('Kâğıdın ve kenarın şu anki hâli saklanır. Sonra cesurca kesip biçebilirsin; istediğin zaman bu hâle dönersin. En fazla 20 hâl tutulur.') }),
+    el('div', { class: 'field' }, el('label', { text: t('Ad') }), inp),
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
-      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Sakla'))
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, t('Sakla')))
   ]);
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
   setTimeout(() => inp.focus(), 30);
@@ -1094,26 +1137,26 @@ function versionsModal() {
   let m;
   const draw = () => {
     list.replaceChildren();
-    if (!(p.versions || []).length) { list.append(el('p', { text: 'Saklanan hâl yok.' })); return; }
+    if (!(p.versions || []).length) { list.append(el('p', { text: t('Saklanan hâl yok.') })); return; }
     p.versions.forEach(v => list.append(el('div', { class: 'vrow' },
-      el('div', { class: 'vn' }, el('b', { text: v.name }), el('small', { text: fmtDate(v.at) + (v.words != null ? ' · ' + fmtNum(v.words) + ' kelime' : '') })),
+      el('div', { class: 'vn' }, el('b', { text: v.name }), el('small', { text: fmtDate(v.at) + (v.words != null ? ' · ' + t('{0} kelime', fmtNum(v.words)) : '') })),
       el('button', { class: 'btn', type: 'button', onclick: () => {
         try {
           const d = JSON.parse(v.data);
           snapshot();
           Object.assign(p, { title: d.title, blocks: d.blocks, cards: d.cards, lib: d.lib || p.lib, piles: d.piles || [], goal: d.goal || 0 });
           m.close(); renderAll(); saveSoon();
-          toast('“' + v.name + '” hâline dönüldü', 'Geri al', undo);
-        } catch (e) { toast('Bu hâl açılamadı'); }
-      } }, 'Bu hâle dön'),
-      el('button', { class: 'btn ghost', type: 'button', onclick: () => { snapshot(); p.versions = p.versions.filter(x => x !== v); saveSoon(); draw(); } }, 'Sil'))));
+          toast(t('“{0}” hâline dönüldü', v.name), t('Geri al'), undo);
+        } catch (e) { toast(t('Bu hâl açılamadı')); }
+      } }, t('Bu hâle dön')),
+      el('button', { class: 'btn ghost', type: 'button', onclick: () => { snapshot(); p.versions = p.versions.filter(x => x !== v); saveSoon(); draw(); } }, t('Sil')))));
   };
   draw();
   m = modal([
-    el('h3', { text: 'Saklanan hâller' }),
-    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Bir hâle döndüğünde şimdiki hâl kaybolmaz: “Geri al” ile hemen geri gelirsin. Emin olmak için önce şimdiki hâli de saklayabilirsin.' }),
+    el('h3', { text: t('Saklanan hâller') }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: t('Bir hâle döndüğünde şimdiki hâl kaybolmaz: “Geri al” ile hemen geri gelirsin. Emin olmak için önce şimdiki hâli de saklayabilirsin.') }),
     list,
-    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Kapat'))
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, t('Kapat')))
   ], 'wide');
 }
 
@@ -1128,10 +1171,10 @@ function sourcePicker(initial, opts2) {
     return el('div', { class: wide ? 'wide' : '' }, el('label', { text: label }), i);
   };
   const form = el('div', { class: 'sp-form', style: 'display:none' },
-    fin('author', 'Yazar', 'Örn. Walter Benjamin'), fin('title', 'Eser', 'Örn. Pasajlar'),
-    fin('translator', 'Çevirmen', 'varsa'), fin('publisher', 'Yayınevi', 'varsa'), fin('year', 'Yıl', 'varsa'));
+    fin('author', t('Yazar'), t('Örn. Walter Benjamin')), fin('title', t('Eser'), t('Örn. Pasajlar')),
+    fin('translator', t('Çevirmen'), t('varsa')), fin('publisher', t('Yayınevi'), t('varsa')), fin('year', t('Yıl'), t('varsa')));
   const lib = recentLib();
-  const search = lib.length > 8 ? el('input', { type: 'search', class: 'sp-search', placeholder: 'Kaynaklarda ara' }) : null;
+  const search = lib.length > 8 ? el('input', { type: 'search', class: 'sp-search', placeholder: t('Kaynaklarda ara') }) : null;
   const chips = el('div', { class: 'chips' });
   const draw = () => {
     chips.replaceChildren();
@@ -1140,8 +1183,8 @@ function sourcePicker(initial, opts2) {
     if (!q) l = l.slice(0, 10);
     if (sel && sel !== ME && !l.some(e => e.id === sel) && libGet(sel)) l.unshift(libGet(sel));
     l.forEach(e => chips.append(el('button', { class: 'chip' + (sel === e.id && !newMode ? ' sel' : ''), type: 'button', title: srcLong(e), onclick: () => { sel = e.id; newMode = false; form.style.display = 'none'; draw(); opts2 && opts2.onPick && opts2.onPick(); } }, srcLabel(e.id))));
-    if (!(opts2 && opts2.noMe)) chips.append(el('button', { class: 'chip me' + (sel === ME && !newMode ? ' sel' : ''), type: 'button', onclick: () => { sel = ME; newMode = false; form.style.display = 'none'; draw(); opts2 && opts2.onPick && opts2.onPick(); } }, '✎ Kendi notum'));
-    chips.append(el('button', { class: 'chip new' + (newMode ? ' sel' : ''), type: 'button', onclick: () => { newMode = true; form.style.display = 'grid'; draw(); fields.author.focus(); opts2 && opts2.onPick && opts2.onPick(); } }, '+ Yeni kaynak'));
+    if (!(opts2 && opts2.noMe)) chips.append(el('button', { class: 'chip me' + (sel === ME && !newMode ? ' sel' : ''), type: 'button', onclick: () => { sel = ME; newMode = false; form.style.display = 'none'; draw(); opts2 && opts2.onPick && opts2.onPick(); } }, t('✎ Kendi notum')));
+    chips.append(el('button', { class: 'chip new' + (newMode ? ' sel' : ''), type: 'button', onclick: () => { newMode = true; form.style.display = 'grid'; draw(); fields.author.focus(); opts2 && opts2.onPick && opts2.onPick(); } }, t('+ Yeni kaynak')));
   };
   if (search) search.addEventListener('input', draw);
   if (!lib.length && !initial) { newMode = true; form.style.display = 'grid'; }
@@ -1167,8 +1210,8 @@ function pileChips(initial) {
   const box = el('div', { class: 'piles' });
   const draw = () => {
     box.replaceChildren();
-    box.append(el('button', { class: 'pile' + (!sel ? ' sel' : ''), type: 'button', onclick: () => { sel = ''; draw(); } }, 'yığın yok'));
-    p.piles.forEach(pl => box.append(el('button', { class: 'pile' + (sel === pl.id ? ' sel' : ''), type: 'button', onclick: () => { sel = pl.id; draw(); } }, el('i', { class: 'dot', style: 'background:' + pl.color }), pl.name)));
+    box.append(el('button', { class: 'pile' + (!sel ? ' sel' : ''), type: 'button', onclick: () => { sel = ''; draw(); } }, t('yığın yok')));
+    p.piles.forEach(pl => box.append(el('button', { class: 'pile' + (sel === pl.id ? ' sel' : ''), type: 'button', onclick: () => { sel = pl.id; draw(); } }, el('i', { class: 'dot', style: 'background:' + pl.color }), pn(pl))));
   };
   draw();
   return { el: box, get: () => sel };
@@ -1177,8 +1220,8 @@ function pileChips(initial) {
 function pieceDialog(o, onOk) {
   const p = P();
   const sp = sourcePicker(o.srcId != null ? o.srcId : (p.lastSrcId || ''), { onPick: () => { err.textContent = ''; } });
-  const pg = el('input', { type: 'text', placeholder: 'örn. 42', autocomplete: 'off' }); pg.value = o.page || '';
-  const note = el('input', { type: 'text', placeholder: 'Örn. girişte kullan', autocomplete: 'off' }); note.value = o.note || '';
+  const pg = el('input', { type: 'text', placeholder: t('örn. 42'), autocomplete: 'off' }); pg.value = o.page || '';
+  const note = el('input', { type: 'text', placeholder: t('Örn. girişte kullan'), autocomplete: 'off' }); note.value = o.note || '';
   const err = el('div', { class: 'err-msg' });
   const textTa = o.editText ? el('textarea', { class: 'big', style: 'min-height:120px' }) : null;
   if (textTa) textTa.value = o.text;
@@ -1187,23 +1230,23 @@ function pieceDialog(o, onOk) {
   let m;
   const ok = () => {
     const r = sp.get();
-    if (!r) { err.textContent = 'Bir kaynak seç, yeni kaynak gir ya da “Kendi notum”u işaretle; yoksa sonra karışır.'; sp.focus(); return; }
-    if (textTa && !textTa.value.trim()) { err.textContent = 'Parça boş kalamaz.'; return; }
+    if (!r) { err.textContent = t('Bir kaynak seç, yeni kaynak gir ya da “Kendi notum”u işaretle; yoksa sonra karışır.'); sp.focus(); return; }
+    if (textTa && !textTa.value.trim()) { err.textContent = t('Parça boş kalamaz.'); return; }
     m.close();
     onOk({ split: !!(splitCb && splitCb.checked), srcId: r.srcId, newEntry: r.newEntry, page: r.srcId === ME ? '' : pg.value.trim(), note: note.value.trim(), pileId: piles ? piles.get() : (o.pileId || ''), text: textTa ? textTa.value.trim() : o.text });
   };
   m = modal([
     el('h3', { text: o.title }),
-    textTa, splitCb ? el('label', { class: 'chk', style: 'margin-top:8px;font-size:12.5px;color:var(--muted)' }, splitCb, 'Her paragrafı ayrı parça yap (hepsi aynı kaynakla)') : null,
+    textTa, splitCb ? el('label', { class: 'chk', style: 'margin-top:8px;font-size:12.5px;color:var(--muted)' }, splitCb, t('Her paragrafı ayrı parça yap (hepsi aynı kaynakla)')) : null,
     textTa ? null : (o.text ? el('div', { class: 'preview', text: o.text.length > 700 ? o.text.slice(0, 700) + '…' : o.text }) : null),
-    el('div', { class: 'field' }, el('label', { text: 'Kaynak' }), sp.el, err),
+    el('div', { class: 'field' }, el('label', { text: t('Kaynak') }), sp.el, err),
     el('div', { class: 'row2' },
-      o.noNote ? null : el('div', { class: 'field' }, el('label', { text: 'Not (isteğe bağlı)' }), note),
-      el('div', { class: 'field pgf' }, el('label', { text: 'Sayfa' }), pg)),
-    piles ? el('div', { class: 'field' }, el('label', { text: 'Yığın' }), piles.el) : null,
+      o.noNote ? null : el('div', { class: 'field' }, el('label', { text: t('Not (isteğe bağlı)') }), note),
+      el('div', { class: 'field pgf' }, el('label', { text: t('Sayfa') }), pg)),
+    piles ? el('div', { class: 'field' }, el('label', { text: t('Yığın') }), piles.el) : null,
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
-      el('button', { class: 'btn accent', type: 'button', onclick: ok }, o.okLabel || 'Tamam'))
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
+      el('button', { class: 'btn accent', type: 'button', onclick: ok }, o.okLabel || t('Tamam')))
   ]);
   m.box.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); ok(); } });
   setTimeout(() => sp.focus(), 30);
@@ -1226,7 +1269,7 @@ function splitCites(cites, before, after) {
 function doCut(blockId, s, e) {
   const [, , b] = findBlock(blockId); if (!b) return;
   const piece = b.text.slice(s, e).trim(); if (!piece) return;
-  pieceDialog({ title: 'Kenara koy', text: piece, srcId: (b.type === 'quote' || b.type === 'atif') ? b.srcId : null, page: (b.type === 'quote' || b.type === 'atif') ? b.page : '', piles: true, okLabel: '✂ Kenara koy' }, r => {
+  pieceDialog({ title: t('Kenara koy'), text: piece, srcId: (b.type === 'quote' || b.type === 'atif') ? b.srcId : null, page: (b.type === 'quote' || b.type === 'atif') ? b.page : '', piles: true, okLabel: t('✂ Kenara koy') }, r => {
     const [p, i, bb] = findBlock(blockId); if (!bb) return;
     snapshot(); applySrc(r);
     const before = bb.text.slice(0, s).replace(/\s+$/, '');
@@ -1239,13 +1282,13 @@ function doCut(blockId, s, e) {
     const card = { id: uid(), text: piece, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId };
     p.cards.push(card);
     renderAll(); flashCard(card.id); saveSoon();
-    toast('Kenara kondu', 'Geri al', undo);
+    toast(t('Kenara kondu'), t('Geri al'), undo);
   });
 }
 function wholeToSide(id, beforeCardId) {
   const [, , b] = findBlock(id); if (!b) return;
   if (!b.text.trim()) { deleteBlock(id); return; }
-  pieceDialog({ title: 'Kenara koy', text: b.text.trim(), srcId: b.srcId || null, page: b.page, piles: true, okLabel: '✂ Kenara koy' }, r => {
+  pieceDialog({ title: t('Kenara koy'), text: b.text.trim(), srcId: b.srcId || null, page: b.page, piles: true, okLabel: t('✂ Kenara koy') }, r => {
     const [p, i] = findBlock(id); if (i < 0) return;
     snapshot(); applySrc(r);
     p.blocks.splice(i, 1);
@@ -1253,7 +1296,7 @@ function wholeToSide(id, beforeCardId) {
     insertCard(p, card, beforeCardId);
     (b.cites || []).forEach(c => p.cards.push({ id: c.id || uid(), text: stripQ(c.text), srcId: c.srcId, page: c.page, note: c.note || '', pileId: c.pileId || '' }));
     renderAll(); flashCard(card.id); saveSoon();
-    toast('Kenara kondu', 'Geri al', undo);
+    toast(t('Kenara kondu'), t('Geri al'), undo);
   });
 }
 function blockToSide(id, beforeCardId) {
@@ -1273,7 +1316,7 @@ function deleteBlock(id) {
   const [p, i] = findBlock(id); if (i < 0) return;
   snapshot(); p.blocks.splice(i, 1);
   renderAll(); saveSoon();
-  toast('Parça silindi', 'Geri al', undo);
+  toast(t('Parça silindi'), t('Geri al'), undo);
 }
 function mergeNext(id) {
   const [p, i, b] = findBlock(id); const n = p.blocks[i + 1];
@@ -1305,7 +1348,7 @@ function setType(id, t) {
 }
 function editBlockSource(id, fresh) {
   const [, , b] = findBlock(id); if (!b) return;
-  pieceDialog({ title: fresh ? (b.type === 'atif' ? 'Bu atıf kime ait?' : 'Bu alıntı kime ait?') : 'Kaynağı düzenle', text: b.text, srcId: b.srcId && b.srcId !== ME ? b.srcId : null, page: b.page, note: b.note, okLabel: 'Kaydet' }, r => {
+  pieceDialog({ title: fresh ? (b.type === 'atif' ? t('Bu atıf kime ait?') : t('Bu alıntı kime ait?')) : t('Kaynağı düzenle'), text: b.text, srcId: b.srcId && b.srcId !== ME ? b.srcId : null, page: b.page, note: b.note, okLabel: t('Kaydet') }, r => {
     const [, , bb] = findBlock(id); if (!bb) return;
     snapshot(); applySrc(r);
     bb.srcId = r.srcId; bb.page = r.page; bb.note = r.note;
@@ -1314,13 +1357,13 @@ function editBlockSource(id, fresh) {
 }
 function typeMenu(anchor, b) {
   const pp = openPop(anchor);
-  const plainLabel = (b.type === 'mine' || b.origin === 'mine') ? 'Senin yazın' : 'Düz metin';
+  const plainLabel = (b.type === 'mine' || b.origin === 'mine') ? t('Senin yazın') : t('Düz metin');
   const cur = b.type === 'quote' ? 'quote' : b.type === 'atif' ? 'atif' : 'plain';
   const item = (key, label, sub) => el('button', { class: 'pop-item' + (cur === key ? ' cur' : ''), type: 'button', onclick: () => { closePop(); setType(b.id, key); } }, (cur === key ? '✓ ' : '') + label, el('small', { text: sub }));
   pp.append(
-    item('plain', plainLabel, 'Kaynak gösterilmez'),
-    item('quote', 'Alıntı', 'Kelimesi kelimesine; girintili, kaynağıyla'),
-    item('atif', 'Atıf', 'Fikir onun, cümle senin; tırnaksız, kaynağıyla'));
+    item('plain', plainLabel, t('Kaynak gösterilmez')),
+    item('quote', t('Alıntı'), t('Kelimesi kelimesine; girintili, kaynağıyla')),
+    item('atif', t('Atıf'), t('Fikir onun, cümle senin; tırnaksız, kaynağıyla')));
 }
 
 /* ---------- placing cards ---------- */
@@ -1342,7 +1385,7 @@ function insertInline(cardId, blockId, pos) {
   const p = P();
   const ci = p.cards.findIndex(c => c.id === cardId); if (ci < 0) return;
   const [, , b] = findBlock(blockId);
-  if (!isTextBlock(b)) { toast('Önce yazında alıntının gireceği yere tıkla'); return; }
+  if (!isTextBlock(b)) { toast(t('Önce yazında alıntının gireceği yere tıkla')); return; }
   snapshot();
   const [c] = p.cards.splice(ci, 1);
   pos = Math.max(0, Math.min(pos == null ? b.text.length : pos, b.text.length));
@@ -1358,7 +1401,7 @@ function insertInline(cardId, blockId, pos) {
   renderAll(); saveSoon();
   const ta = main.querySelector('.block[data-id="' + b.id + '"] textarea');
   if (ta) { ta.focus(); try { ta.setSelectionRange(caret, caret); } catch (e) {} }
-  toast(own ? 'Notun cümleye eklendi' : 'Alıntı cümleye eklendi', 'Geri al', undo);
+  toast(own ? t('Notun cümleye eklendi') : t('Alıntı cümleye eklendi'), t('Geri al'), undo);
 }
 function inlineBack(blockId, citeId) {
   const [p, , b] = findBlock(blockId); if (!b) return;
@@ -1374,7 +1417,7 @@ function inlineBack(blockId, citeId) {
 function editCite(blockId, citeId) {
   const [, , b] = findBlock(blockId); if (!b) return;
   const c = (b.cites || []).find(x => x.id === citeId); if (!c) return;
-  pieceDialog({ title: 'Alıntının kaynağı', text: c.text, srcId: c.srcId, page: c.page, note: c.note, okLabel: 'Kaydet' }, r => {
+  pieceDialog({ title: t('Alıntının kaynağı'), text: c.text, srcId: c.srcId, page: c.page, note: c.note, okLabel: t('Kaydet') }, r => {
     snapshot(); applySrc(r);
     c.srcId = r.srcId; c.page = r.page; c.note = r.note;
     renderAll(); saveSoon();
@@ -1383,7 +1426,7 @@ function editCite(blockId, citeId) {
 function cardToCaret(cardId) {
   const lc2 = lastCaret;
   const [, , b] = lc2 ? findBlock(lc2.id) : [null, -1, null];
-  if (!isTextBlock(b)) { toast('Önce yazında alıntının gireceği yere tıkla, sonra “Cümleye ekle”ye bas'); return; }
+  if (!isTextBlock(b)) { toast(t('Önce yazında alıntının gireceği yere tıkla, sonra “Cümleye ekle”ye bas')); return; }
   insertInline(cardId, b.id, lc2.pos);
 }
 function dropOnGap(d, gi) {
@@ -1408,7 +1451,7 @@ function dropOnSide(d, beforeId) {
 function gatherLeftovers() {
   const p = P();
   const n = p.blocks.filter(b => b.type === 'src').length;
-  if (!n) { toast('Kâğıtta kalan kaynak metin yok'); return; }
+  if (!n) { toast(t('Kâğıtta kalan kaynak metin yok')); return; }
   let choice = ME;
   const rb = (val, label) => {
     const i = el('input', { type: 'radio', name: 'lo' }); i.checked = choice === val;
@@ -1416,12 +1459,12 @@ function gatherLeftovers() {
     return el('label', { class: 'chk' }, i, label);
   };
   const m = modal([
-    el('h3', { text: 'Kalanları kenara topla' }),
-    el('p', { text: 'Kâğıtta yazına katmadığın ' + n + ' kaynak metin parçası var. Hepsi sırasıyla kenara taşınacak; kâğıtta yalnızca senin yazın, alıntıların ve atıfların kalacak.' }),
-    el('div', { class: 'opt-label', text: 'Kenarda nasıl görünsünler?' }),
-    el('div', { class: 'chks' }, rb(ME, 'Kendi notum olarak'), rb('', 'Kaynaksız; kaynaklarını sonra yazarım')),
+    el('h3', { text: t('Kalanları kenara topla') }),
+    el('p', { text: t('Kâğıtta yazına katmadığın {0} kaynak metin parçası var. Hepsi sırasıyla kenara taşınacak; kâğıtta yalnızca senin yazın, alıntıların ve atıfların kalacak.', n) }),
+    el('div', { class: 'opt-label', text: t('Kenarda nasıl görünsünler?') }),
+    el('div', { class: 'chks' }, rb(ME, t('Kendi notum olarak')), rb('', t('Kaynaksız; kaynaklarını sonra yazarım'))),
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
       el('button', { class: 'btn accent', type: 'button', onclick: () => {
         m.close(); snapshot();
         p.blocks.filter(b => b.type === 'src').forEach(b => {
@@ -1430,8 +1473,8 @@ function gatherLeftovers() {
         });
         p.blocks = p.blocks.filter(b => b.type !== 'src' && (b.type !== 'mine' || b.text.trim()));
         renderAll(); saveSoon();
-        toast(n + ' parça kenara toplandı', 'Geri al', undo);
-      } }, 'Kenara topla'))
+        toast(t('{0} parça kenara toplandı', n), t('Geri al'), undo);
+      } }, t('Kenara topla')))
   ]);
 }
 
@@ -1439,7 +1482,7 @@ function gatherLeftovers() {
 function startPlacing(kind, id) {
   placing = { kind, id };
   document.body.classList.add('placing');
-  $('#placeTxt').textContent = kind === 'card' ? 'Parçayı koyacağın yeri seç' : 'Parçayı taşıyacağın yeri seç';
+  $('#placeTxt').textContent = kind === 'card' ? t('Parçayı koyacağın yeri seç') : t('Parçayı taşıyacağın yeri seç');
   hideCut();
 }
 function stopPlacing() { placing = null; document.body.classList.remove('placing'); }
@@ -1546,11 +1589,11 @@ function setPile(cardId, pileId) {
   snapshot(); c.pileId = pileId || '';
   renderSide(); saveSoon();
   const pl = p.piles.find(x => x.id === pileId);
-  toast(pl ? '“' + pl.name + '” yığınına kondu' : 'Yığından çıkarıldı');
+  toast(pl ? t('“{0}” yığınına kondu', pn(pl)) : t('Yığından çıkarıldı'));
 }
 function newPileDialog(then) {
   const p = P();
-  const inp = el('input', { type: 'text', placeholder: 'Örn. giriş, karşı görüş, sona sakla' });
+  const inp = el('input', { type: 'text', placeholder: t('Örn. giriş, karşı görüş, sona sakla') });
   let color = PILE_COLORS[p.piles.length % PILE_COLORS.length];
   const sw = el('div', { class: 'piles' });
   const drawSw = () => { sw.replaceChildren(...PILE_COLORS.map(c => el('button', { class: 'pile' + (c === color ? ' sel' : ''), type: 'button', onclick: () => { color = c; drawSw(); } }, el('i', { class: 'dot', style: 'background:' + c, }), ' '))); };
@@ -1565,12 +1608,12 @@ function newPileDialog(then) {
     renderSide(); saveSoon();
   };
   m = modal([
-    el('h3', { text: 'Yeni yığın' }),
-    el('div', { class: 'field' }, el('label', { text: 'Adı' }), inp),
-    el('div', { class: 'field' }, el('label', { text: 'Rengi' }), sw),
+    el('h3', { text: t('Yeni yığın') }),
+    el('div', { class: 'field' }, el('label', { text: t('Adı') }), inp),
+    el('div', { class: 'field' }, el('label', { text: t('Rengi') }), sw),
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
-      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Oluştur'))
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, t('Oluştur')))
   ]);
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
   setTimeout(() => inp.focus(), 30);
@@ -1578,31 +1621,31 @@ function newPileDialog(then) {
 function pileMenu(anchor, c) {
   const p = P(); const pp = openPop(anchor);
   p.piles.forEach(pl => pp.append(el('button', { class: 'pop-item' + (c.pileId === pl.id ? ' cur' : ''), type: 'button', onclick: () => { closePop(); setPile(c.id, pl.id); } },
-    el('i', { class: 'dot', style: 'display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:' + pl.color }), pl.name)));
-  if (c.pileId) pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); setPile(c.id, ''); } }, 'Yığından çıkar'));
+    el('i', { class: 'dot', style: 'display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;background:' + pl.color }), pn(pl))));
+  if (c.pileId) pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); setPile(c.id, ''); } }, t('Yığından çıkar')));
   if (p.piles.length) pp.append(el('div', { class: 'pop-sep' }));
-  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); newPileDialog(pl => { const cc = P().cards.find(x => x.id === c.id); if (cc) cc.pileId = pl.id; }); } }, '+ Yeni yığın'));
+  pp.append(el('button', { class: 'pop-item', type: 'button', onclick: () => { closePop(); newPileDialog(pl => { const cc = P().cards.find(x => x.id === c.id); if (cc) cc.pileId = pl.id; }); } }, t('+ Yeni yığın')));
 }
 function editPileDialog(pl) {
   const p = P();
-  const inp = el('input', { type: 'text' }); inp.value = pl.name;
+  const inp = el('input', { type: 'text' }); inp.value = pn(pl);
   let m;
   m = modal([
-    el('h3', { text: 'Yığını düzenle' }),
-    el('div', { class: 'field' }, el('label', { text: 'Adı' }), inp),
+    el('h3', { text: t('Yığını düzenle') }),
+    el('div', { class: 'field' }, el('label', { text: t('Adı') }), inp),
     el('div', { class: 'm-actions' },
       el('button', { class: 'btn ghost', type: 'button', style: 'margin-right:auto;color:var(--accent)', onclick: () => {
         m.close(); snapshot();
         p.piles = p.piles.filter(x => x !== pl);
         p.cards.forEach(c => { if (c.pileId === pl.id) c.pileId = ''; });
         sideFilter.pile = ''; renderSide(); saveSoon();
-        toast('Yığın kaldırıldı; parçalar kenarda duruyor', 'Geri al', undo);
-      } }, 'Yığını kaldır'),
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
+        toast(t('Yığın kaldırıldı; parçalar kenarda duruyor'), t('Geri al'), undo);
+      } }, t('Yığını kaldır')),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
       el('button', { class: 'btn primary', type: 'button', onclick: () => {
         if (!inp.value.trim()) return;
         m.close(); snapshot(); pl.name = inp.value.trim(); renderSide(); saveSoon();
-      } }, 'Kaydet'))
+      } }, t('Kaydet')))
   ]);
   setTimeout(() => inp.focus(), 30);
 }
@@ -1614,27 +1657,27 @@ function libraryModal() {
   let m;
   const draw = () => {
     list.replaceChildren();
-    if (!p.lib.length) { list.append(el('p', { style: 'color:var(--muted)', text: 'Henüz kaynak yok. Bir parça kestiğinde kaynağını burada da görürsün.' })); return; }
-    [...p.lib].sort((a, b) => lc(surname(a.author) + a.title).localeCompare(lc(surname(b.author) + b.title), 'tr')).forEach(e => {
+    if (!p.lib.length) { list.append(el('p', { style: 'color:var(--muted)', text: t('Henüz kaynak yok. Bir parça kestiğinde kaynağını burada da görürsün.') })); return; }
+    [...p.lib].sort((a, b) => lc(surname(a.author) + a.title).localeCompare(lc(surname(b.author) + b.title), lang)).forEach(e => {
       const n = srcUseCount(e.id);
       const row = el('div', { class: 'lrow' });
       const view = () => row.replaceChildren(el('div', { class: 'lt' },
         el('span', {}, ...biblioRuns(e).map(r => r.i ? el('em', { text: r.t }) : r.t)),
-        el('small', { text: n + ' parça' }),
-        mini('düzenle', edit),
-        mini('sil', () => {
-          if (n) { toast('Bu kaynak ' + n + ' parçada kullanılıyor; önce onların kaynağını değiştir'); return; }
+        el('small', { text: t('{0} parça', n) }),
+        mini(t('düzenle'), edit),
+        mini(t('sil'), () => {
+          if (n) { toast(t('Bu kaynak {0} parçada kullanılıyor; önce onların kaynağını değiştir', n)); return; }
           snapshot(); p.lib = p.lib.filter(x => x !== e); saveSoon(); draw();
         })));
       const edit = () => {
         const f = {};
         const fin = (k, label, wide) => { const i = el('input', { type: 'text' }); i.value = e[k] || ''; f[k] = i; return el('div', { class: wide ? 'wide' : '' }, el('label', { text: label }), i); };
         row.replaceChildren(el('div', { class: 'sp-form' },
-          fin('author', 'Yazar'), fin('title', 'Eser'), fin('translator', 'Çevirmen'), fin('publisher', 'Yayınevi'), fin('year', 'Yıl'),
+          fin('author', t('Yazar')), fin('title', t('Eser')), fin('translator', t('Çevirmen')), fin('publisher', t('Yayınevi')), fin('year', t('Yıl')),
           el('div', { class: 'wide', style: 'display:flex;gap:6px;justify-content:flex-end' },
-            mini('Vazgeç', view),
-            mini('Kaydet', () => {
-              if (!f.author.value.trim() && !f.title.value.trim()) { toast('Yazar ya da eser adı gerekli'); return; }
+            mini(t('Vazgeç'), view),
+            mini(t('Kaydet'), () => {
+              if (!f.author.value.trim() && !f.title.value.trim()) { toast(t('Yazar ya da eser adı gerekli')); return; }
               snapshot(); Object.keys(f).forEach(k => e[k] = f[k].value.trim());
               saveSoon(); draw(); renderAll();
             }))));
@@ -1646,10 +1689,10 @@ function libraryModal() {
   };
   draw();
   m = modal([
-    el('h3', { text: 'Kaynaklar' }),
-    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Bir kaynağı burada düzelttiğinde, ona bağlı bütün parçalarda ve çıktıda düzelir. Sayfa numaraları parçalarda ayrı ayrı durur.' }),
+    el('h3', { text: t('Kaynaklar') }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: t('Bir kaynağı burada düzelttiğinde, ona bağlı bütün parçalarda ve çıktıda düzelir. Sayfa numaraları parçalarda ayrı ayrı durur.') }),
     list,
-    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Kapat'))
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, t('Kapat')))
   ], 'wide');
 }
 
@@ -1672,16 +1715,16 @@ function allWords(p) {
 }
 function goalDialog() {
   const p = P();
-  const inp = el('input', { type: 'number', min: '0', step: '50', placeholder: 'Örn. 1500' }); if (p.goal) inp.value = p.goal;
+  const inp = el('input', { type: 'number', min: '0', step: '50', placeholder: t('Örn. 1500') }); if (p.goal) inp.value = p.goal;
   let m;
   const ok = () => { m.close(); p.goal = Math.max(0, parseInt(inp.value, 10) || 0); renderPaper(); saveSoon(); };
   m = modal([
-    el('h3', { text: 'Kelime hedefi' }),
-    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Yalnızca senin yazdıkların ve atıfların sayılır; alıntılar ve kâğıtta kalan kaynak metin sayılmaz. Hedefi kaldırmak için boş bırak.' }),
-    el('div', { class: 'field' }, el('label', { text: 'Hedef (kelime)' }), inp),
+    el('h3', { text: t('Kelime hedefi') }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: t('Yalnızca senin yazdıkların ve atıfların sayılır; alıntılar ve kâğıtta kalan kaynak metin sayılmaz. Hedefi kaldırmak için boş bırak.') }),
+    el('div', { class: 'field' }, el('label', { text: t('Hedef (kelime)') }), inp),
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
-      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Tamam'))
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, t('Tamam')))
   ]);
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
   setTimeout(() => inp.focus(), 30);
@@ -1690,13 +1733,13 @@ function metaLine(p) {
   const mine = myWords(p);
   const nSrc = p.blocks.filter(b => b.type === 'src').length;
   const box = el('div', { class: 'doc-meta', id: 'docMeta' });
-  box.append(el('span', { text: 'Senin yazın: ' + fmtNum(mine) + ' kelime' }));
+  box.append(el('span', { text: t('Senin yazın: {0} kelime', fmtNum(mine)) }));
   if (p.goal) {
     const pct = Math.min(100, Math.round(mine / p.goal * 100));
-    box.append(el('button', { class: 'linkbtn goal', type: 'button', title: 'Hedefi değiştir', onclick: goalDialog }, 'hedef ' + fmtNum(p.goal), el('i', {}, el('b', { style: 'width:' + pct + '%' })), '%' + pct));
-  } else box.append(el('button', { class: 'linkbtn', type: 'button', onclick: goalDialog }, 'hedef koy'));
-  box.append(el('span', { text: p.cards.length + ' parça kenarda' }));
-  if (nSrc) box.append(el('button', { class: 'linkbtn', type: 'button', title: 'Yazına katmadığın kaynak metin parçalarını kenara taşı', onclick: gatherLeftovers }, 'kalan ' + nSrc + ' kaynak parçayı kenara topla'));
+    box.append(el('button', { class: 'linkbtn goal', type: 'button', title: t('Hedefi değiştir'), onclick: goalDialog }, t('hedef {0}', fmtNum(p.goal)), el('i', {}, el('b', { style: 'width:' + pct + '%' })), lang === 'en' ? pct + '%' : '%' + pct));
+  } else box.append(el('button', { class: 'linkbtn', type: 'button', onclick: goalDialog }, t('hedef koy')));
+  box.append(el('span', { text: t('{0} parça kenarda', p.cards.length) }));
+  if (nSrc) box.append(el('button', { class: 'linkbtn', type: 'button', title: t('Yazına katmadığın kaynak metin parçalarını kenara taşı'), onclick: gatherLeftovers }, t('kalan {0} kaynak parçayı kenara topla', nSrc)));
   return box;
 }
 function refreshMeta() { const p = P(); const old = $('#docMeta'); if (p && old) old.replaceWith(metaLine(p)); }
@@ -1704,11 +1747,11 @@ function refreshMeta() { const p = P(); const old = $('#docMeta'); if (p && old)
 function gapEl(i, isEnd, isEmpty) {
   return el('div', { class: 'gap' + (isEnd ? ' end' : '') + (isEmpty ? ' empty' : ''), 'data-i': i },
     el('div', { class: 'gap-line' }),
-    el('div', { class: 'empty-msg', text: 'Kâğıtta parça kalmadı. Yazmaya başla ya da kenardan bir parça getir.' }),
+    el('div', { class: 'empty-msg', text: t('Kâğıtta parça kalmadı. Yazmaya başla ya da kenardan bir parça getir.') }),
     el('div', { class: 'gap-acts' },
-      el('button', { type: 'button', onclick: () => insertWrite(i) }, '+ yaz'),
-      el('button', { type: 'button', onclick: e => cardPicker(e.currentTarget, id => placeCard(id, i)) }, '+ kenardan parça')),
-    el('button', { class: 'place-btn', type: 'button', onclick: () => placeAt(i) }, 'buraya'));
+      el('button', { type: 'button', onclick: () => insertWrite(i) }, t('+ yaz')),
+      el('button', { type: 'button', onclick: e => cardPicker(e.currentTarget, id => placeCard(id, i)) }, t('+ kenardan parça'))),
+    el('button', { class: 'place-btn', type: 'button', onclick: () => placeAt(i) }, t('buraya')));
 }
 function insertWrite(gi) {
   const p = P();
@@ -1721,24 +1764,24 @@ function insertWrite(gi) {
 }
 function blockEl(b, i, p) {
   const blk = el('div', { class: 'block b-' + b.type, 'data-id': b.id });
-  const handle = el('div', { class: 'handle', draggable: 'true', title: 'Tut ve sürükle: başka araya taşı ya da kenara at', html: GRIP });
+  const handle = el('div', { class: 'handle', draggable: 'true', title: t('Tut ve sürükle: başka araya taşı ya da kenara at'), html: GRIP });
   handle.addEventListener('dragstart', e => startDrag(e, { kind: 'block', id: b.id }, blk, ''));
   handle.addEventListener('dragend', endDrag);
-  const ta = el('textarea', { rows: '1', spellcheck: (b.type === 'mine' || b.type === 'atif') ? 'true' : 'false', placeholder: b.type === 'mine' ? 'Buraya yaz…' : null });
+  const ta = el('textarea', { rows: '1', spellcheck: (b.type === 'mine' || b.type === 'atif') ? 'true' : 'false', placeholder: b.type === 'mine' ? t('Buraya yaz…') : null });
   ta.value = b.text;
   const acts = el('div', { class: 'b-actions' });
-  const typeBtn = mini('tür ▾', e => typeMenu(e.currentTarget, b), 'Düz metin, alıntı ya da atıf');
+  const typeBtn = mini(t('tür ▾'), e => typeMenu(e.currentTarget, b), t('Düz metin, alıntı ya da atıf'));
   if (b.type === 'quote' || b.type === 'atif') {
-    acts.append(mini('↩ kenara geri', () => (b.srcId ? blockToSide(b.id) : wholeToSide(b.id))), typeBtn);
-    if (b.type === 'atif') acts.append(mini('＋ alıntı', e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), 'İmlecin olduğu yere kenardan bir alıntı ekle'));
-    acts.append(mini('taşı', () => startPlacing('block', b.id)), mini('sil', () => deleteBlock(b.id)));
+    acts.append(mini(t('↩ kenara geri'), () => (b.srcId ? blockToSide(b.id) : wholeToSide(b.id))), typeBtn);
+    if (b.type === 'atif') acts.append(mini(t('＋ alıntı'), e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), t('İmlecin olduğu yere kenardan bir alıntı ekle')));
+    acts.append(mini(t('taşı'), () => startPlacing('block', b.id)), mini(t('sil'), () => deleteBlock(b.id)));
   } else {
-    acts.append(mini('✂ hepsini kenara', () => wholeToSide(b.id)), typeBtn,
-      mini('＋ alıntı', e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), 'İmlecin olduğu yere kenardan bir alıntı ekle'),
-      mini('taşı', () => startPlacing('block', b.id)));
+    acts.append(mini(t('✂ hepsini kenara'), () => wholeToSide(b.id)), typeBtn,
+      mini(t('＋ alıntı'), e => cardPicker(e.currentTarget, id => insertInline(id, b.id, ta.selectionStart)), t('İmlecin olduğu yere kenardan bir alıntı ekle')),
+      mini(t('taşı'), () => startPlacing('block', b.id)));
     const nx = p.blocks[i + 1];
-    if (nx && nx.type === b.type && b.type !== 'quote') acts.append(mini('birleştir', () => mergeNext(b.id), 'Alttaki parçayla tek paragraf yap'));
-    acts.append(mini('sil', () => deleteBlock(b.id)));
+    if (nx && nx.type === b.type && b.type !== 'quote') acts.append(mini(t('birleştir'), () => mergeNext(b.id), t('Alttaki parçayla tek paragraf yap')));
+    acts.append(mini(t('sil'), () => deleteBlock(b.id)));
   }
   const saveCaret = () => { lastCaret = { id: b.id, pos: ta.selectionStart }; };
   ta.addEventListener('focus', () => { typingPending = true; });
@@ -1759,24 +1802,24 @@ function blockEl(b, i, p) {
       if (ta.selectionEnd > ta.selectionStart) { hideCut(); doCut(b.id, ta.selectionStart, ta.selectionEnd); }
     }
   });
-  blk.append(handle, el('div', { class: 'b-label', text: labels[b.type] }), acts, ta);
+  blk.append(handle, el('div', { class: 'b-label', text: t(labels[b.type]) }), acts, ta);
   if (b.type === 'quote' || b.type === 'atif') {
     const lbl = srcLabel(b.srcId);
-    const pg = el('input', { type: 'text', class: 'pg', placeholder: 'sayfa', autocomplete: 'off' });
+    const pg = el('input', { type: 'text', class: 'pg', placeholder: t('sayfa'), autocomplete: 'off' });
     pg.value = b.page || '';
     pg.addEventListener('focus', () => { typingPending = true; });
     pg.addEventListener('input', () => { if (typingPending) { snapshot(); typingPending = false; } b.page = pg.value.trim(); saveSoon(); });
     blk.append(el('div', { class: 'q-meta' }, el('span', { text: '—' }),
-      el('button', { class: 'srcbtn' + (lbl && b.srcId !== ME ? '' : ' none'), type: 'button', title: 'Kaynağı değiştir', onclick: () => editBlockSource(b.id) }, lbl && b.srcId !== ME ? lbl : 'kaynak seç'),
-      el('span', { text: 's.' }), pg));
-    if (b.note) blk.append(el('div', { class: 'q-note', text: 'Not: ' + b.note }));
+      el('button', { class: 'srcbtn' + (lbl && b.srcId !== ME ? '' : ' none'), type: 'button', title: t('Kaynağı değiştir'), onclick: () => editBlockSource(b.id) }, lbl && b.srcId !== ME ? lbl : t('kaynak seç')),
+      el('span', { text: t('s.') }), pg));
+    if (b.note) blk.append(el('div', { class: 'q-note', text: t('Not: ') + b.note }));
   }
   if ((b.cites || []).length) {
     blk.append(el('div', { class: 'cites' }, b.cites.map(c => {
       const lost = !b.text.includes(c.text);
-      return el('span', { class: 'cite-chip' + (lost ? ' lost' : ''), title: lost ? 'Bu alıntının metni değişmiş; çıktıda kaynak paragrafın sonuna eklenir' : 'Cümle içindeki alıntı' },
-        el('button', { type: 'button', title: 'Kaynağı düzenle', onmousedown: e => e.preventDefault(), onclick: () => editCite(b.id, c.id) }, '“' + trunc(stripQ(c.text), 26) + '” — ' + (srcShort(c.srcId, c.page) || 'kaynak yok')),
-        el('button', { class: 'cc-x', type: 'button', title: 'Metinden çıkar, kenara geri koy', onmousedown: e => e.preventDefault(), onclick: () => inlineBack(b.id, c.id) }, '↩'));
+      return el('span', { class: 'cite-chip' + (lost ? ' lost' : ''), title: lost ? t('Bu alıntının metni değişmiş; çıktıda kaynak paragrafın sonuna eklenir') : t('Cümle içindeki alıntı') },
+        el('button', { type: 'button', title: t('Kaynağı düzenle'), onmousedown: e => e.preventDefault(), onclick: () => editCite(b.id, c.id) }, '“' + trunc(stripQ(c.text), 26) + '” — ' + (srcShort(c.srcId, c.page) || t('kaynak yok'))),
+        el('button', { class: 'cc-x', type: 'button', title: t('Metinden çıkar, kenara geri koy'), onmousedown: e => e.preventDefault(), onclick: () => inlineBack(b.id, c.id) }, '↩'));
     })));
   }
   return blk;
@@ -1795,26 +1838,23 @@ function renderPaper(keepId) {
   p.blocks = p.blocks.filter(b => b.type !== 'mine' || b.text.trim() || keepIds.has(b.id));
 
   const paper = el('div', { class: 'paper', id: 'paper' });
-  const title = el('input', { class: 'doc-title', placeholder: 'Çalışmanın adı', spellcheck: 'false' });
+  const title = el('input', { class: 'doc-title', placeholder: t('Çalışmanın adı'), spellcheck: 'false' });
   title.value = p.title || '';
   title.addEventListener('focus', () => { typingPending = true; });
   title.addEventListener('input', () => {
     if (typingPending) { snapshot(); typingPending = false; }
-    p.title = title.value; $('#projName').textContent = p.title || 'Adsız çalışma'; saveSoon();
+    p.title = title.value; $('#projName').textContent = p.title || t('Adsız çalışma'); saveSoon();
   });
   paper.append(title, metaLine(p),
     el('div', { class: 'legend' },
-      el('span', {}, el('i', { class: 'sw src' }), 'kaynak metin'),
-      el('span', {}, el('i', { class: 'sw mine' }), 'senin yazın'),
-      el('span', {}, el('i', { class: 'sw quote' }), 'alıntı'),
-      el('span', {}, el('i', { class: 'sw atif' }), 'atıf')));
+      el('span', {}, el('i', { class: 'sw src' }), t('kaynak metin')),
+      el('span', {}, el('i', { class: 'sw mine' }), t('senin yazın')),
+      el('span', {}, el('i', { class: 'sw quote' }), t('alıntı')),
+      el('span', {}, el('i', { class: 'sw atif' }), t('atıf'))));
   if (!store.hintClosed) {
     paper.append(el('div', { class: 'hint' },
-      el('b', { text: 'Kesmek: ' }), 'metinde bir yeri seç, ', el('b', { text: '✂ Kes' }), ' düğmesine bas (ya da Ctrl+K). Parça kaynağıyla birlikte kenara gider. ',
-      el('b', { text: 'Yazmak: ' }), 'iki parçanın arasına gelince ', el('b', { text: '+ yaz' }), ' çıkar. ',
-      el('b', { text: 'Alıntı: ' }), 'kenardaki parçayı bir araya sürükle ya da ', el('b', { text: 'Metne koy' }), ' de. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki ', el('b', { text: 'Cümleye ekle' }), '’ye bas. ',
-      el('b', { text: 'Atıf: ' }), 'bir parçanın ', el('b', { text: 'tür' }), ' menüsünden seçilir.',
-      el('button', { class: 'x', type: 'button', title: 'Kapat', onclick: e => { store.hintClosed = true; persistLocal(); e.currentTarget.parentNode.remove(); } }, '×')));
+      ...rich(t('**Kesmek:** metinde bir yeri seç, **✂ Kes** düğmesine bas (ya da Ctrl+K). Parça kaynağıyla birlikte kenara gider. **Yazmak:** iki parçanın arasına gelince **+ yaz** çıkar. **Alıntı:** kenardaki parçayı bir araya sürükle ya da **Metne koy** de. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki **Cümleye ekle**’ye bas. **Atıf:** bir parçanın **tür** menüsünden seçilir.')),
+      el('button', { class: 'x', type: 'button', title: t('Kapat'), onclick: e => { store.hintClosed = true; persistLocal(); e.currentTarget.parentNode.remove(); } }, '×')));
   }
   if (!p.blocks.length) paper.append(gapEl(0, true, true));
   else {
@@ -1862,20 +1902,20 @@ function renderReading() {
   });
   if (!fnDone) { const f = fnList(); if (f) art.append(f); }
   const chk = (key, label) => { const i = el('input', { type: 'checkbox' }); i.checked = !!o[key]; i.addEventListener('change', () => { o[key] = i.checked; saveSoon(); renderReading(); }); return el('label', { class: 'chk' }, i, label); };
-  const sel = el('select', {}, el('option', { value: 'paren' }, 'parantez içinde'), el('option', { value: 'foot' }, 'dipnot'), el('option', { value: 'none' }, 'gösterme'));
+  const sel = el('select', {}, el('option', { value: 'paren' }, t('parantez içinde')), el('option', { value: 'foot' }, t('dipnot')), el('option', { value: 'none' }, t('gösterme')));
   sel.value = o.cite; sel.addEventListener('change', () => { o.cite = sel.value; saveSoon(); renderReading(); });
   const paper = el('div', { class: 'paper' },
     el('div', { class: 'readbar' },
-      el('span', {}, 'Kaynaklar: ', sel),
-      chk('biblio', 'kaynakça'),
-      chk('src', 'kalan kaynak metni göster'),
-      el('span', { text: fmtNum(myWords(p)) + ' kelime senin' }),
-      el('button', { class: 'btn', type: 'button', onclick: () => { readMode = false; renderAll(); } }, 'Düzenlemeye dön')),
+      el('span', {}, t('Kaynaklar: '), sel),
+      chk('biblio', t('kaynakça')),
+      chk('src', t('kalan kaynak metni göster')),
+      el('span', { text: t('{0} kelime senin', fmtNum(myWords(p))) }),
+      el('button', { class: 'btn', type: 'button', onclick: () => { readMode = false; renderAll(); } }, t('Düzenlemeye dön'))),
     art);
   main.replaceChildren(paper, sig());
 }
 function sig() {
-  return el('div', { class: 'sig' }, 'Makas · ', el('a', { href: 'https://gamzeguckiran.com/apps.html', target: inArtifact ? '_blank' : null, rel: inArtifact ? 'noopener' : null }, 'Bir Lryiu Labs projesi'));
+  return el('div', { class: 'sig' }, 'Makas · v' + VERSION + ' · ', el('a', { href: 'https://gamzeguckiran.com/apps.html', target: inArtifact ? '_blank' : null, rel: inArtifact ? 'noopener' : null }, t('Bir Lryiu Labs projesi')));
 }
 
 /* ---------- render: side ---------- */
@@ -1889,16 +1929,16 @@ function renderSide() {
   const p = P(); if (!p) { side.replaceChildren(); return; }
   const head = el('div', { class: 'side-head' },
     el('div', { class: 'side-title' },
-      el('span', {}, 'Kenar ', el('small', { text: p.cards.length ? p.cards.length + ' parça' : 'boş' })),
-      el('button', { class: 'linkbtn', type: 'button', onclick: libraryModal }, 'Kaynaklar (' + p.lib.length + ')')),
-    el('button', { class: 'btn addcard', type: 'button', onclick: newCardDialog }, '+ Kenara not ya da alıntı ekle'));
+      el('span', {}, t('Kenar') + ' ', el('small', { text: p.cards.length ? t('{0} parça', p.cards.length) : t('boş') })),
+      el('button', { class: 'linkbtn', type: 'button', onclick: libraryModal }, t('Kaynaklar') + ' (' + p.lib.length + ')')),
+    el('button', { class: 'btn addcard', type: 'button', onclick: newCardDialog }, t('+ Kenara not ya da alıntı ekle')));
   if (p.cards.length > 3) {
     const srcs = [...new Set(p.cards.map(c => c.srcId || ''))];
     if (!srcs.includes(sideFilter.src)) sideFilter.src = '';
-    const q = el('input', { type: 'search', placeholder: 'Parçalarda ara' });
+    const q = el('input', { type: 'search', placeholder: t('Parçalarda ara') });
     q.value = sideFilter.q;
     q.addEventListener('input', () => { sideFilter.q = q.value; renderCards(); });
-    const sel = el('select', {}, el('option', { value: '' }, 'Tüm kaynaklar'), srcs.map(s => el('option', { value: s }, s === ME ? '✎ Kendi notlarım' : (srcLabel(s) || '(kaynaksız)'))));
+    const sel = el('select', {}, el('option', { value: '' }, t('Tüm kaynaklar')), srcs.map(s => el('option', { value: s }, s === ME ? t('✎ Kendi notlarım') : (srcLabel(s) || t('(kaynaksız)')))));
     sel.value = sideFilter.src;
     sel.addEventListener('change', () => { sideFilter.src = sel.value; renderCards(); });
     head.append(el('div', { class: 'side-tools' }, q, sel));
@@ -1906,15 +1946,15 @@ function renderSide() {
   {
     if (sideFilter.pile && !p.piles.some(x => x.id === sideFilter.pile)) sideFilter.pile = '';
     const piles = el('div', { class: 'piles' });
-    piles.append(el('button', { class: 'pile' + (!sideFilter.pile ? ' sel' : ''), type: 'button', onclick: () => { sideFilter.pile = ''; renderSide(); } }, 'Tümü'));
+    piles.append(el('button', { class: 'pile' + (!sideFilter.pile ? ' sel' : ''), type: 'button', onclick: () => { sideFilter.pile = ''; renderSide(); } }, t('Tümü')));
     p.piles.forEach(pl => {
       const n = p.cards.filter(c => c.pileId === pl.id).length;
-      piles.append(el('button', { class: 'pile' + (sideFilter.pile === pl.id ? ' sel' : ''), 'data-pile': pl.id, type: 'button', title: sideFilter.pile === pl.id ? 'Yığını düzenlemek için tekrar tıkla' : 'Bu yığını göster; parçayı buraya sürükleyerek de yığına koyabilirsin',
+      piles.append(el('button', { class: 'pile' + (sideFilter.pile === pl.id ? ' sel' : ''), 'data-pile': pl.id, type: 'button', title: sideFilter.pile === pl.id ? t('Yığını düzenlemek için tekrar tıkla') : t('Bu yığını göster; parçayı buraya sürükleyerek de yığına koyabilirsin'),
         onclick: () => { if (sideFilter.pile === pl.id) editPileDialog(pl); else { sideFilter.pile = pl.id; renderSide(); } } },
-        el('i', { class: 'dot', style: 'background:' + pl.color }), pl.name + ' ' + n));
+        el('i', { class: 'dot', style: 'background:' + pl.color }), pn(pl) + ' ' + n));
     });
-    if (!p.piles.length) piles.append(el('button', { class: 'pile add', type: 'button', title: 'Giriş, Gelişme ve Sonuç yığınlarını ekle', onclick: () => { snapshot(); p.piles = defaultPiles(); renderSide(); saveSoon(); } }, '+ Giriş · Gelişme · Sonuç'));
-    piles.append(el('button', { class: 'pile add', type: 'button', onclick: () => newPileDialog() }, '+ yığın'));
+    if (!p.piles.length) piles.append(el('button', { class: 'pile add', type: 'button', title: t('Giriş, Gelişme ve Sonuç yığınlarını ekle'), onclick: () => { snapshot(); p.piles = defaultPiles(); renderSide(); saveSoon(); } }, t('+ Giriş · Gelişme · Sonuç')));
+    piles.append(el('button', { class: 'pile add', type: 'button', onclick: () => newPileDialog() }, t('+ yığın')));
     head.append(piles);
   }
   side.replaceChildren(head, el('div', { class: 'cards', id: 'cards' }));
@@ -1926,12 +1966,12 @@ function renderCards() {
   list.replaceChildren();
   if (!p.cards.length) {
     list.append(el('div', { class: 'side-empty' },
-      'Metinden bir yer seçip ', el('b', { text: '✂ Kes' }), ' dediğinde parça buraya, kaynağıyla birlikte gelir.',
-      el('br'), el('br'), 'Kâğıttaki bir parçayı soldaki tutamağından tutup buraya sürükleyerek de kenara atabilirsin.'));
+      ...rich(t('Metinden bir yer seçip **✂ Kes** dediğinde parça buraya, kaynağıyla birlikte gelir.')),
+      el('br'), el('br'), t('Kâğıttaki bir parçayı soldaki tutamağından tutup buraya sürükleyerek de kenara atabilirsin.')));
     return;
   }
   const vis = p.cards.filter(matchCard);
-  if (!vis.length) list.append(el('div', { class: 'side-empty', text: 'Burada eşleşen parça yok.' }));
+  if (!vis.length) list.append(el('div', { class: 'side-empty', text: t('Burada eşleşen parça yok.') }));
   vis.forEach(c => list.append(cardEl(c)));
 }
 function cardEl(c) {
@@ -1942,23 +1982,23 @@ function cardEl(c) {
   card.addEventListener('dragend', endDrag);
   const isMe = c.srcId === ME, lbl = srcLabel(c.srcId);
   card.append(el('div', { class: 'c-top' },
-    el('div', { class: 'c-src' + (isMe ? ' me' : (lbl ? '' : ' none')) }, isMe ? '✎ Kendi notum' : (lbl || 'kaynak yazılmamış'), c.page && !isMe ? el('span', { class: 'c-page', text: ' · s. ' + c.page }) : null),
-    pl ? el('span', { class: 'c-pile', text: pl.name }) : null));
-  const t = el('div', { class: 'c-text', text: c.text, title: 'Tamamını görmek için tıkla' });
-  t.addEventListener('click', () => card.classList.toggle('open'));
-  card.append(t);
+    el('div', { class: 'c-src' + (isMe ? ' me' : (lbl ? '' : ' none')) }, isMe ? t('✎ Kendi notum') : (lbl || t('kaynak yazılmamış')), c.page && !isMe ? el('span', { class: 'c-page', text: ' · ' + t('s.') + ' ' + c.page }) : null),
+    pl ? el('span', { class: 'c-pile', text: pn(pl) }) : null));
+  const ct = el('div', { class: 'c-text', text: c.text, title: t('Tamamını görmek için tıkla') });
+  ct.addEventListener('click', () => card.classList.toggle('open'));
+  card.append(ct);
   if (c.note) card.append(el('div', { class: 'c-note', text: c.note }));
   card.append(el('div', { class: 'c-actions' },
-    mini('Metne koy', () => startPlacing('card', c.id), 'Ayrı paragraf olarak bir araya koy'),
-    mini('Cümleye ekle', () => cardToCaret(c.id), 'Yazında en son tıkladığın yere, cümlenin içine ekle'),
-    mini('Yığın', e => pileMenu(e.currentTarget, c)),
-    mini('Düzenle', () => editCard(c.id)),
-    mini('Sil', () => deleteCard(c.id))));
+    mini(t('Metne koy'), () => startPlacing('card', c.id), t('Ayrı paragraf olarak bir araya koy')),
+    mini(t('Cümleye ekle'), () => cardToCaret(c.id), t('Yazında en son tıkladığın yere, cümlenin içine ekle')),
+    mini(t('Yığın'), e => pileMenu(e.currentTarget, c)),
+    mini(t('Düzenle'), () => editCard(c.id)),
+    mini(t('Sil'), () => deleteCard(c.id))));
   return card;
 }
 function newCardDialog() {
   const p = P();
-  pieceDialog({ title: 'Kenara ekle', text: '', editText: true, split: true, srcId: p.lastSrcId || null, pileId: sideFilter.pile || '', piles: true, okLabel: 'Kenara koy' }, r => {
+  pieceDialog({ title: t('Kenara ekle'), text: '', editText: true, split: true, srcId: p.lastSrcId || null, pileId: sideFilter.pile || '', piles: true, okLabel: t('Kenara koy') }, r => {
     snapshot(); applySrc(r);
     const texts = r.split ? splitText(r.text) : [r.text];
     const made = texts.map(t => ({ id: uid(), text: t, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId }));
@@ -1967,12 +2007,12 @@ function newCardDialog() {
     if (sideFilter.pile && sideFilter.pile !== r.pileId) sideFilter.pile = '';
     sideFilter.q = '';
     renderAll(); made.forEach(c => flashCard(c.id)); saveSoon();
-    toast(made.length > 1 ? made.length + ' parça kenara kondu' : 'Kenara kondu', 'Geri al', undo);
+    toast(made.length > 1 ? t('{0} parça kenara kondu', made.length) : t('Kenara kondu'), t('Geri al'), undo);
   });
 }
 function editCard(id) {
   const c = P().cards.find(x => x.id === id); if (!c) return;
-  pieceDialog({ title: 'Parçayı düzenle', text: c.text, editText: true, srcId: c.srcId || '', page: c.page, note: c.note, pileId: c.pileId, piles: true, okLabel: 'Kaydet' }, r => {
+  pieceDialog({ title: t('Parçayı düzenle'), text: c.text, editText: true, srcId: c.srcId || '', page: c.page, note: c.note, pileId: c.pileId, piles: true, okLabel: t('Kaydet') }, r => {
     snapshot(); applySrc(r);
     Object.assign(c, { text: r.text, srcId: r.srcId, page: r.page, note: r.note, pileId: r.pileId });
     renderAll(); saveSoon();
@@ -1982,7 +2022,7 @@ function deleteCard(id) {
   const p = P(); const i = p.cards.findIndex(c => c.id === id); if (i < 0) return;
   snapshot(); p.cards.splice(i, 1);
   renderAll(); saveSoon();
-  toast('Parça silindi', 'Geri al', undo);
+  toast(t('Parça silindi'), t('Geri al'), undo);
 }
 function flashCard(id) {
   requestAnimationFrame(() => {
@@ -1992,9 +2032,9 @@ function flashCard(id) {
 }
 function cardPicker(anchor, onPick) {
   const p = P();
-  if (!p.cards.length) { toast('Kenarda parça yok; önce metinden bir yer kes'); return; }
+  if (!p.cards.length) { toast(t('Kenarda parça yok; önce metinden bir yer kes')); return; }
   const pp = openPop(anchor);
-  const q = el('input', { type: 'search', placeholder: 'Parça ara' });
+  const q = el('input', { type: 'search', placeholder: t('Parça ara') });
   const box = el('div');
   const draw = () => {
     box.replaceChildren();
@@ -2002,10 +2042,10 @@ function cardPicker(anchor, onPick) {
     p.cards.filter(c => !ql || lc(c.text + ' ' + srcShort(c.srcId, c.page)).includes(ql)).forEach(c => {
       const me = c.srcId === ME;
       box.append(el('button', { class: 'pop-item', type: 'button', onmousedown: e => e.preventDefault(), onclick: () => { closePop(); onPick(c.id); } },
-        el('span', { class: 'pi-src' + (me ? ' me' : ''), text: me ? '✎ Kendi notum' : (srcShort(c.srcId, c.page) || 'kaynak yok') }),
+        el('span', { class: 'pi-src' + (me ? ' me' : ''), text: me ? t('✎ Kendi notum') : (srcShort(c.srcId, c.page) || t('kaynak yok')) }),
         el('span', { class: 'pi-txt', text: trunc(c.text, 120) })));
     });
-    if (!box.childNodes.length) box.append(el('div', { class: 'pop-item', text: 'Eşleşen parça yok' }));
+    if (!box.childNodes.length) box.append(el('div', { class: 'pop-item', text: t('Eşleşen parça yok') }));
   };
   q.addEventListener('input', draw);
   pp.append(q, box); draw();
@@ -2013,34 +2053,61 @@ function cardPicker(anchor, onPick) {
 
 /* ---------- render: start ---------- */
 function renderStart() {
-  const tIn = el('input', { class: 'field-in', placeholder: 'Örn. Kayıp Zaman Üzerine' });
-  const txt = el('textarea', { class: 'start-ta', placeholder: 'Alıntılarını, notlarını, yarım cümlelerini buraya yapıştır…\n\nYa da bir dosyayı (.txt, .md, .docx, .pdf) buraya sürükleyip bırak.' });
+  const tIn = el('input', { class: 'field-in', placeholder: t('Örn. Kayıp Zaman Üzerine') });
+  const txt = el('textarea', { class: 'start-ta', placeholder: t('Alıntılarını, notlarını, yarım cümlelerini buraya yapıştır…\n\nYa da bir dosyayı (.txt, .md, .docx, .pdf) buraya sürükleyip bırak.') });
   fileDropTarget(txt, tIn);
   const go = () => {
-    if (!txt.value.trim()) { toast('Önce bir metin yapıştır ya da dosya yükle'); txt.focus(); return; }
+    if (!txt.value.trim()) { toast(t('Önce bir metin yapıştır ya da dosya yükle')); txt.focus(); return; }
     newProject(tIn.value.trim(), txt.value);
   };
+  // first visit only: short welcome with the intro video
+  let welcome = null;
+  if (!store.welcomeDone && !Object.keys(store.projects).length) {
+    const closeW = () => { store.welcomeDone = true; persistLocal(); renderStart(); };
+    const vid = el('video', { src: 'videos/makas.mp4', autoplay: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': t('Makas tanıtım videosu') });
+    vid.muted = true;
+    // local copy first (site), then the hosted video (e.g. when opened from a GitHub download), else text only
+    const VIDS = ['videos/makas.mp4', 'https://gamzeguckiran.com/videos/makas.mp4'];
+    let vi = 0;
+    vid.addEventListener('error', () => {
+      if (++vi < VIDS.length) { vid.src = VIDS[vi]; vid.load(); }
+      else { vid.remove(); welcome.classList.add('novid'); }
+    });
+    welcome = el('section', { class: 'welcome' },
+      vid,
+      el('div', {},
+        el('div', { class: 'w-k', text: t('Hoş geldin') }),
+        el('h2', { class: 'w-h', text: 'Makas' }),
+        lang === 'en' ? el('div', { class: 'w-sub', text: 'makas: Turkish for “scissors”' }) : null,
+        el('p', { class: 'w-p', text: t('Bir araştırma yazısında beni en çok yoran şey, önce kâğıt yığınlarının, sonra onlarca Word dosyasının arasında kaybolmaktı. Makas’ı bunun için yaptım. Metnini getir, kes, parçala. Kestiğin her parça kaynağıyla birlikte kenara gider. Giriş · Gelişme · Sonuç diye yığarsın. Yazını yazarken notların yanı başında durur; alıntıyı tek hamlede cümlenin içine alırsın.') }),
+        el('p', { class: 'w-p last' }, t('Metinlerin hiçbir yere gönderilmez, yalnızca bu tarayıcıda durur. Keyifle çalış.'), el('br'), '♥'),
+        el('div', { class: 'w-acts' },
+          el('button', { class: 'btn primary', type: 'button', onclick: () => { closeW(); const t = $('.field-in'); if (t) t.focus(); } }, t('Başla')),
+          el('button', { class: 'btn', type: 'button', onclick: guideModal }, t('Nasıl kullanılır?')))),
+      el('button', { class: 'x', type: 'button', title: t('Kapat'), 'aria-label': t('Kapat'), onclick: closeW }, '×'));
+  }
   const paper = el('div', { class: 'paper start' },
-    el('h1', { class: 'start-h', text: 'Yeni bir çalışma' }),
-    el('p', { class: 'start-p', text: 'Alıntılarını ve notlarını getir. Her paragraf kâğıtta ayrı bir parça olur. İstediğin yeri kesip kaynağıyla kenara koyarsın; kalanların üstüne, altına, arasına kendi cümlelerini yazarsın.' }),
-    el('button', { class: 'linkbtn', type: 'button', style: 'font-size:13px;margin:-12px 0 8px', onclick: guideModal }, 'Makas nedir, nasıl kullanılır?'),
-    el('label', { class: 'lbl', text: 'Çalışmanın adı' }), tIn,
+    welcome,
+    el('h1', { class: 'start-h', text: t('Yeni bir çalışma') }),
+    el('p', { class: 'start-p', text: t('Alıntılarını ve notlarını getir. Her paragraf kâğıtta ayrı bir parça olur. İstediğin yeri kesip kaynağıyla kenara koyarsın; kalanların üstüne, altına, arasına kendi cümlelerini yazarsın.') }),
+    welcome ? null : el('button', { class: 'linkbtn', type: 'button', style: 'font-size:13px;margin:-12px 0 8px', onclick: guideModal }, t('Makas nedir, nasıl kullanılır?')),
+    el('label', { class: 'lbl', text: t('Çalışmanın adı') }), tIn,
     el('div', { class: 'upl' },
       el('button', { class: 'btn', type: 'button', onclick: () => pickFile(ACCEPT, f => loadInto(txt, f, tIn)) },
-        el('span', { html: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 21H4"/></svg>' }), 'Dosya yükle'),
-      el('span', { text: '.txt, .md, .docx ya da .pdf — dosyayı aşağıdaki alana sürükleyip bırakabilir ya da metni yapıştırabilirsin.' })),
+        el('span', { html: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 21H4"/></svg>' }), t('Dosya yükle')),
+      el('span', { text: t('.txt, .md, .docx ya da .pdf — dosyayı aşağıdaki alana sürükleyip bırakabilir ya da metni yapıştırabilirsin.') })),
     txt,
     el('div', { class: 'start-row' },
       el('span', { style: 'flex:1' }),
-      el('button', { class: 'btn primary', type: 'button', onclick: go }, 'Parçalara ayır →')));
+      el('button', { class: 'btn primary', type: 'button', onclick: go }, t('Parçalara ayır →'))));
   const list = Object.values(store.projects).sort((a, b) => (b.updated || 0) - (a.updated || 0));
   if (list.length) {
-    paper.append(el('h2', { class: 'start-h2', text: 'Çalışmalarım' }));
+    paper.append(el('h2', { class: 'start-h2', text: t('Çalışmalarım') }));
     list.forEach(pr => paper.append(el('button', { class: 'proj-row', type: 'button', onclick: () => openProject(pr.id) },
-      el('span', { text: pr.title || 'Adsız çalışma' }), el('small', { text: fmtDate(pr.updated) }))));
+      el('span', { text: pr.title || t('Adsız çalışma') }), el('small', { text: fmtDate(pr.updated) }))));
   }
   paper.append(el('div', { class: 'start-row small' },
-    el('button', { class: 'btn ghost', type: 'button', onclick: importProjectFile }, 'Daha önce indirdiğin bir proje dosyasını aç (.json)')));
+    el('button', { class: 'btn ghost', type: 'button', onclick: importProjectFile }, t('Daha önce indirdiğin bir proje dosyasını aç (.json)'))));
   main.replaceChildren(paper, sig());
 }
 
@@ -2051,7 +2118,7 @@ function applyTheme(dark) {
   document.body.classList.toggle('dark', dark);
   const b = $('#themeBtn');
   b.innerHTML = dark ? SUN : MOON;
-  b.title = dark ? 'Gündüz modu' : 'Gece modu';
+  b.title = dark ? t('Gündüz modu') : t('Gece modu');
   b.setAttribute('aria-label', b.title);
 }
 let darkOn = false;
@@ -2065,11 +2132,11 @@ $('#themeBtn').addEventListener('click', () => {
 function renderHeader() {
   const p = P();
   const desk = screen === 'desk' && p;
-  $('#projName').textContent = desk ? (p.title || 'Adsız çalışma') : 'Çalışmalarım';
+  $('#projName').textContent = desk ? (p.title || t('Adsız çalışma')) : t('Çalışmalarım');
   $('#addBtn').disabled = !desk || readMode;
   $('#expBtn').disabled = !desk;
   $('#readBtn').disabled = !desk;
-  $('#readTxt').textContent = readMode ? 'Düzenle' : 'Oku';
+  $('#readTxt').textContent = readMode ? t('Düzenle') : t('Oku');
   updateUndo();
   setStatus(statusKind || (db ? 'saved' : 'local'));
 }
@@ -2093,7 +2160,7 @@ function renderAll() {
 
 /* ---------- add text ---------- */
 function addTextModal(file) {
-  const ta = el('textarea', { class: 'big', style: 'min-height:46vh', placeholder: 'Yeni alıntıları, notları buraya yapıştır ya da bir dosya sürükle…' });
+  const ta = el('textarea', { class: 'big', style: 'min-height:46vh', placeholder: t('Yeni alıntıları, notları buraya yapıştır ya da bir dosya sürükle…') });
   fileDropTarget(ta);
   let m;
   const ok = () => {
@@ -2106,16 +2173,16 @@ function addTextModal(file) {
     renderAll(); saveSoon();
     const n = main.querySelector('.block[data-id="' + first.id + '"]');
     if (n) n.scrollIntoView({ block: 'center', behavior: 'smooth' });
-    toast(parts.length + ' parça kâğıdın sonuna eklendi');
+    toast(t('{0} parça kâğıdın sonuna eklendi', parts.length));
   };
   m = modal([
-    el('h3', { text: 'Kâğıda metin ekle' }),
-    el('p', { style: 'font-size:13px;color:var(--muted)', text: 'Eklediğin metin kâğıdın sonuna, kaynak metin olarak gelir.' }),
+    el('h3', { text: t('Kâğıda metin ekle') }),
+    el('p', { style: 'font-size:13px;color:var(--muted)', text: t('Eklediğin metin kâğıdın sonuna, kaynak metin olarak gelir.') }),
     ta,
     el('div', { class: 'm-actions' },
-      el('button', { class: 'btn', type: 'button', style: 'margin-right:auto', onclick: () => pickFile(ACCEPT, f => loadInto(ta, f)) }, 'Dosya yükle (.txt .md .docx .pdf)'),
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Vazgeç'),
-      el('button', { class: 'btn primary', type: 'button', onclick: ok }, 'Parçalara ayır, ekle'))
+      el('button', { class: 'btn', type: 'button', style: 'margin-right:auto', onclick: () => pickFile(ACCEPT, f => loadInto(ta, f)) }, t('Dosya yükle (.txt .md .docx .pdf)')),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Vazgeç')),
+      el('button', { class: 'btn primary', type: 'button', onclick: ok }, t('Parçalara ayır, ekle')))
   ], 'wide');
   if (file) loadInto(ta, file);
   setTimeout(() => ta.focus(), 30);
@@ -2152,7 +2219,7 @@ function textWithCites(text, cites, used) {
 }
 function buildDoc(o) {
   const p = P();
-  const out = [{ k: 'title', runs: [{ t: p.title || 'Adsız çalışma' }] }];
+  const out = [{ k: 'title', runs: [{ t: p.title || t('Adsız çalışma') }] }];
   const usedIds = [];
   const used = id => { if (id && id !== ME && libGet(id) && !usedIds.includes(id)) usedIds.push(id); };
   for (const b of p.blocks) {
@@ -2170,20 +2237,20 @@ function buildDoc(o) {
     }
   }
   if (o.left && p.cards.length) {
-    out.push({ k: 'h', runs: [{ t: 'Kenarda kalan parçalar' }] });
+    out.push({ k: 'h', runs: [{ t: t('Kenarda kalan parçalar') }] });
     p.cards.forEach(c => {
       const ps = splitParas(c.text); const cr = citeRun(c);
-      ps.forEach((t, j) => {
-        const runs = [{ t, i: true }];
-        if (j === ps.length - 1) { if (cr) runs.push(cr); else if (c.srcId === ME) runs.push({ t: ' (kendi notum)' }); }
+      ps.forEach((pt, j) => {
+        const runs = [{ t: pt, i: true }];
+        if (j === ps.length - 1) { if (cr) runs.push(cr); else if (c.srcId === ME) runs.push({ t: t(' (kendi notum)') }); }
         out.push({ k: 'quote', runs });
       });
-      if (c.note) out.push({ k: 'note', runs: [{ t: 'Not: ' + c.note }] });
+      if (c.note) out.push({ k: 'note', runs: [{ t: t('Not: ') + c.note }] });
     });
   }
   if (o.biblio && usedIds.length) {
-    out.push({ k: 'h', bib: true, runs: [{ t: 'Kaynakça' }] });
-    usedIds.map(libGet).sort((a, b) => lc(invertAuthor(a.author) || a.title).localeCompare(lc(invertAuthor(b.author) || b.title), 'tr'))
+    out.push({ k: 'h', bib: true, runs: [{ t: t('Kaynakça') }] });
+    usedIds.map(libGet).sort((a, b) => lc(invertAuthor(a.author) || a.title).localeCompare(lc(invertAuthor(b.author) || b.title), lang))
       .forEach(e => out.push({ k: 'li', runs: biblioRuns(e) }));
   }
   return out;
@@ -2208,15 +2275,15 @@ function resolveDoc(parts, mode) {
 const plain = runs => runs.map(r => r.fn ? '[' + r.fn + ']' : r.t).join('');
 function buildTxt(o) {
   const { parts, notes } = resolveDoc(buildDoc(o), o.cite);
-  const nt = notes.length ? '\nNOTLAR\n\n' + notes.map(n => n.n + '. ' + plain(n.runs)).join('\n') : '';
+  const nt = notes.length ? '\n' + t('NOTLAR') + '\n\n' + notes.map(n => n.n + '. ' + plain(n.runs)).join('\n') : '';
   let put = false;
   let s = parts.map(x => {
     const t = plain(x.runs);
-    if (x.bib && nt && !put) { put = true; return nt + '\n\n\n' + t.toLocaleUpperCase('tr-TR'); }
+    if (x.bib && nt && !put) { put = true; return nt + '\n\n\n' + t.toLocaleUpperCase(LOC()); }
     switch (x.k) {
       case 'title': return t + '\n' + '='.repeat(Math.min(60, t.length));
       case 'quote': return '    ' + t;
-      case 'h': return '\n' + t.toLocaleUpperCase('tr-TR');
+      case 'h': return '\n' + t.toLocaleUpperCase(LOC());
       case 'li': return '• ' + t;
       case 'note': return '    ' + t;
       default: return t;
@@ -2261,7 +2328,7 @@ function buildHtml(o, title) {
   }
   if (inList) body += '</ul>\n';
   if (!fnPut) body += fnHtml;
-  return '<!DOCTYPE html>\n<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + esc(title || 'Çalışma') + '</title>' +
+  return '<!DOCTYPE html>\n<html lang="' + lang + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + esc(title || t('Çalışma')) + '</title>' +
     '<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">' +
     '<style>body{font-family:Literata,Georgia,serif;font-size:17px;line-height:1.75;color:#222;max-width:680px;margin:64px auto;padding:0 28px}' +
     'h1{font-size:30px;line-height:1.25;margin:0 0 36px}h2{font-size:19px;margin:48px 0 12px}p{margin:0 0 16px;text-align:justify;hyphens:auto}' +
@@ -2290,7 +2357,7 @@ async function buildDocx(o) {
   }
   const doc = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="' + W_NS + '"><w:body>' + body +
     '<w:sectPr><w:footnotePr><w:numFmt w:val="decimal"/></w:footnotePr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1418" w:left="1418" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>';
-  const styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="' + W_NS + '"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="tr-TR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="200" w:line="360" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
+  const styles = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles xmlns:w="' + W_NS + '"><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman" w:eastAsia="Times New Roman"/><w:sz w:val="24"/><w:szCs w:val="24"/><w:lang w:val="' + LOC() + '"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="200" w:line="360" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
     '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>' +
     '<w:style w:type="paragraph" w:styleId="FootnoteText"><w:name w:val="footnote text"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="60" w:line="240" w:lineRule="auto"/><w:jc w:val="both"/></w:pPr><w:rPr><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr></w:style>' +
     '<w:style w:type="character" w:styleId="FootnoteReference"><w:name w:val="footnote reference"/><w:rPr><w:vertAlign w:val="superscript"/></w:rPr></w:style></w:styles>';
@@ -2314,58 +2381,86 @@ function exportModal() {
   const o = opts();
   const chk = (k, label) => { const i = el('input', { type: 'checkbox' }); i.checked = !!o[k]; i.addEventListener('change', () => { o[k] = i.checked; saveSoon(); }); return el('label', { class: 'chk' }, i, label); };
   const radios = el('div', { class: 'radio' });
-  const drawR = () => radios.replaceChildren(...[['paren', 'Parantez içinde'], ['foot', 'Dipnot'], ['none', 'Gösterme']].map(([v, l]) => el('button', { class: 'chip' + (o.cite === v ? ' sel' : ''), type: 'button', onclick: () => { o.cite = v; saveSoon(); drawR(); } }, l)));
+  const drawR = () => radios.replaceChildren(...[['paren', t('Parantez içinde')], ['foot', t('Dipnot')], ['none', t('Gösterme')]].map(([v, l]) => el('button', { class: 'chip' + (o.cite === v ? ' sel' : ''), type: 'button', onclick: () => { o.cite = v; saveSoon(); drawR(); } }, l)));
   drawR();
   const fmt = (label, sub, fn, dis, wide) => el('button', { class: 'fmt' + (wide ? ' wide' : ''), type: 'button', disabled: dis || null, onclick: fn }, el('b', { text: label }), sub ? el('small', { text: sub }) : null);
   const base = fileBase(p.title);
   let m;
   m = modal([
-    el('h3', { text: 'İndir / Çıktı al' }),
-    el('div', { class: 'opt-label', text: 'Alıntı ve atıfların kaynağı' }),
+    el('h3', { text: t('İndir / Çıktı al') }),
+    el('div', { class: 'opt-label', text: t('Alıntı ve atıfların kaynağı') }),
     radios,
     el('div', { class: 'chks' },
-      chk('biblio', 'Sona kaynakça ekle'),
-      chk('src', 'Kâğıtta kalan kaynak metni de çıktıya kat'),
-      chk('left', 'Kenarda kalan parçaları ek olarak koy')),
+      chk('biblio', t('Sona kaynakça ekle')),
+      chk('src', t('Kâğıtta kalan kaynak metni de çıktıya kat')),
+      chk('left', t('Kenarda kalan parçaları ek olarak koy'))),
     el('div', { class: 'fmts' },
-      fmt('Word (.docx)', 'Dipnotlar gerçek Word dipnotu olur; Word, Pages, Google Dokümanlar açar', async () => {
-        try { offer(base + '.docx', await buildDocx(o), buildTxt(o)); } catch (e) { toast('Word dosyası hazırlanamadı'); }
+      fmt('Word (.docx)', t('Dipnotlar gerçek Word dipnotu olur; Word, Pages, Google Dokümanlar açar'), async () => {
+        try { offer(base + '.docx', await buildDocx(o), buildTxt(o)); } catch (e) { toast(t('Word dosyası hazırlanamadı')); }
       }, !window.JSZip),
-      fmt('Yazdırılabilir sayfa (.html)', 'Tarayıcıda aç, Ctrl+P ile yazdır ya da PDF olarak kaydet', () => offer(base + '.html', buildHtml(o, p.title))),
-      fmt('Düz metin (.txt)', 'Her yere yapıştırılır', () => offer(base + '.txt', buildTxt(o))),
-      fmt('Markdown (.md)', 'Blog dosyaların için', () => offer(base + '.md', buildMd(o))),
-      fmt('Proje dosyası (.json)', 'Kesikleri, kenarı, kaynakları ve saklanan hâlleri olduğu gibi saklar. Sonra buraya geri açıp kaldığın yerden sürersin; yedek olarak da durur.', () => offer(base + '.makas.json', JSON.stringify(p, null, 1)), false, true)),
+      fmt(t('Yazdırılabilir sayfa (.html)'), t('Tarayıcıda aç, Ctrl+P ile yazdır ya da PDF olarak kaydet'), () => offer(base + '.html', buildHtml(o, p.title))),
+      fmt(t('Düz metin (.txt)'), t('Her yere yapıştırılır'), () => offer(base + '.txt', buildTxt(o))),
+      fmt('Markdown (.md)', t('Blog dosyaların için'), () => offer(base + '.md', buildMd(o))),
+      fmt(t('Proje dosyası (.json)'), t('Kesikleri, kenarı, kaynakları ve saklanan hâlleri olduğu gibi saklar. Sonra buraya geri açıp kaldığın yerden sürersin; yedek olarak da durur.'), () => offer(base + '.makas.json', JSON.stringify(p, null, 1)), false, true)),
     el('div', { class: 'm-actions' },
       el('button', { class: 'btn', type: 'button', style: 'margin-right:auto', onclick: async () => {
-        try { await navigator.clipboard.writeText(buildTxt(o)); toast('Metin kopyalandı'); } catch (e) { toast('Kopyalanamadı'); }
-      } }, 'Metni kopyala'),
-      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, 'Kapat'))
+        try { await navigator.clipboard.writeText(buildTxt(o)); toast(t('Metin kopyalandı')); } catch (e) { toast(t('Kopyalanamadı')); }
+      } }, t('Metni kopyala')),
+      el('button', { class: 'btn', type: 'button', onclick: () => m.close() }, t('Kapat')))
   ]);
 }
 
 /* ---------- guide ---------- */
 function guideModal() {
-  const sec = (title, ...kids) => el('div', { class: 'g-sec' }, el('h4', { text: title }), ...kids);
-  const pp = (...kids) => el('p', {}, ...kids);
-  const b = t => el('b', { text: t });
+  const sec = (title, txt) => el('div', { class: 'g-sec' }, el('h4', { text: t(title) }), el('p', {}, ...rich(t(txt))));
   let m;
   m = modal([
-    el('h3', { text: 'Makas nedir?' }),
-    pp('Araştırma denemesi yazarken alıntıları ve notları kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleleri yazmanın dijital hâli. Kâğıt harcamadan; kestiğin her parça kaynağıyla birlikte.'),
+    el('h3', { text: t('Makas nedir?') }),
+    el('p', { text: t('Araştırma denemesi yazarken alıntıları ve notları kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleleri yazmanın dijital hâli. Kâğıt harcamadan; kestiğin her parça kaynağıyla birlikte.') }),
     el('div', { class: 'guide' },
-      sec('1 · Metni getir', pp('Alıntılarını ve notlarını yapıştır ya da ', b('Dosya yükle'), ' ile .txt, .md, .docx veya .pdf getir; dosyayı alana sürükleyip bırakmak da olur. ', b('Parçalara ayır'), ' dediğinde her paragraf kâğıtta ayrı bir parça olur.')),
-      sec('2 · Kes', pp('Bir yeri seç, çıkan ', b('✂ Kes'), ' düğmesine bas (ya da Ctrl+K). Kaynağı seç ya da yeni kaynak gir (yazar, eser, çevirmen, yayınevi, yıl), sayfayı yaz. Parça kaynağıyla birlikte sağdaki kenara gider; kalanlar kâğıtta durur. Kendi notunsa ', b('Kendi notum'), '’u seç.')),
-      sec('3 · Kenar', pp('Kesiklerin burada birikir. Yazarken yeni bir not ya da alıntı bulursan ', b('+ Kenara not ya da alıntı ekle'), ' ile doğrudan buraya koy. Parçaları ', b('Giriş · Gelişme · Sonuç'), ' gibi yığınlara ayır: yığının adına tıklayınca yalnızca o yığın listelenir, parçayı yığının adına sürükleyince o yığına girer.')),
-      sec('4 · Yaz', pp('İki parçanın arasına gelince ', b('+ yaz'), ' çıkar; bağlantı cümlelerini oraya yazarsın. Kâğıttaki her parçayı soldaki tutamağından tutup başka bir araya taşıyabilirsin.')),
-      sec('5 · Yerleştir', pp('Kenardaki parçayı kâğıtta bir araya sürükle ya da ', b('Metne koy'), ' de: ayrı, girintili bir alıntı olur. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki ', b('Cümleye ekle'), '’ye bas: tırnak içinde o noktaya girer, kaynağı altında görünür.')),
-      sec('6 · Alıntı mı, atıf mı?', pp('Her parçanın ', b('tür'), ' menüsünden seçersin. ', b('Alıntı'), ' kelimesi kelimesine; ', b('atıf'), ' fikir onun, cümle senin (tırnaksız ama kaynaklı); ', b('düz metin'), ' kaynaksız.')),
-      sec('7 · Oku ve sakla', pp(b('Oku'), ' düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden ', inArtifact ? 'hesabına' : 'bu tarayıcıya', ' kaydedilir. Çalışmalarım menüsündeki ', b('Bu hâlini sakla'), ' ile bir taslağı saklayıp günler sonra ona dönebilirsin.')),
-      sec('8 · Çıktı al', pp(b('İndir / Çıktı'), ': Word (kaynaklar gerçek dipnot olarak), yazdırılabilir sayfa, düz metin ya da Markdown. Kaynaklar parantez içinde ya da dipnotta gösterilir, sona kaynakça eklenir. ', b('Proje dosyası'), ' ise çalışmanın tam yedeğidir; başka bir bilgisayarda Makas’a açıp kaldığın yerden sürersin.')),
-      sec('Kısayollar', pp(b('Ctrl+K'), ' seçili yeri kes · ', b('Ctrl+Z'), ' geri al · ', b('Ctrl+Shift+Z'), ' yinele · ', b('Esc'), ' vazgeç')),
-      inArtifact ? null : sec('Metinlerin nerede?', pp('Hiçbir sunucuya gönderilmez; yalnızca kullandığın tarayıcıda durur. Tarayıcı verilerini silersen çalışmaların da silinir; önemli bir çalışmayı ara ara proje dosyası olarak indirmeni öneririm.'))),
-    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, 'Anladım'))
+      sec('1 · Metni getir', 'Alıntılarını ve notlarını yapıştır ya da **Dosya yükle** ile .txt, .md, .docx veya .pdf getir; dosyayı alana sürükleyip bırakmak da olur. **Parçalara ayır** dediğinde her paragraf kâğıtta ayrı bir parça olur.'),
+      sec('2 · Kes', 'Bir yeri seç, çıkan **✂ Kes** düğmesine bas (ya da Ctrl+K). Kaynağı seç ya da yeni kaynak gir (yazar, eser, çevirmen, yayınevi, yıl), sayfayı yaz. Parça kaynağıyla birlikte sağdaki kenara gider; kalanlar kâğıtta durur. Kendi notunsa **Kendi notum**’u seç.'),
+      sec('3 · Kenar', 'Kesiklerin burada birikir. Yazarken yeni bir not ya da alıntı bulursan **+ Kenara not ya da alıntı ekle** ile doğrudan buraya koy. Parçaları **Giriş · Gelişme · Sonuç** gibi yığınlara ayır: yığının adına tıklayınca yalnızca o yığın listelenir, parçayı yığının adına sürükleyince o yığına girer.'),
+      sec('4 · Yaz', 'İki parçanın arasına gelince **+ yaz** çıkar; bağlantı cümlelerini oraya yazarsın. Kâğıttaki her parçayı soldaki tutamağından tutup başka bir araya taşıyabilirsin.'),
+      sec('5 · Yerleştir', 'Kenardaki parçayı kâğıtta bir araya sürükle ya da **Metne koy** de: ayrı, girintili bir alıntı olur. Cümlenin içine koymak için önce yazında yere tıkla, sonra parçadaki **Cümleye ekle**’ye bas: tırnak içinde o noktaya girer, kaynağı altında görünür.'),
+      sec('6 · Alıntı mı, atıf mı?', 'Her parçanın **tür** menüsünden seçersin. **Alıntı** kelimesi kelimesine; **atıf** fikir onun, cümle senin (tırnaksız ama kaynaklı); **düz metin** kaynaksız.'),
+      sec('7 · Oku ve sakla', inArtifact
+        ? '**Oku** düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden hesabına kaydedilir. Çalışmalarım menüsündeki **Bu hâlini sakla** ile bir taslağı saklayıp günler sonra ona dönebilirsin.'
+        : '**Oku** düğmesi metni okurun göreceği hâliyle gösterir. Çalışman kendiliğinden bu tarayıcıya kaydedilir. Çalışmalarım menüsündeki **Bu hâlini sakla** ile bir taslağı saklayıp günler sonra ona dönebilirsin.'),
+      sec('8 · Çıktı al', '**İndir / Çıktı**: Word (kaynaklar gerçek dipnot olarak), yazdırılabilir sayfa, düz metin ya da Markdown. Kaynaklar parantez içinde ya da dipnotta gösterilir, sona kaynakça eklenir. **Proje dosyası** ise çalışmanın tam yedeğidir; başka bir bilgisayarda Makas’a açıp kaldığın yerden sürersin.'),
+      sec('Kısayollar', '**Ctrl+K** seçili yeri kes · **Ctrl+Z** geri al · **Ctrl+Shift+Z** yinele · **Esc** vazgeç'),
+      inArtifact ? null : sec('Metinlerin nerede?', 'Hiçbir sunucuya gönderilmez; yalnızca kullandığın tarayıcıda durur. Tarayıcı verilerini silersen çalışmaların da silinir; önemli bir çalışmayı ara ara proje dosyası olarak indirmeni öneririm.')),
+    el('div', { class: 'm-actions' }, el('button', { class: 'btn primary', type: 'button', onclick: () => m.close() }, t('Anladım')))
   ], 'wide');
 }
+
+/* ---------- language switch ---------- */
+function staticTexts() {
+  document.documentElement.lang = lang;
+  document.title = t('Makas — Alıntı ve Deneme Masası | Lryiu Labs');
+  $('#projBtn').title = t('Çalışmalarım');
+  $('#undoBtn').title = t('Geri al (Ctrl+Z)');
+  $('#redoBtn').title = t('Yinele (Ctrl+Shift+Z)');
+  $('#readBtn').title = t('Metni okurun göreceği hâliyle gör');
+  const hb = $('#helpBtn'); hb.title = t('Nasıl kullanılır?'); hb.setAttribute('aria-label', hb.title);
+  $('#addBtn').title = t('Kâğıdın sonuna yeni metin ekle');
+  $('#addBtn').textContent = t('+ Metin ekle');
+  $('#expBtn').textContent = t('İndir / Çıktı');
+  $('#cutTxt').textContent = t('Kes, kenara koy');
+  $('#placeCancel').textContent = t('Vazgeç');
+  const lb = $('#langBtn');
+  lb.replaceChildren(el('span', { class: 'lg' + (lang === 'tr' ? ' on' : ''), text: 'TR' }), el('span', { class: 'lg' + (lang === 'en' ? ' on' : ''), text: 'EN' }));
+  lb.title = lang === 'tr' ? 'Switch to English' : 'Türkçeye geç';
+  lb.setAttribute('aria-label', lb.title);
+  applyTheme(darkOn);
+}
+function setLang(l) {
+  lang = l;
+  try { localStorage.setItem('makas.lang', l); } catch (e) {}
+  closePop(); hideCut();
+  staticTexts(); renderAll(); setHH();
+}
+$('#langBtn').addEventListener('click', () => setLang(lang === 'tr' ? 'en' : 'tr'));
 
 /* ---------- wiring ---------- */
 $('#projBtn').addEventListener('click', e => { if (pop) { closePop(); return; } projMenu(e.currentTarget); });
@@ -2393,7 +2488,9 @@ const setHH = () => document.documentElement.style.setProperty('--hh', $('#top')
 let rsT;
 addEventListener('resize', () => { setHH(); clearTimeout(rsT); rsT = setTimeout(fitAll, 120); });
 setHH();
+staticTexts();
 renderAll();
+setHH();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
 setStatus('local');
 initRemote();

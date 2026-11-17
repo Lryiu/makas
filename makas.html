@@ -2064,10 +2064,11 @@ function renderStart() {
   let welcome = null;
   if (!store.welcomeDone && !Object.keys(store.projects).length) {
     const closeW = () => { store.welcomeDone = true; persistLocal(); renderStart(); };
-    const vid = el('video', { src: 'videos/makas.mp4', autoplay: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': t('Makas tanıtım videosu') });
+    // intro video in the interface language: local copy first (site), then the hosted one (e.g. a GitHub download), else text only
+    const vname = lang === 'en' ? 'makas-en.mp4' : 'makas.mp4';
+    const VIDS = ['videos/' + vname, 'https://gamzeguckiran.com/videos/' + vname];
+    const vid = el('video', { src: VIDS[0], autoplay: true, loop: true, playsinline: true, controls: true, preload: 'metadata', 'aria-label': t('Makas tanıtım videosu') });
     vid.muted = true;
-    // local copy first (site), then the hosted video (e.g. when opened from a GitHub download), else text only
-    const VIDS = ['videos/makas.mp4', 'https://gamzeguckiran.com/videos/makas.mp4'];
     let vi = 0;
     vid.addEventListener('error', () => {
       if (++vi < VIDS.length) { vid.src = VIDS[vi]; vid.load(); }

@@ -10,6 +10,14 @@ Kâğıda döküp makasla kesmenin, masaya dizip aralarına bağlantı cümleler
 
 https://github.com/user-attachments/assets/08e0fa94-dd20-401b-92a8-28f3e4cdc055
 
+### 🇬🇧 English
+
+A writing desk for research essays. Bring in your quotes and notes, cut any passage together with its source, lay the pieces out in the margin and write your own sentences between them. In the output, sources become footnotes or in-text citations, with a bibliography at the end. Makas works in Turkish and English: switch with the TR / EN button in the top bar.
+
+*makas: Turkish for “scissors”.*
+
+https://github.com/user-attachments/assets/517f154c-db35-48d1-bf81-cbf161429a1a
+
 ---
 
 ## ✨ Özellikler
